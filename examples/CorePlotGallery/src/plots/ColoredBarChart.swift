@@ -123,7 +123,7 @@ class ColoredBarChart: PlotItem {
 
         graph.legend             = theLegend
         graph.legendAnchor       = .Top
-        graph.legendDisplacement = CGPointMake( 0.0, self.titleSize * -2.625 )
+        graph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * -2.625)
     }
     
 }

@@ -38,17 +38,17 @@ class CompositePlot: PlotItem {
         self.scatterPlotView.frame = NSMakeRect( 0.0,
                                                 0.0,
                                                 newSize.width,
-                                                newSize.height * CPTFloat(0.5) )
+                                                newSize.height * 0.5 )
 
         self.barChartView.frame = NSMakeRect( 0.0,
-                                             newSize.height * CPTFloat(0.5),
-                                             newSize.width * CPTFloat(0.5),
-                                             newSize.height * CPTFloat(0.5) )
+                                             newSize.height * 0.5,
+                                             newSize.width * 0.5,
+                                             newSize.height * 0.5 )
 
-        self.pieChartView.frame = NSMakeRect( newSize.width * CPTFloat(0.5),
-                                             newSize.height * CPTFloat(0.5),
-                                             newSize.width * CPTFloat(0.5),
-                                             newSize.height * CPTFloat(0.5) )
+        self.pieChartView.frame = NSMakeRect( newSize.width * 0.5,
+                                             newSize.height * 0.5,
+                                             newSize.width * 0.5,
+                                             newSize.height * 0.5 )
 
         self.scatterPlotView.needsDisplay = true
         self.barChartView.needsDisplay = true
@@ -155,17 +155,17 @@ class CompositePlot: PlotItem {
         scatterView.frame = NSMakeRect( 0.0,
                                        0.0,
                                        viewRect.size.width,
-                                       viewRect.size.height * CPTFloat(0.5) )
+                                       viewRect.size.height * 0.5 )
 
         barView.frame = NSMakeRect( 0.0,
-                                   viewRect.size.height * CPTFloat(0.5),
-                                   viewRect.size.width * CPTFloat(0.5),
-                                   viewRect.size.height * CPTFloat(0.5) )
+                                   viewRect.size.height * 0.5,
+                                   viewRect.size.width * 0.5,
+                                   viewRect.size.height * 0.5 )
 
-        pieView.frame = NSMakeRect( viewRect.size.width * CPTFloat(0.5),
-                                   viewRect.size.height * CPTFloat(0.5),
-                                   viewRect.size.width * CPTFloat(0.5),
-                                   viewRect.size.height * CPTFloat(0.5) )
+        pieView.frame = NSMakeRect( viewRect.size.width * 0.5,
+                                   viewRect.size.height * 0.5,
+                                   viewRect.size.width * 0.5,
+                                   viewRect.size.height * 0.5 )
 
         for view in [scatterView, barView, pieView] {
             view.setAutoresizesSubviews = true
@@ -189,16 +189,16 @@ class CompositePlot: PlotItem {
     override func killGraph() {
 
         self.scatterPlotView?.hostedGraph = nil
-        self.barChartView?.hostedGraph    = nil
-        self.pieChartView?.hostedGraph    = nil
+        self.barChartView?.hostedGraph = nil
+        self.pieChartView?.hostedGraph = nil
 
         scatterPlotView?.removeFromSuperview()
         barChartView?.removeFromSuperview()
         pieChartView?.removeFromSuperview()
 
         self.scatterPlotView = nil
-        self.barChartView    = nil
-        self.pieChartView    = nil
+        self.barChartView = nil
+        self.pieChartView = nil
 
         super.killGraph()
     }
@@ -274,7 +274,7 @@ class CompositePlot: PlotItem {
         let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
         plotSymbol.fill          = CPTFill(color: CPTColor.blueColor())
         plotSymbol.lineStyle     = symbolLineStyle
-        plotSymbol.size          = CGSizeMake(10.0, 10.0)
+        plotSymbol.size          = CGSize(width: 10.0, height: 10.0)
         boundLinePlot.plotSymbol = plotSymbol
 
         // Create a green plot area
@@ -348,7 +348,8 @@ class CompositePlot: PlotItem {
         var labelLocation = 0
         var customLabels: Set<CPTAxisLabel> = []
         for tickLocation in customTickLocations {
-            let newLabel = CPTAxisLabel(text: xAxisLabels[labelLocation++], textStyle: x.labelTextStyle)
+            let newLabel = CPTAxisLabel(text: xAxisLabels[labelLocation], textStyle: x.labelTextStyle)
+            labelLocation += 1
             newLabel.tickLocation = tickLocation
             newLabel.offset       = x.labelOffset
             newLabel.rotation     = CGFloat(M_PI_4)
@@ -563,7 +564,7 @@ extension CompositePlot: CPTPlotDataSource {
         if plot.identifier as! String == "Blue Plot" && Int(index) == self.selectedIndex {
             let redDot = CPTPlotSymbol()
             redDot.symbolType = .Ellipse
-            redDot.size = CGSizeMake(10.0, 10.0)
+            redDot.size = CGSize(width: 10.0, height: 10.0)
             redDot.fill = CPTFill(color: CPTColor.redColor())
             redDot.lineStyle = CPTLineStyle()
 
@@ -583,10 +584,10 @@ extension CompositePlot: CPTPlotDataSource {
             
             let thePlot = scatterPlot?.plotWithIdentifier("Blue Plot") as? CPTScatterPlot
             if ( oldIndex != nil ) {
-                thePlot?.reloadPlotSymbolsInIndexRange(NSMakeRange( oldIndex!, 1 ))
+                thePlot?.reloadPlotSymbolsInIndexRange(NSRange(location: oldIndex!, length: 1))
             }
             if ( newIndex != nil ) {
-                thePlot?.reloadPlotSymbolsInIndexRange(NSMakeRange( newIndex!, 1 ))
+                thePlot?.reloadPlotSymbolsInIndexRange(NSRange(location: newIndex!, length: 1))
             }
         }
     }

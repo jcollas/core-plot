@@ -149,7 +149,7 @@ class RealTimePlot: PlotItem {
     if thePlot != nil {
         if ( plotData.count >= kMaxDataPoints ) {
             plotData.removeAtIndex(0)
-            thePlot?.deleteDataInIndexRange(NSMakeRange(0, 1))
+            thePlot?.deleteDataInIndexRange(NSRange(location: 0, length: 1))
         }
 
         let plotSpace = theGraph.defaultPlotSpace as! CPTXYPlotSpace

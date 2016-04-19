@@ -167,7 +167,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
         plotSymbol.fill      = CPTFill(color: CPTColor.lightGrayColor())
         plotSymbol.lineStyle = symbolLineStyle
-        plotSymbol.size      = CGSizeMake(10.0, 10.0)
+        plotSymbol.size      = CGSize(width: 10.0, height: 10.0)
         linePlot.plotSymbol  = plotSymbol
 
         // Auto scale the plot space to fit the plot data
@@ -200,7 +200,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         graph.legend?.cornerRadius    = 5.0
         graph.legend?.numberOfRows    = 1
         graph.legendAnchor           = .Bottom
-        graph.legendDisplacement     = CGPointMake( 0.0, self.titleSize * 4.0 )
+        graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 4.0)
     }
 
 }

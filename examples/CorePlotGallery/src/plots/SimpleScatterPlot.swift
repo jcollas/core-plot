@@ -149,7 +149,7 @@ class SimpleScatterPlot: PlotItem {
     let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
     plotSymbol.fill               = CPTFill(color: CPTColor.blueColor())
     plotSymbol.lineStyle          = symbolLineStyle
-    plotSymbol.size               = CGSizeMake(10.0, 10.0)
+    plotSymbol.size               = CGSize(width: 10.0, height: 10.0)
     dataSourceLinePlot.plotSymbol = plotSymbol
 
     // Set plot delegate, to know when symbols have been touched
@@ -164,7 +164,7 @@ class SimpleScatterPlot: PlotItem {
     graph.legend?.borderLineStyle = x.axisLineStyle
     graph.legend?.cornerRadius    = 5.0
     graph.legendAnchor           = .Bottom
-    graph.legendDisplacement     = CGPointMake(0.0, 12.0)
+    graph.legendDisplacement     = CGPoint(x: 0.0, y: 12.0)
 }
 
 }
@@ -248,7 +248,7 @@ extension SimpleScatterPlot: CPTScatterPlotDelegate {
             let textLayer = CPTTextLayer(text: yString, style: hitAnnotationTextStyle)
             let annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace, anchorPlotPoint: anchorPoint)
             annotation.contentLayer   = textLayer
-            annotation.displacement   = CGPointMake(0.0, 20.0)
+            annotation.displacement   = CGPoint(x: 0.0, y: 20.0)
             self.symbolTextAnnotation = annotation
             graph.plotAreaFrame?.plotArea?.addAnnotation(annotation)
         }

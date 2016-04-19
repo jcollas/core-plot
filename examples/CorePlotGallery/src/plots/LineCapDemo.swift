@@ -51,7 +51,7 @@ class LineCapDemo: PlotItem {
 
         // Line cap
         let lineCap = CPTLineCap()
-        lineCap.size      = CGSizeMake(15.0, 15.0)
+        lineCap.size      = CGSize(width: 15.0, height: 15.0)
         lineCap.lineStyle = axisLineStyle
         lineCap.fill      = CPTFill(color: CPTColor.blueColor())
 
@@ -67,11 +67,13 @@ class LineCapDemo: PlotItem {
             axis.orthogonalPosition = lineCapType / 2
             axis.axisLineStyle      = axisLineStyle
 
-            lineCap.lineCapType = CPTLineCapType(rawValue: lineCapType++)!
+            lineCap.lineCapType = CPTLineCapType(rawValue: lineCapType)!
             axis.axisLineCapMin = lineCap
-            
-            lineCap.lineCapType = CPTLineCapType(rawValue: lineCapType++)!
+            lineCapType += 1
+
+            lineCap.lineCapType = CPTLineCapType(rawValue: lineCapType)!
             axis.axisLineCapMax = lineCap
+            lineCapType += 1
 
             axes.append(axis)
         }

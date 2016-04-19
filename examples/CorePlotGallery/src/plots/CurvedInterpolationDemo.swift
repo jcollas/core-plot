@@ -95,7 +95,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
 
         let lineCap = CPTLineCap.sweptArrowPlotLineCap()
-        lineCap.size = CGSizeMake( self.titleSize * 0.625, self.titleSize * 0.625 )
+        lineCap.size = CGSize(width: self.titleSize * 0.625, height: self.titleSize * 0.625)
 
         // Axes
         // Label x axis with a fixed interval policy
@@ -232,7 +232,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
         plotSymbol.fill       = CPTFill(color: CPTColor.blueColor().colorWithAlphaComponent(0.5))
         plotSymbol.lineStyle  = symbolLineStyle
-        plotSymbol.size       = CGSizeMake(5.0, 5.0)
+        plotSymbol.size       = CGSize(width: 5.0, height: 5.0)
         bezierPlot.plotSymbol = plotSymbol
         cmUniformPlot.plotSymbol = plotSymbol
         cmCentripetalPlot.plotSymbol = plotSymbol
@@ -247,7 +247,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
         graph.legendAnchor           = .Bottom
-        graph.legendDisplacement     = CGPointMake( 0.0, self.titleSize * 2.0 )
+        graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 2.0)
     }
 
 }

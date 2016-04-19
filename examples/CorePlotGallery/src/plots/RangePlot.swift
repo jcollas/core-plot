@@ -88,8 +88,8 @@ class RangePlot: PlotItem {
             let instructionsAnnotation = CPTLayerAnnotation(anchorLayer: anchorLayer)
             instructionsAnnotation.contentLayer = textLayer
             instructionsAnnotation.rectAnchor = .Bottom
-            instructionsAnnotation.contentAnchorPoint = CGPointMake(0.5, 0.0)
-            instructionsAnnotation.displacement = CGPointMake(0.0, 10.0)
+            instructionsAnnotation.contentAnchorPoint = CGPoint(x: 0.5, y: 0.0)
+            instructionsAnnotation.displacement = CGPoint(x: 0.0, y: 10.0)
             newGraph.plotAreaFrame?.plotArea?.addAnnotation(instructionsAnnotation)
         }
 
@@ -158,7 +158,7 @@ class RangePlot: PlotItem {
         newGraph.legend?.cornerRadius = 5.0
         newGraph.legend?.swatchCornerRadius = 3.0
         newGraph.legendAnchor = .Top
-        newGraph.legendDisplacement = CGPointMake( 0.0, self.titleSize * -2.0 - 12.0 )
+        newGraph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * -2.0 - 12.0)
     }
 
 }

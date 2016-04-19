@@ -40,7 +40,7 @@ class DonutChart: PlotItem {
         whiteLineStyle.lineColor = CPTColor.whiteColor()
 
         let whiteShadow = CPTMutableShadow()
-        whiteShadow.shadowOffset = CGSizeMake(2.0, -4.0)
+        whiteShadow.shadowOffset = CGSize(width: 2.0, height: -4.0)
         whiteShadow.shadowBlurRadius = 4.0
         whiteShadow.shadowColor = CPTColor.whiteColor().colorWithAlphaComponent(0.25)
 

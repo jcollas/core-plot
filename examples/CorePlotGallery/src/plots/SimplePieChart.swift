@@ -97,7 +97,7 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
         graph.legend = theLegend
 
         graph.legendAnchor = .Right
-        graph.legendDisplacement = CGPointMake(-graph.paddingRight - 10.0, 0.0)
+        graph.legendDisplacement = CGPoint(x: -graph.paddingRight - 10.0, y: 0.0)
     }
 
     func dataLabelForPlot(plot: CPTPlot, recordIndex index: UInt) -> CPTLayer? {
@@ -192,11 +192,11 @@ extension SimplePieChart: CPTPlotDataSource {
             let title = NSMutableAttributedString(string:"Pie Slice \(index)")
             title.addAttribute(NSForegroundColorAttributeName,
                           value: sliceColor,
-                          range: NSMakeRange(4, 5))
+                          range: NSRange(location: 4, length: 5))
 
             title.addAttribute(NSFontAttributeName,
                           value: labelFont!,
-                          range: NSMakeRange(0, title.length))
+                          range: NSRange(location: 0, length: title.length))
 
             return title
         }

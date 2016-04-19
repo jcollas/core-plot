@@ -156,12 +156,12 @@ class GradientScatterPlot: PlotItem {
         // Add plot symbols
         let symbolGradient = CPTGradient(beginningColor: CPTColor(componentRed:0.75, green:0.75, blue:1.0, alpha:1.0), endingColor: CPTColor.blueColor())
         symbolGradient.gradientType = .Radial
-        symbolGradient.startAnchor  = CGPointMake(0.25, 0.75)
+        symbolGradient.startAnchor  = CGPoint(x: 0.25, y: 0.75)
         
         let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
         plotSymbol.fill = CPTFill(gradient: symbolGradient)
         plotSymbol.lineStyle = nil
-        plotSymbol.size = CGSizeMake(12.0, 12.0)
+        plotSymbol.size = CGSize(width: 12.0, height: 12.0)
         dataSourceLinePlot.plotSymbol = plotSymbol
         
         // Set plot delegate, to know when symbols have been touched
@@ -256,7 +256,7 @@ extension GradientScatterPlot: CPTScatterPlotDelegate {
             let textLayer = CPTTextLayer(text:yString, style: hitAnnotationTextStyle)
             annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace,anchorPlotPoint:anchorPoint)
             annotation?.contentLayer   = textLayer
-            annotation?.displacement   = CGPointMake(0.0, 20.0)
+            annotation?.displacement   = CGPoint(x: 0.0, y: 20.0)
             self.symbolTextAnnotation = annotation
             graph.plotAreaFrame?.plotArea?.addAnnotation(annotation)
         }

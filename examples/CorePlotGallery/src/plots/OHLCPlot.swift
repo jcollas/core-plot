@@ -95,7 +95,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         let lineCap = CPTLineCap()
         lineCap.lineStyle    = xAxis.axisLineStyle
         lineCap.lineCapType  = .OpenArrow
-        lineCap.size         = CGSizeMake( self.titleSize * 0.5, self.titleSize * 0.5 )
+        lineCap.size         = CGSize(width: self.titleSize * 0.5, height: self.titleSize * 0.5)
         xAxis.axisLineCapMax = lineCap
 
         yAxis.orthogonalPosition = -0.5 * oneDay
@@ -159,7 +159,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         newGraph.legend?.cornerRadius = 5.0
         newGraph.legend?.swatchCornerRadius = 5.0
         newGraph.legendAnchor = .Bottom
-        newGraph.legendDisplacement = CGPointMake( 0.0, self.titleSize * 3.0 )
+        newGraph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * 3.0)
         
         // Set plot ranges
         let plotSpace = newGraph.defaultPlotSpace as! CPTXYPlotSpace

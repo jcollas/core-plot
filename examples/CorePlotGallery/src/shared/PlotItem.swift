@@ -53,7 +53,7 @@ class PlotItem: NSObject {
 
         graphs = []
         section = nil
-        title   = nil
+        title = nil
     }
 
     func addGraph(graph: CPTGraph, toHostingView hostingView: CPTGraphHostingView?) {

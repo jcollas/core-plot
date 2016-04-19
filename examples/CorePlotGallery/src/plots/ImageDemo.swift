@@ -53,7 +53,7 @@ class ImageDemo: PlotItem {
         let titleAnnotation = CPTLayerAnnotation(anchorLayer: thePlotArea!)
         titleAnnotation.rectAnchor         = .Top
         titleAnnotation.contentLayer       = titleLayer
-        titleAnnotation.contentAnchorPoint = CGPointMake(0.5, 1.0)
+        titleAnnotation.contentAnchorPoint = CGPoint(x: 0.5, y: 1.0)
         thePlotArea?.addAnnotation(titleAnnotation)
 
         textStyle.color = CPTColor.darkGrayColor()
@@ -71,7 +71,7 @@ class ImageDemo: PlotItem {
         var annotation = CPTLayerAnnotation(anchorLayer: thePlotArea!)
         annotation.rectAnchor         = .BottomLeft
         annotation.contentLayer       = titleLayer
-        annotation.contentAnchorPoint = CGPointMake(0.0, 0.0)
+        annotation.contentAnchorPoint = CGPoint(x: 0.0, y: 0.0)
         thePlotArea?.addAnnotation(annotation)
 
         // Stretched
@@ -87,7 +87,7 @@ class ImageDemo: PlotItem {
             annotation = CPTLayerAnnotation(anchorLayer: anchorLayer)
             annotation.rectAnchor = .BottomRight
             annotation.contentLayer       = titleLayer
-            annotation.contentAnchorPoint = CGPointMake(1.0, 0.0)
+            annotation.contentAnchorPoint = CGPoint(x: 1.0, y: 0.0)
             graph.plotAreaFrame?.plotArea?.addAnnotation(annotation)
         }
     }

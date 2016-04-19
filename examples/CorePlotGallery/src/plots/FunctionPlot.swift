@@ -130,17 +130,17 @@ class FunctionPlot: PlotItem {
 
                     title.addAttribute(NSFontAttributeName,
                                        value: italicFont,
-                                       range: NSMakeRange(0, 1))
+                                       range: NSRange(location: 0, length: 1))
                     title.addAttribute(NSFontAttributeName,
                                        value: italicFont,
-                                       range: NSMakeRange(8, 1))
+                                       range: NSRange(location: 8, length: 1))
                 }
             }
 
             if let labelFont = CPTFont(name: "Helvetica", size: self.titleSize * 0.5) {
                 title.addAttribute(NSFontAttributeName,
                                    value: labelFont,
-                                   range: NSMakeRange(0, title.length))
+                                   range: NSRange(location: 0, length: title.length))
             }
 
             linePlot.attributedTitle = title
@@ -172,7 +172,7 @@ class FunctionPlot: PlotItem {
         graph.legend?.numberOfRows    = 1
         graph.legend?.delegate        = self
         graph.legendAnchor           = .Bottom
-        graph.legendDisplacement     = CGPointMake( 0.0, self.titleSize * 1.25 )
+        graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 1.25)
     }
 
 #if os(iOS)

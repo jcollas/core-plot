@@ -94,7 +94,7 @@ class CandlestickPlot: PlotItem {
         let lineCap = CPTLineCap()
         lineCap.lineStyle   = xAxis.axisLineStyle
         lineCap.lineCapType = .SweptArrow
-        lineCap.size        = CGSizeMake( self.titleSize * 0.5, self.titleSize * 0.625)
+        lineCap.size        = CGSize(width: self.titleSize * 0.5, height: self.titleSize * 0.625)
 
         if let lineColor = xAxis.axisLineStyle?.lineColor {
             lineCap.fill = CPTFill(color: lineColor)
@@ -127,7 +127,7 @@ class CandlestickPlot: PlotItem {
         dataSourceLinePlot.areaBaseValue2 = 5.0
 
         let whiteShadow = CPTMutableShadow()
-        whiteShadow.shadowOffset     = CGSizeMake(2.0, -2.0)
+        whiteShadow.shadowOffset     = CGSize(width: 2.0, height: -2.0)
         whiteShadow.shadowBlurRadius = 4.0
         whiteShadow.shadowColor      = CPTColor.whiteColor()
 
@@ -161,7 +161,7 @@ class CandlestickPlot: PlotItem {
         newGraph.legend?.cornerRadius       = 5.0
         newGraph.legend?.swatchCornerRadius = 5.0
         newGraph.legendAnchor              = .Bottom
-        newGraph.legendDisplacement        = CGPointMake( 0.0, self.titleSize * 3.0 )
+        newGraph.legendDisplacement        = CGPoint(x: 0.0, y: self.titleSize * 3.0)
 
         // Set plot ranges
         let plotSpace = newGraph.defaultPlotSpace as! CPTXYPlotSpace

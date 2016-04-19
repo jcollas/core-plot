@@ -151,7 +151,7 @@ class CurvedScatterPlot: PlotItem {
         redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
 
         let lineCap = CPTLineCap.sweptArrowPlotLineCap()
-        lineCap.size = CGSizeMake( self.titleSize * 0.625, self.titleSize * 0.625 )
+        lineCap.size = CGSize(width: self.titleSize * 0.625, height: self.titleSize * 0.625)
 
         // Axes
         // Label x axis with a fixed interval policy
@@ -257,7 +257,7 @@ class CurvedScatterPlot: PlotItem {
         let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
         plotSymbol.fill = CPTFill(color: CPTColor.blueColor().colorWithAlphaComponent(0.5))
         plotSymbol.lineStyle = symbolLineStyle
-        plotSymbol.size = CGSizeMake(10.0, 10.0)
+        plotSymbol.size = CGSize(width: 10.0, height: 10.0)
         dataSourceLinePlot.plotSymbol = plotSymbol
 
         // Set plot delegate, to know when symbols have been touched
@@ -274,7 +274,7 @@ class CurvedScatterPlot: PlotItem {
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius = 5.0
         graph.legendAnchor = .Bottom
-        graph.legendDisplacement = CGPointMake( 0.0, self.titleSize * 2.0 )
+        graph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * 2.0)
     }
 
 }
@@ -400,8 +400,8 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
         if let defaultSpace = graph.defaultPlotSpace {
             annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace, anchorPlotPoint: anchorPoint)
             annotation?.contentLayer = textLayer
-            annotation?.contentAnchorPoint = CGPointMake(0.5, 0.0)
-            annotation?.displacement = CGPointMake(0.0, 10.0)
+            annotation?.contentAnchorPoint = CGPoint(x: 0.5, y: 0.0)
+            annotation?.displacement = CGPoint(x: 0.0, y: 10.0)
             graph.plotAreaFrame?.plotArea?.addAnnotation(annotation)
         }
     }

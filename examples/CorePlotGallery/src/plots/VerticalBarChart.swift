@@ -201,7 +201,7 @@ class VerticalBarChart: PlotItem {
         theLegend.fill = CPTFill(color: CPTColor(genericGray: 0.15))
         theLegend.borderLineStyle = barLineStyle
         theLegend.cornerRadius    = textSize * 0.25
-        theLegend.swatchSize      = CGSizeMake( textSize * 0.75, textSize * 0.75 )
+        theLegend.swatchSize      = CGSize(width: textSize * 0.75, height: textSize * 0.75)
         whiteTextStyle.fontSize   = textSize * 0.5
         theLegend.textStyle       = whiteTextStyle
         theLegend.rowMargin       = textSize * 0.25
@@ -216,7 +216,7 @@ class VerticalBarChart: PlotItem {
         let legendAnnotation = CPTPlotSpaceAnnotation(plotSpace:barPlotSpace, anchorPlotPoint: plotPoint)
         legendAnnotation.contentLayer = theLegend
         
-        legendAnnotation.contentAnchorPoint = kUseHorizontalBars ? CGPointMake(1.0, 0.0) : CGPointMake(0.0, 1.0)
+        legendAnnotation.contentAnchorPoint = kUseHorizontalBars ? CGPoint(x: 1.0, y: 0.0) : CGPoint(x: 0.0, y: 1.0)
         
         graph.plotAreaFrame?.plotArea?.addAnnotation(legendAnnotation)
     }
@@ -267,7 +267,7 @@ extension VerticalBarChart: CPTBarPlotDelegate {
             let textLayer = CPTTextLayer(text:yString, style:hitAnnotationTextStyle)
             annotation = CPTPlotSpaceAnnotation(plotSpace: space, anchorPlotPoint: anchorPoint)
             annotation?.contentLayer   = textLayer
-            annotation?.displacement   = CGPointMake(0.0, 0.0)
+            annotation?.displacement   = CGPoint(x: 0.0, y: 0.0)
             self.symbolTextAnnotation = annotation
             
             graph.plotAreaFrame?.plotArea?.addAnnotation(annotation)
