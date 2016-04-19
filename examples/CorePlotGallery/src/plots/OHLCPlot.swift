@@ -3,7 +3,6 @@
 // CorePlotGallery
 //
 
-import Foundation
 import CorePlot
 
 class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>

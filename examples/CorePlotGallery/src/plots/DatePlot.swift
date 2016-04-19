@@ -3,7 +3,6 @@
 // Plot Gallery-Mac
 //
 
-import Foundation
 import CorePlot
 
 class DatePlot: PlotItem {

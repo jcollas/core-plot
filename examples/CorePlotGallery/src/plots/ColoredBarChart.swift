@@ -1,5 +1,4 @@
 
-import Foundation
 import CorePlot
 
 class ColoredBarChart: PlotItem {

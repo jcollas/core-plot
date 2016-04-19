@@ -3,7 +3,6 @@
 // CorePlotGallery
 //
 
-import Foundation
 import CorePlot
 
 class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>

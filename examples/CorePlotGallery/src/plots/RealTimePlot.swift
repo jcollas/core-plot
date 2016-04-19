@@ -3,7 +3,6 @@
 // CorePlotGallery
 //
 
-import Foundation
 import CorePlot
 
 let kFrameRate = 5.0  // frames per second
