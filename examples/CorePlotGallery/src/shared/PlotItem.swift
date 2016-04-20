@@ -8,9 +8,13 @@ import CorePlot
 #if os(iOS) || os(tvOS)
     typealias CGNSRect=CGRect
     typealias PlotGalleryNativeView=UIView
+    typealias CPTNativeImage=UIImage
+    typealias CPTNativeEvent=UIEvent
 #else
     typealias CGNSRect=NSRect
     typealias PlotGalleryNativeView=NSView
+    typealias CPTNativeImage=NSImage
+    typealias CPTNativeEvent=NSEvent
 #endif
 
 let kDemoPlots      = "Demos"
@@ -42,7 +46,7 @@ class PlotItem: NSObject {
 #endif
     }
 
-    var cachedImage: UIImage!
+    var cachedImage: CPTNativeImage!
 
     class func registerPlotItem(itemClass: PlotItem.Type) {
 
@@ -255,34 +259,34 @@ class PlotItem: NSObject {
             let imageFrame = CGRectMake(0, 0, 400, 300)
 
             let imageView = NSView(frame: NSRectFromCGRect(imageFrame))
-            imageView.setWantsLayer(true)
+            imageView.wantsLayer = true
 
             self.renderInView(imageView, withTheme:nil, animated: false)
 
             let boundsSize = imageFrame.size
 
-            let layerImage = NSBitmapImageRep(bitmapDataPlanes:NULL,
-                                            pixelsWide: boundsSize.width,
-                                            pixelsHigh: boundsSize.height,
+            let layerImage = NSBitmapImageRep(bitmapDataPlanes: nil,
+                                            pixelsWide: Int(boundsSize.width),
+                                            pixelsHigh: Int(boundsSize.height),
                                             bitsPerSample:8,
                                             samplesPerPixel:4,
                                             hasAlpha:true,
                                             isPlanar:false,
                                             colorSpaceName:NSCalibratedRGBColorSpace,
-                                            bytesPerRow: boundsSize.width * 4,
+                                            bytesPerRow: Int(boundsSize.width * 4),
                                             bitsPerPixel: 32)
 
-            let bitmapContext = NSGraphicsContext(bitmapImageRep:layerImage)
-            let context = bitmapContext.graphicsPort
+            let bitmapContext = NSGraphicsContext(bitmapImageRep:layerImage!)
+            let context = bitmapContext?.graphicsPort as! CGContext
 
             CGContextClearRect( context, CGRectMake(0.0, 0.0, boundsSize.width, boundsSize.height) )
             CGContextSetAllowsAntialiasing(context, true)
             CGContextSetShouldSmoothFonts(context, false)
-            imageView.layer.renderInContext(context)
+            imageView.layer!.renderInContext(context)
             CGContextFlush(context)
 
             self.cachedImage = NSImage(size:NSSizeFromCGSize(boundsSize))
-            self.cachedImage.addRepresentation(layerImage)
+            self.cachedImage.addRepresentation(layerImage!)
         }
         
         return self.cachedImage
@@ -339,8 +343,8 @@ class PlotItem: NSObject {
                                                           multiplier: 1.0,
                                                             constant: 0.0))
 #else
-        hostingView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable
-        hostingView.setAutoresizesSubviews(true)
+        hostingView.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
+        hostingView.autoresizesSubviews = true
 #endif
 
         self.generateData()
@@ -366,7 +370,7 @@ class PlotItem: NSObject {
 #if !os(iOS) && !os(tvOS)
 
     func imageUID() -> String {
-        return self.title
+        return self.title!
     }
 
     func imageRepresentationType() -> String {
@@ -378,7 +382,7 @@ class PlotItem: NSObject {
     }
 
     func imageTitle() -> String {
-        return self.title
+        return self.title!
     }
 #endif
 

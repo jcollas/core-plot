@@ -180,13 +180,13 @@ extension SimplePieChart: CPTPlotDataSource {
     }
 
     func attributedLegendTitleForPieChart(pieChart: CPTPieChart, recordIndex index: UInt) -> NSAttributedString {
-//#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+#if os(iOS) || os(tvOS)
         let sliceColor = CPTPieChart.defaultPieSliceColorForIndex(index).uiColor
         let labelFont = UIFont(name: "Helvetica", size: self.titleSize * 0.5)
-//#else
-//            NSColor *sliceColor = [CPTPieChart defaultPieSliceColorForIndex:index].nsColor
-//            NSFont *labelFont   = [NSFont fontWithName:"Helvetica" size:self.titleSize * 0.5]
-//#endif
+#else
+        let sliceColor = CPTPieChart.defaultPieSliceColorForIndex(index).nsColor
+        let labelFont = NSFont(name: "Helvetica", size: self.titleSize * 0.5)
+#endif
 
             let title = NSMutableAttributedString(string:"Pie Slice \(index)")
             title.addAttribute(NSForegroundColorAttributeName,

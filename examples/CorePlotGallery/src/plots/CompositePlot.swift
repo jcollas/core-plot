@@ -168,8 +168,8 @@ class CompositePlot: PlotItem {
                                    viewRect.size.height * 0.5 )
 
         for view in [scatterView, barView, pieView] {
-            view.setAutoresizesSubviews = true
-            view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable
+            view.autoresizesSubviews = true
+            view.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
 
             hostingView.addSubview(view)
         }

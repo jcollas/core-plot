@@ -186,7 +186,7 @@ extension RangePlot: CPTPlotDataSource {
 
 extension RangePlot: CPTPlotSpaceDelegate {
 
-    func plotSpace(space: CPTPlotSpace, shouldHandlePointingDeviceUpEvent event: UIEvent, atPoint point: CGPoint) -> Bool {
+    func plotSpace(space: CPTPlotSpace, shouldHandlePointingDeviceUpEvent event: CPTNativeEvent, atPoint point: CGPoint) -> Bool {
         let rangePlot = graph?.plotWithIdentifier("Range Plot") as! CPTRangePlot
 
         rangePlot.areaFill = (rangePlot.areaFill != nil ? nil : self.areaFill)
