@@ -56,7 +56,7 @@ class CompositePlot: PlotItem {
     }
 #endif
 
-    override func renderInView(hostingView: /*PlotGalleryNativeView*/ UIView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInView(hostingView: PlotGalleryNativeView, withTheme theme: CPTTheme?, animated: Bool) {
         killGraph()
 
         let scatterView = CPTGraphHostingView()

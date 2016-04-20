@@ -5,6 +5,14 @@
 
 import CorePlot
 
+#if os(iOS) || os(tvOS)
+    typealias CGNSRect=CGRect
+    typealias PlotGalleryNativeView=UIView
+#else
+    typealias CGNSRect=NSRect
+    typealias PlotGalleryNativeView=NSView
+#endif
+
 let kDemoPlots      = "Demos"
 let kPieCharts      = "Pie Charts"
 let kLinePlots      = "Line Plots"
@@ -292,7 +300,7 @@ class PlotItem: NSObject {
     }
 #endif
 
-    func renderInView(inView: UIView, withTheme theme: CPTTheme?, animated: Bool) {
+    func renderInView(inView: PlotGalleryNativeView, withTheme theme: CPTTheme?, animated: Bool) {
 
         killGraph()
 
