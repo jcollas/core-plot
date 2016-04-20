@@ -24,7 +24,7 @@ class LabelingPolicyDemo: PlotItem {
         let minorTickLength: CGFloat = 8.0
         let titleOffset: CGFloat     = self.titleSize
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)

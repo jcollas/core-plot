@@ -8,8 +8,7 @@
 #import "DetailViewControllerTV.h"
 #import "ThemeTableViewControllerTV.h"
 
-#import "PlotGallery.h"
-#import "PlotItem.h"
+#import "Plot_Gallery_tvOS-Swift.h"
 
 @interface RootViewControllerTV()
 
@@ -59,8 +58,8 @@
 
         NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
 
-        PlotItem *plotItem = [[PlotGallery sharedPlotGallery] objectInSection:[indexPath indexAtPosition:0]
-                                                                      atIndex:[indexPath indexAtPosition:1]];
+        PlotItem *plotItem = [[PlotGallery sharedPlotGallery] objectInSection:indexPath.section
+                                                                      atIndex:indexPath.row];
 
         controller.detailItem = plotItem;
     }
@@ -95,7 +94,7 @@
 
 -(NSInteger)tableView:(UITableView *)tv numberOfRowsInSection:(NSInteger)section
 {
-    return (NSInteger)[[PlotGallery sharedPlotGallery] numberOfRowsInSection:(NSUInteger)section];
+    return (NSInteger)[[PlotGallery sharedPlotGallery] numberOfRowsInSection:section];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tv cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,8 +108,8 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
 
-    PlotItem *plotItem = [[PlotGallery sharedPlotGallery] objectInSection:[indexPath indexAtPosition:0]
-                                                                  atIndex:[indexPath indexAtPosition:1]];
+    PlotItem *plotItem = [[PlotGallery sharedPlotGallery] objectInSection:indexPath.section
+                                                                  atIndex:indexPath.row];
     cell.imageView.image = [plotItem image];
     cell.textLabel.text  = plotItem.title;
 

@@ -49,124 +49,122 @@ class SimpleScatterPlot: PlotItem {
 
     override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
             let bounds = hostingView.bounds
         #else
             let bounds = NSRectToCGRect(hostingView.bounds)
         #endif
 
-    let graph = CPTXYGraph(frame: bounds)
-    self.addGraph(graph, toHostingView: hostingView)
-    self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        let graph = CPTXYGraph(frame: bounds)
+        self.addGraph(graph, toHostingView: hostingView)
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
 
-    // Plot area delegate
-    graph.plotAreaFrame?.plotArea?.delegate = self
+        // Plot area delegate
+        graph.plotAreaFrame?.plotArea?.delegate = self
 
-    // Setup scatter plot space
-    let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-    plotSpace.allowsUserInteraction = true
-    plotSpace.delegate              = self
+        // Setup scatter plot space
+        let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
+        plotSpace.allowsUserInteraction = true
+        plotSpace.delegate              = self
 
-    // Grid line styles
-    let majorGridLineStyle = CPTMutableLineStyle()
-    majorGridLineStyle.lineWidth = 0.75
-    majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        // Grid line styles
+        let majorGridLineStyle = CPTMutableLineStyle()
+        majorGridLineStyle.lineWidth = 0.75
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
 
-    let minorGridLineStyle = CPTMutableLineStyle()
-    minorGridLineStyle.lineWidth = 0.25
-    minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        let minorGridLineStyle = CPTMutableLineStyle()
+        minorGridLineStyle.lineWidth = 0.25
+        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
 
-    let redLineStyle = CPTMutableLineStyle()
-    redLineStyle.lineWidth = 10.0
-    redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
+        let redLineStyle = CPTMutableLineStyle()
+        redLineStyle.lineWidth = 10.0
+        redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
 
-    // Axes
-    // Label x axis with a fixed interval policy
-    let axisSet = graph.axisSet as! CPTXYAxisSet
+        // Axes
+        // Label x axis with a fixed interval policy
+        let axisSet = graph.axisSet as! CPTXYAxisSet
 
-        guard let x = axisSet.xAxis else {
+        guard let x = axisSet.xAxis, y = axisSet.yAxis else {
             return
         }
-    x.majorIntervalLength   = 0.5
-    x.orthogonalPosition    = 1.0
-    x.minorTicksPerInterval = 2
-    x.majorGridLineStyle    = majorGridLineStyle
-    x.minorGridLineStyle    = minorGridLineStyle
 
-    x.title         = "X Axis"
-    x.titleOffset   = 30.0
-    x.titleLocation = 1.25
+        x.majorIntervalLength = 0.5
+        x.orthogonalPosition = 1.0
+        x.minorTicksPerInterval = 2
+        x.majorGridLineStyle = majorGridLineStyle
+        x.minorGridLineStyle = minorGridLineStyle
 
-    // Label y with an automatic label policy.
-        guard let y = axisSet.yAxis else {
-            return
-        }
-    y.labelingPolicy              = .Automatic
-    y.orthogonalPosition          = 1.0
-    y.minorTicksPerInterval       = 2
-    y.preferredNumberOfMajorTicks = 8
-    y.majorGridLineStyle          = majorGridLineStyle
-    y.minorGridLineStyle          = minorGridLineStyle
-    y.labelOffset                 = 10.0
+        x.title = "X Axis"
+        x.titleOffset   = 30.0
+        x.titleLocation = 1.25
 
-    y.title         = "Y Axis"
-    y.titleOffset   = 30.0
-    y.titleLocation = 1.0
+        // Label y with an automatic label policy.
+        y.labelingPolicy = .Automatic
+        y.orthogonalPosition = 1.0
+        y.minorTicksPerInterval = 2
+        y.preferredNumberOfMajorTicks = 8
+        y.majorGridLineStyle = majorGridLineStyle
+        y.minorGridLineStyle = minorGridLineStyle
+        y.labelOffset = 10.0
 
-    // Set axes
-    graph.axisSet?.axes = [x, y]
+        y.title = "Y Axis"
+        y.titleOffset   = 30.0
+        y.titleLocation = 1.0
 
-    // Create a plot that uses the data source method
-    let dataSourceLinePlot = CPTScatterPlot()
-    dataSourceLinePlot.identifier = "Data Source Plot"
+        // Set axes
+        graph.axisSet?.axes = [x, y]
 
-    let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
-    lineStyle.lineWidth                = 3.0
-    lineStyle.lineColor                = CPTColor.greenColor()
-    dataSourceLinePlot.dataLineStyle   = lineStyle
-    dataSourceLinePlot.histogramOption = self.histogramOption
+        // Create a plot that uses the data source method
+        let dataSourceLinePlot = CPTScatterPlot()
+        dataSourceLinePlot.identifier = "Data Source Plot"
 
-    dataSourceLinePlot.dataSource = self
-    graph.addPlot(dataSourceLinePlot)
+        let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
+        lineStyle.lineWidth = 3.0
+        lineStyle.lineColor = CPTColor.greenColor()
+        dataSourceLinePlot.dataLineStyle   = lineStyle
+        dataSourceLinePlot.histogramOption = self.histogramOption
 
-    // Auto scale the plot space to fit the plot data
-    // Extend the ranges by 30% for neatness
-    plotSpace.scaleToFitPlots([dataSourceLinePlot])
-    let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
-    let yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
-    xRange.expandRangeByFactor(1.3)
-    yRange.expandRangeByFactor(1.3)
-    plotSpace.xRange = xRange
-    plotSpace.yRange = yRange
+        dataSourceLinePlot.dataSource = self
+        graph.addPlot(dataSourceLinePlot)
 
-    // Restrict y range to a global range
-    let globalYRange = CPTPlotRange(location:0.0, length: 2.0)
-    plotSpace.globalYRange = globalYRange
+        // Auto scale the plot space to fit the plot data
+        // Extend the ranges by 30% for neatness
+        plotSpace.scaleToFitPlots([dataSourceLinePlot])
+        let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
+        let yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
+        xRange.expandRangeByFactor(1.3)
+        yRange.expandRangeByFactor(1.3)
+        plotSpace.xRange = xRange
+        plotSpace.yRange = yRange
 
-    // Add plot symbols
-    let symbolLineStyle = CPTMutableLineStyle()
-    symbolLineStyle.lineColor = CPTColor.blackColor()
-    let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
-    plotSymbol.fill               = CPTFill(color: CPTColor.blueColor())
-    plotSymbol.lineStyle          = symbolLineStyle
-    plotSymbol.size               = CGSize(width: 10.0, height: 10.0)
-    dataSourceLinePlot.plotSymbol = plotSymbol
+        // Restrict y range to a global range
+        let globalYRange = CPTPlotRange(location:0.0, length: 2.0)
+        plotSpace.globalYRange = globalYRange
 
-    // Set plot delegate, to know when symbols have been touched
-    // We will display an annotation when a symbol is touched
-    dataSourceLinePlot.delegate                        = self
-    dataSourceLinePlot.plotSymbolMarginForHitDetection = 5.0
+        // Add plot symbols
+        let symbolLineStyle = CPTMutableLineStyle()
+        symbolLineStyle.lineColor = CPTColor.blackColor()
+        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
+        plotSymbol.fill               = CPTFill(color: CPTColor.blueColor())
+        plotSymbol.lineStyle          = symbolLineStyle
+        plotSymbol.size               = CGSize(width: 10.0, height: 10.0)
+        dataSourceLinePlot.plotSymbol = plotSymbol
 
-    // Add legend
-    graph.legend = CPTLegend(graph: graph)
-    graph.legend?.textStyle       = x.titleTextStyle
-    graph.legend?.fill            = CPTFill(color: CPTColor.darkGrayColor())
-    graph.legend?.borderLineStyle = x.axisLineStyle
-    graph.legend?.cornerRadius    = 5.0
-    graph.legendAnchor           = .Bottom
-    graph.legendDisplacement     = CGPoint(x: 0.0, y: 12.0)
-}
-
+        // Set plot delegate, to know when symbols have been touched
+        // We will display an annotation when a symbol is touched
+        dataSourceLinePlot.delegate                        = self
+        dataSourceLinePlot.plotSymbolMarginForHitDetection = 5.0
+        
+        // Add legend
+        graph.legend = CPTLegend(graph: graph)
+        graph.legend?.textStyle       = x.titleTextStyle
+        graph.legend?.fill            = CPTFill(color: CPTColor.darkGrayColor())
+        graph.legend?.borderLineStyle = x.axisLineStyle
+        graph.legend?.cornerRadius    = 5.0
+        graph.legendAnchor           = .Bottom
+        graph.legendDisplacement     = CGPoint(x: 0.0, y: 12.0)
+    }
+    
 }
 
 // MARK: - Plot Data Source Methods
@@ -181,9 +179,7 @@ extension SimpleScatterPlot: CPTPlotDataSource {
 
         if let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) {
             let key = field == .X ? "x" : "y"
-            let num = self.plotData[Int(index)][key]
-
-            return num
+            return self.plotData[Int(index)][key]
         }
         
         return 0.0
@@ -298,5 +294,5 @@ extension SimpleScatterPlot: CPTPlotAreaDelegate {
             }
         }
     }
-
+    
 }

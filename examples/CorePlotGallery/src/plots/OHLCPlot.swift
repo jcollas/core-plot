@@ -53,7 +53,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         // for daylight savings time.
         let refDate = NSDate(timeIntervalSinceReferenceDate: oneDay / 2.0)
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)
@@ -163,7 +163,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         // Set plot ranges
         let plotSpace = newGraph.defaultPlotSpace as! CPTXYPlotSpace
         plotSpace.xRange = CPTPlotRange(location: -0.5 * oneDay, length: oneDay * Double(plotData.count))
-        plotSpace.yRange = CPTPlotRange(location:0.0, length:4.0)
+        plotSpace.yRange = CPTPlotRange(location: 0.0, length: 4.0)
     }
 
 }

@@ -3,7 +3,6 @@
 // CorePlotGallery
 //
 
-import UIKit
 import CorePlot
 
 let kDemoPlots      = "Demos"
@@ -197,7 +196,7 @@ class PlotItem: NSObject {
         }
     }
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 
     func image() -> UIImage {
         if ( self.cachedImage == nil ) {
@@ -286,7 +285,7 @@ class PlotItem: NSObject {
         graph.applyTheme(theme ?? defaultTheme)
     }
 
-#if !os(iOS)
+#if !os(iOS) && !os(tvOS)
 
     func setFrameSize(size: NSSize) {
 
@@ -301,7 +300,7 @@ class PlotItem: NSObject {
 
         inView.addSubview(hostingView)
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         hostingView.translatesAutoresizingMaskIntoConstraints = false
         inView.addConstraint(NSLayoutConstraint(item:hostingView,
                                                            attribute: .Left,
@@ -356,7 +355,7 @@ class PlotItem: NSObject {
 
 //MARK: - IKImageBrowserItem methods
 
-#if !os(iOS)
+#if !os(iOS) && !os(tvOS)
 
     func imageUID() -> String {
         return self.title

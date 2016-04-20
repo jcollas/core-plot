@@ -46,6 +46,54 @@
 		C04CC5151CC4EC0200B3513B /* SimplePieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D81CC4E82400B3513B /* SimplePieChart.swift */; };
 		C04CC5161CC4EC0200B3513B /* SimpleScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D91CC4E82400B3513B /* SimpleScatterPlot.swift */; };
 		C04CC5171CC4EC0200B3513B /* VerticalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4DB1CC4E82400B3513B /* VerticalBarChart.swift */; };
+		C04CC5181CC7907200B3513B /* PlotItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C31CC4E7E800B3513B /* PlotItem.swift */; };
+		C04CC5191CC7907600B3513B /* PlotGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C21CC4E7E800B3513B /* PlotGallery.swift */; };
+		C04CC51A1CC7907900B3513B /* PiNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C11CC4E7E800B3513B /* PiNumberFormatter.swift */; };
+		C04CC51B1CC7908A00B3513B /* AxisDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C71CC4E82400B3513B /* AxisDemo.swift */; };
+		C04CC51C1CC7908A00B3513B /* CandlestickPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C81CC4E82400B3513B /* CandlestickPlot.swift */; };
+		C04CC51D1CC7908A00B3513B /* ColoredBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C91CC4E82400B3513B /* ColoredBarChart.swift */; };
+		C04CC51E1CC7908A00B3513B /* CompositePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CA1CC4E82400B3513B /* CompositePlot.swift */; };
+		C04CC51F1CC7908A00B3513B /* ControlChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CB1CC4E82400B3513B /* ControlChart.swift */; };
+		C04CC5201CC7908A00B3513B /* CurvedScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CC1CC4E82400B3513B /* CurvedScatterPlot.swift */; };
+		C04CC5211CC7908A00B3513B /* DatePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CD1CC4E82400B3513B /* DatePlot.swift */; };
+		C04CC5221CC7908A00B3513B /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CE1CC4E82400B3513B /* DonutChart.swift */; };
+		C04CC5231CC7908A00B3513B /* FunctionPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CF1CC4E82400B3513B /* FunctionPlot.swift */; };
+		C04CC5241CC7908A00B3513B /* GradientScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D01CC4E82400B3513B /* GradientScatterPlot.swift */; };
+		C04CC5251CC7908A00B3513B /* ImageDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D11CC4E82400B3513B /* ImageDemo.swift */; };
+		C04CC5261CC7908A00B3513B /* LabelingPolicyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D21CC4E82400B3513B /* LabelingPolicyDemo.swift */; };
+		C04CC5271CC7908A00B3513B /* LineCapDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D31CC4E82400B3513B /* LineCapDemo.swift */; };
+		C04CC5281CC7908A00B3513B /* OHLCPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D41CC4E82400B3513B /* OHLCPlot.swift */; };
+		C04CC5291CC7908A00B3513B /* PlotSpaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D51CC4E82400B3513B /* PlotSpaceDemo.swift */; };
+		C04CC52A1CC7908A00B3513B /* RangePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D61CC4E82400B3513B /* RangePlot.swift */; };
+		C04CC52B1CC7908A00B3513B /* RealTimePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D71CC4E82400B3513B /* RealTimePlot.swift */; };
+		C04CC52C1CC7908A00B3513B /* SteppedScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4DA1CC4E82400B3513B /* SteppedScatterPlot.swift */; };
+		C04CC52D1CC7908A00B3513B /* SimplePieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D81CC4E82400B3513B /* SimplePieChart.swift */; };
+		C04CC52E1CC7908A00B3513B /* SimpleScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D91CC4E82400B3513B /* SimpleScatterPlot.swift */; };
+		C04CC52F1CC7908A00B3513B /* VerticalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4DB1CC4E82400B3513B /* VerticalBarChart.swift */; };
+		C04CC5301CC7908B00B3513B /* AxisDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C71CC4E82400B3513B /* AxisDemo.swift */; };
+		C04CC5311CC7908B00B3513B /* CandlestickPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C81CC4E82400B3513B /* CandlestickPlot.swift */; };
+		C04CC5321CC7908B00B3513B /* ColoredBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C91CC4E82400B3513B /* ColoredBarChart.swift */; };
+		C04CC5331CC7908B00B3513B /* CompositePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CA1CC4E82400B3513B /* CompositePlot.swift */; };
+		C04CC5341CC7908B00B3513B /* ControlChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CB1CC4E82400B3513B /* ControlChart.swift */; };
+		C04CC5351CC7908B00B3513B /* CurvedScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CC1CC4E82400B3513B /* CurvedScatterPlot.swift */; };
+		C04CC5361CC7908B00B3513B /* DatePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CD1CC4E82400B3513B /* DatePlot.swift */; };
+		C04CC5371CC7908B00B3513B /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CE1CC4E82400B3513B /* DonutChart.swift */; };
+		C04CC5381CC7908B00B3513B /* FunctionPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4CF1CC4E82400B3513B /* FunctionPlot.swift */; };
+		C04CC5391CC7908B00B3513B /* GradientScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D01CC4E82400B3513B /* GradientScatterPlot.swift */; };
+		C04CC53A1CC7908B00B3513B /* ImageDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D11CC4E82400B3513B /* ImageDemo.swift */; };
+		C04CC53B1CC7908B00B3513B /* LabelingPolicyDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D21CC4E82400B3513B /* LabelingPolicyDemo.swift */; };
+		C04CC53C1CC7908B00B3513B /* LineCapDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D31CC4E82400B3513B /* LineCapDemo.swift */; };
+		C04CC53D1CC7908B00B3513B /* OHLCPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D41CC4E82400B3513B /* OHLCPlot.swift */; };
+		C04CC53E1CC7908B00B3513B /* PlotSpaceDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D51CC4E82400B3513B /* PlotSpaceDemo.swift */; };
+		C04CC53F1CC7908B00B3513B /* RangePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D61CC4E82400B3513B /* RangePlot.swift */; };
+		C04CC5401CC7908B00B3513B /* RealTimePlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D71CC4E82400B3513B /* RealTimePlot.swift */; };
+		C04CC5411CC7908B00B3513B /* SteppedScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4DA1CC4E82400B3513B /* SteppedScatterPlot.swift */; };
+		C04CC5421CC7908B00B3513B /* SimplePieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D81CC4E82400B3513B /* SimplePieChart.swift */; };
+		C04CC5431CC7908B00B3513B /* SimpleScatterPlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4D91CC4E82400B3513B /* SimpleScatterPlot.swift */; };
+		C04CC5441CC7908B00B3513B /* VerticalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4DB1CC4E82400B3513B /* VerticalBarChart.swift */; };
+		C04CC5451CC796C800B3513B /* PlotItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C31CC4E7E800B3513B /* PlotItem.swift */; };
+		C04CC5461CC796CA00B3513B /* PlotGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C21CC4E7E800B3513B /* PlotGallery.swift */; };
+		C04CC5471CC796CD00B3513B /* PiNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C11CC4E7E800B3513B /* PiNumberFormatter.swift */; };
 		C30B12431BCADD300084C567 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D4146F1A7D824700B6F5D6 /* CorePlot.framework */; };
 		C30B12441BCADD300084C567 /* CorePlot.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3D4146F1A7D824700B6F5D6 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C30D8AFA1BCAF99D0003BB70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D8AF91BCAF99D0003BB70 /* main.m */; };
@@ -209,7 +257,7 @@
 		4F35EBF6123611E3007C3389 /* PlotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotView.m; path = src/mac/PlotView.m; sourceTree = "<group>"; };
 		4F35EC1D1236AE6E007C3389 /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = ../../framework/CorePlot.xcodeproj; sourceTree = SOURCE_ROOT; };
 		8D1107320486CEB800E47090 /* Plot Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plot Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C04CC4B81CC4E79900B3513B /* Plot Gallery-Mac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Plot Gallery-Mac-Bridging-Header.h"; sourceTree = "<group>"; };
+		C04CC4B81CC4E79900B3513B /* Plot Gallery-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Plot Gallery-Bridging-Header.h"; sourceTree = "<group>"; };
 		C04CC4B91CC4E79A00B3513B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = src/ios/AppDelegate.swift; sourceTree = "<group>"; };
 		C04CC4BA1CC4E79A00B3513B /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = src/ios/DetailViewController.swift; sourceTree = "<group>"; };
 		C04CC4BB1CC4E79A00B3513B /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = src/ios/RootViewController.swift; sourceTree = "<group>"; };
@@ -359,7 +407,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C04CC4B81CC4E79900B3513B /* Plot Gallery-Mac-Bridging-Header.h */,
+				C04CC4B81CC4E79900B3513B /* Plot Gallery-Bridging-Header.h */,
 				4F22FF7B12342B5A006BF615 /* Plot_Gallery_Prefix.pch */,
 			);
 			name = "Other Sources";
@@ -728,11 +776,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C04CC5341CC7908B00B3513B /* ControlChart.swift in Sources */,
+				C04CC5391CC7908B00B3513B /* GradientScatterPlot.swift in Sources */,
+				C04CC53F1CC7908B00B3513B /* RangePlot.swift in Sources */,
+				C04CC5411CC7908B00B3513B /* SteppedScatterPlot.swift in Sources */,
+				C04CC5441CC7908B00B3513B /* VerticalBarChart.swift in Sources */,
+				C04CC53A1CC7908B00B3513B /* ImageDemo.swift in Sources */,
+				C04CC5351CC7908B00B3513B /* CurvedScatterPlot.swift in Sources */,
 				4F22FF4912342978006BF615 /* main.m in Sources */,
+				C04CC53C1CC7908B00B3513B /* LineCapDemo.swift in Sources */,
 				4F22FF4C1234298E006BF615 /* Plot_Gallery_MacAppDelegate.m in Sources */,
 				4F35EBF7123611E3007C3389 /* PlotGalleryController.m in Sources */,
+				C04CC5401CC7908B00B3513B /* RealTimePlot.swift in Sources */,
+				C04CC53D1CC7908B00B3513B /* OHLCPlot.swift in Sources */,
+				C04CC5301CC7908B00B3513B /* AxisDemo.swift in Sources */,
+				C04CC5451CC796C800B3513B /* PlotItem.swift in Sources */,
+				C04CC5461CC796CA00B3513B /* PlotGallery.swift in Sources */,
+				C04CC5331CC7908B00B3513B /* CompositePlot.swift in Sources */,
+				C04CC5371CC7908B00B3513B /* DonutChart.swift in Sources */,
+				C04CC5431CC7908B00B3513B /* SimpleScatterPlot.swift in Sources */,
+				C04CC53B1CC7908B00B3513B /* LabelingPolicyDemo.swift in Sources */,
+				C04CC5311CC7908B00B3513B /* CandlestickPlot.swift in Sources */,
+				C04CC5421CC7908B00B3513B /* SimplePieChart.swift in Sources */,
+				C04CC53E1CC7908B00B3513B /* PlotSpaceDemo.swift in Sources */,
 				4F35EBF8123611E3007C3389 /* PlotView.m in Sources */,
+				C04CC5381CC7908B00B3513B /* FunctionPlot.swift in Sources */,
 				E9595DFC1C9973B9004129DA /* CurvedInterpolationDemo.swift in Sources */,
+				C04CC5471CC796CD00B3513B /* PiNumberFormatter.swift in Sources */,
+				C04CC5361CC7908B00B3513B /* DatePlot.swift in Sources */,
+				C04CC5321CC7908B00B3513B /* ColoredBarChart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,11 +812,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C04CC5241CC7908A00B3513B /* GradientScatterPlot.swift in Sources */,
+				C04CC5261CC7908A00B3513B /* LabelingPolicyDemo.swift in Sources */,
+				C04CC52A1CC7908A00B3513B /* RangePlot.swift in Sources */,
+				C04CC51A1CC7907900B3513B /* PiNumberFormatter.swift in Sources */,
+				C04CC5251CC7908A00B3513B /* ImageDemo.swift in Sources */,
+				C04CC52D1CC7908A00B3513B /* SimplePieChart.swift in Sources */,
+				C04CC52C1CC7908A00B3513B /* SteppedScatterPlot.swift in Sources */,
+				C04CC5201CC7908A00B3513B /* CurvedScatterPlot.swift in Sources */,
+				C04CC5221CC7908A00B3513B /* DonutChart.swift in Sources */,
+				C04CC5291CC7908A00B3513B /* PlotSpaceDemo.swift in Sources */,
+				C04CC51E1CC7908A00B3513B /* CompositePlot.swift in Sources */,
+				C04CC51F1CC7908A00B3513B /* ControlChart.swift in Sources */,
+				C04CC5181CC7907200B3513B /* PlotItem.swift in Sources */,
+				C04CC52B1CC7908A00B3513B /* RealTimePlot.swift in Sources */,
+				C04CC52F1CC7908A00B3513B /* VerticalBarChart.swift in Sources */,
 				C3F6216C1C9F365100301061 /* CurvedInterpolationDemo.swift in Sources */,
+				C04CC5211CC7908A00B3513B /* DatePlot.swift in Sources */,
 				C30D8AFD1BCAF99D0003BB70 /* AppDelegateTV.m in Sources */,
+				C04CC5191CC7907600B3513B /* PlotGallery.swift in Sources */,
 				C3B9C26F1BCB237000BD560B /* DetailViewControllerTV.m in Sources */,
+				C04CC51C1CC7908A00B3513B /* CandlestickPlot.swift in Sources */,
+				C04CC5271CC7908A00B3513B /* LineCapDemo.swift in Sources */,
+				C04CC51D1CC7908A00B3513B /* ColoredBarChart.swift in Sources */,
+				C04CC52E1CC7908A00B3513B /* SimpleScatterPlot.swift in Sources */,
 				C30D8AFA1BCAF99D0003BB70 /* main.m in Sources */,
+				C04CC51B1CC7908A00B3513B /* AxisDemo.swift in Sources */,
 				C3B9C2711BCB237000BD560B /* ThemeTableViewControllerTV.m in Sources */,
+				C04CC5231CC7908A00B3513B /* FunctionPlot.swift in Sources */,
+				C04CC5281CC7908A00B3513B /* OHLCPlot.swift in Sources */,
 				C3B9C2701BCB237000BD560B /* RootViewControllerTV.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -848,7 +944,7 @@
 				INFOPLIST_FILE = "Plot_Gallery_Mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -856,7 +952,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-Mac";
 				PRODUCT_NAME = "Plot Gallery";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Mac-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "i386 x86_64";
 			};
@@ -877,7 +973,7 @@
 				INFOPLIST_FILE = "Plot_Gallery_Mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -885,7 +981,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-Mac";
 				PRODUCT_NAME = "Plot Gallery";
 				RUN_CLANG_STATIC_ANALYZER = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Mac-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Bridging-Header.h";
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
@@ -949,6 +1045,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -967,6 +1064,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
@@ -993,6 +1091,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1007,6 +1106,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;

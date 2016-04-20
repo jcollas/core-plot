@@ -57,7 +57,7 @@ class RangePlot: PlotItem {
         // for daylight savings time.
         let refDate = NSDate(timeIntervalSinceReferenceDate: oneDay / 2.0)
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)

@@ -5,7 +5,7 @@
 
 #import "DetailViewControllerTV.h"
 
-#import "PlotItem.h"
+#import "Plot_Gallery_tvOS-Swift.h"
 #import "ThemeTableViewControllerTV.h"
 
 @interface DetailViewControllerTV()

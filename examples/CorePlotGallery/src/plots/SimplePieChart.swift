@@ -39,7 +39,7 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
 
     override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
-        #if os(iOS)
+        #if os(iOS) || os(tvOS)
             let bounds = hostingView.bounds
         #else
             let bounds = NSRectToCGRect(hostingView.bounds)

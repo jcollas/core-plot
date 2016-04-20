@@ -27,7 +27,7 @@ class ColoredBarChart: PlotItem {
 
     override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)
@@ -144,7 +144,6 @@ extension ColoredBarChart: CPTPlotDataSource {
 
             switch ( field ) {
                 case .BarLocation:
-                    nums = []
                     for i in indexRange.location..<NSMaxRange(indexRange) {
                         nums.append(Double(i))
                     }

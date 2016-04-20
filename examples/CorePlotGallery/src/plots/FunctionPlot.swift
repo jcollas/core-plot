@@ -1,12 +1,11 @@
 
-import UIKit
 import CorePlot
 
 class FunctionPlot: PlotItem {
 
     var dataSources: Set<CPTFunctionDataSource> = []
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     typealias CPTFont=UIFont
 #else
     typealias CPTFont=NSFont
@@ -30,7 +29,7 @@ class FunctionPlot: PlotItem {
 
     override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)
@@ -175,7 +174,7 @@ class FunctionPlot: PlotItem {
         graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 1.25)
     }
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
     func italicFontForFont(oldFont: UIFont) -> UIFont? {
         var italicName: String? = nil
 

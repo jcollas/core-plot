@@ -34,25 +34,25 @@ class CompositePlot: PlotItem {
 
 #if os(OSX)
 
-    func setFrameSize(newSize: NSSize) {
-        self.scatterPlotView.frame = NSMakeRect( 0.0,
+    override func setFrameSize(newSize: NSSize) {
+        self.scatterPlotView?.frame = NSMakeRect( 0.0,
                                                 0.0,
                                                 newSize.width,
                                                 newSize.height * 0.5 )
 
-        self.barChartView.frame = NSMakeRect( 0.0,
+        self.barChartView?.frame = NSMakeRect( 0.0,
                                              newSize.height * 0.5,
                                              newSize.width * 0.5,
                                              newSize.height * 0.5 )
 
-        self.pieChartView.frame = NSMakeRect( newSize.width * 0.5,
+        self.pieChartView?.frame = NSMakeRect( newSize.width * 0.5,
                                              newSize.height * 0.5,
                                              newSize.width * 0.5,
                                              newSize.height * 0.5 )
 
-        self.scatterPlotView.needsDisplay = true
-        self.barChartView.needsDisplay = true
-        self.pieChartView.needsDisplay = true
+        self.scatterPlotView?.needsDisplay = true
+        self.barChartView?.needsDisplay = true
+        self.pieChartView?.needsDisplay = true
     }
 #endif
 
@@ -63,7 +63,7 @@ class CompositePlot: PlotItem {
         let barView     = CPTGraphHostingView()
         let pieView     = CPTGraphHostingView()
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         for view in [scatterView, barView, pieView] {
             view.translatesAutoresizingMaskIntoConstraints = false
             hostingView.addSubview(view)
@@ -205,7 +205,7 @@ class CompositePlot: PlotItem {
 
     func renderScatterPlotInHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)
@@ -313,7 +313,7 @@ class CompositePlot: PlotItem {
 
     func renderBarPlotInHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)
@@ -386,7 +386,7 @@ class CompositePlot: PlotItem {
 
     func renderPieChartInHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         hostingView.layoutIfNeeded()
         let bounds = hostingView.bounds
 #else

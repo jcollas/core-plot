@@ -60,7 +60,7 @@ class DatePlot: PlotItem {
         let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let refDate = gregorian?.dateFromComponents(dateComponents)
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)

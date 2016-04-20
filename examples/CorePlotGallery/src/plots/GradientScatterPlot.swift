@@ -50,7 +50,7 @@ class GradientScatterPlot: PlotItem {
 
     override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
         let bounds = NSRectToCGRect(hostingView.bounds)
@@ -240,16 +240,16 @@ extension GradientScatterPlot: CPTScatterPlotDelegate {
         // Determine point of symbol in plot coordinates
         let dataPoint = self.plotData[Int(index)]
 
-        let x = dataPoint["x"]
-        let y = dataPoint["y"]
+        let x = dataPoint["x"]!
+        let y = dataPoint["y"]!
 
-        let anchorPoint: [Double] = [x!, y!]
+        let anchorPoint: [Double] = [x, y]
 
         // Add annotation
         // First make a string for the y value
         let formatter = NSNumberFormatter()
         formatter.maximumFractionDigits = 2
-        let yString = formatter.stringFromNumber(y!)
+        let yString = formatter.stringFromNumber(y)
 
         // Now add the annotation to the plot area
         if let defaultSpace = graph.defaultPlotSpace {
