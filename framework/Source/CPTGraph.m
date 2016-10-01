@@ -17,15 +17,15 @@
 /** @defgroup graphAnimation Graphs
  *  @brief Graph properties that can be animated using Core Animation.
  *  @if MacOnly
- *  @since Custom layer property animation is supported on MacOS 10.6 and later.
+ *  @since Custom layer property animation is supported on macOS 10.6 and later.
  *  @endif
  *  @ingroup animation
  **/
 
-NSString *const CPTGraphNeedsRedrawNotification        = @"CPTGraphNeedsRedrawNotification";
-NSString *const CPTGraphDidAddPlotSpaceNotification    = @"CPTGraphDidAddPlotSpaceNotification";
-NSString *const CPTGraphDidRemovePlotSpaceNotification = @"CPTGraphDidRemovePlotSpaceNotification";
-NSString *const CPTGraphPlotSpaceNotificationKey       = @"CPTGraphPlotSpaceNotificationKey";
+CPTGraphNotification const CPTGraphNeedsRedrawNotification        = @"CPTGraphNeedsRedrawNotification";
+CPTGraphNotification const CPTGraphDidAddPlotSpaceNotification    = @"CPTGraphDidAddPlotSpaceNotification";
+CPTGraphNotification const CPTGraphDidRemovePlotSpaceNotification = @"CPTGraphDidRemovePlotSpaceNotification";
+CPTGraphPlotSpaceKey const CPTGraphPlotSpaceNotificationKey       = @"CPTGraphPlotSpaceNotificationKey";
 
 /// @cond
 @interface CPTGraph()
