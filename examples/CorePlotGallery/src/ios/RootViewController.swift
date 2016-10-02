@@ -16,10 +16,10 @@ class RootViewController: UITableViewController {
 
         self.currentThemeName = kThemeTableViewControllerDefaultTheme
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(themeChanged(_:)), name:PlotGalleryThemeDidChangeNotification, object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(_:)), name:NSNotification.Name(rawValue: PlotGalleryThemeDidChangeNotification), object:nil)
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
 //        self.setupView()
@@ -30,25 +30,25 @@ class RootViewController: UITableViewController {
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Segues
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if segue.identifier == "showDetail" {
-            let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+            let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
 
-            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
             controller.navigationItem.leftItemsSupplementBackButton = true
 
             controller.currentThemeName = self.currentThemeName
 
             let indexPath = self.tableView.indexPathForSelectedRow
 
-            let plotItem = PlotGallery.sharedPlotGallery.objectInSection(indexPath!.section,
-                                                                          atIndex: indexPath!.row)
+            let plotItem = PlotGallery.sharedPlotGallery.objectInSection((indexPath! as NSIndexPath).section,
+                                                                          atIndex: (indexPath! as NSIndexPath).row)
 
             controller.detailItem = plotItem
         }
@@ -56,8 +56,8 @@ class RootViewController: UITableViewController {
 
     // MARK: - Theme Selection
 
-    func themeChanged(notification: NSNotification) {
-        let themeInfo = notification.userInfo
+    func themeChanged(_ notification: Notification) {
+        let themeInfo = (notification as NSNotification).userInfo
 
         if let themeName = themeInfo?[PlotGalleryThemeNameKey] as? String {
             self.currentThemeName = themeName
@@ -66,19 +66,19 @@ class RootViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return Int(PlotGallery.sharedPlotGallery.numberOfSections)
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Int(PlotGallery.sharedPlotGallery.numberOfRowsInSection(section))
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("PlotCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlotCell", for: indexPath)
 
-        let plotItem = PlotGallery.sharedPlotGallery.objectInSection(indexPath.section, atIndex: indexPath.row)
+        let plotItem = PlotGallery.sharedPlotGallery.objectInSection((indexPath as NSIndexPath).section, atIndex: (indexPath as NSIndexPath).row)
 
         cell.imageView?.image = plotItem.image()
         cell.textLabel?.text  = plotItem.title
@@ -86,7 +86,7 @@ class RootViewController: UITableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return PlotGallery.sharedPlotGallery.sectionTitles[section]
     }
 

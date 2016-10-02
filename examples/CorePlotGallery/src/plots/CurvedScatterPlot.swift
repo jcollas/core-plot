@@ -110,7 +110,7 @@ class CurvedScatterPlot: PlotItem {
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -121,7 +121,7 @@ class CurvedScatterPlot: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         graph.plotAreaFrame?.paddingLeft   += self.titleSize * 2.25
         graph.plotAreaFrame?.paddingTop    += self.titleSize
@@ -140,24 +140,24 @@ class CurvedScatterPlot: PlotItem {
         // Grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.1)
 
         let redLineStyle = CPTMutableLineStyle()
         redLineStyle.lineWidth = 10.0
-        redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
+        redLineStyle.lineColor = CPTColor.red().withAlphaComponent(0.5)
 
-        let lineCap = CPTLineCap.sweptArrowPlotLineCap()
+        let lineCap = CPTLineCap.sweptArrowPlot()
         lineCap.size = CGSize(width: self.titleSize * 0.625, height: self.titleSize * 0.625)
 
         // Axes
         // Label x axis with a fixed interval policy
         let axisSet = graph.axisSet as! CPTXYAxisSet
 
-        guard let x = axisSet.xAxis, y = axisSet.yAxis else {
+        guard let x = axisSet.xAxis, let y = axisSet.yAxis else {
             return
         }
 
@@ -178,7 +178,7 @@ class CurvedScatterPlot: PlotItem {
         x.titleOffset = self.titleSize * 1.25
 
         // Label y with an automatic label policy.
-        y.labelingPolicy              = .Automatic
+        y.labelingPolicy              = .automatic
         y.minorTicksPerInterval       = 4
         y.preferredNumberOfMajorTicks = 8
         y.majorGridLineStyle          = majorGridLineStyle
@@ -202,24 +202,24 @@ class CurvedScatterPlot: PlotItem {
 
         // Create a plot that uses the data source method
         let dataSourceLinePlot = CPTScatterPlot()
-        dataSourceLinePlot.identifier = kData
+        dataSourceLinePlot.identifier = kData as (NSCoding & NSCopying & NSObjectProtocol)?
 
         // Make the data source line use curved interpolation
-        dataSourceLinePlot.interpolation = .Curved
+        dataSourceLinePlot.interpolation = .curved
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth              = 3.0
-        lineStyle.lineColor              = CPTColor.greenColor()
+        lineStyle.lineColor              = CPTColor.green()
         dataSourceLinePlot.dataLineStyle = lineStyle
 
         dataSourceLinePlot.dataSource = self
-        graph.addPlot(dataSourceLinePlot)
+        graph.add(dataSourceLinePlot)
 
         // First derivative
         let firstPlot = CPTScatterPlot()
-        firstPlot.identifier    = kFirst
+        firstPlot.identifier    = kFirst as (NSCoding & NSCopying & NSObjectProtocol)?
         lineStyle.lineWidth     = 2.0
-        lineStyle.lineColor     = CPTColor.redColor()
+        lineStyle.lineColor     = CPTColor.red()
         firstPlot.dataLineStyle = lineStyle
         firstPlot.dataSource    = self
 
@@ -227,35 +227,35 @@ class CurvedScatterPlot: PlotItem {
 
         // Second derivative
         let secondPlot = CPTScatterPlot()
-        secondPlot.identifier    = kSecond
-        lineStyle.lineColor      = CPTColor.blueColor()
+        secondPlot.identifier    = kSecond as (NSCoding & NSCopying & NSObjectProtocol)?
+        lineStyle.lineColor      = CPTColor.blue()
         secondPlot.dataLineStyle = lineStyle
         secondPlot.dataSource    = self
 
         // [graph addPlot:secondPlot]
 
         // Auto scale the plot space to fit the plot data
-        plotSpace.scaleToFitEntirePlots(graph.allPlots())
+        plotSpace.scale(toFitEntirePlots: graph.allPlots())
         let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
         let yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
 
         // Expand the ranges to put some space around the plot
-        xRange.expandRangeByFactor(1.025)
+        xRange.expand(byFactor: 1.025)
         xRange.location = plotSpace.xRange.location
-        yRange.expandRangeByFactor(1.05)
+        yRange.expand(byFactor: 1.05)
         x.visibleAxisRange = xRange
         y.visibleAxisRange = yRange
 
-        xRange.expandRangeByFactor(3.0)
-        yRange.expandRangeByFactor(3.0)
+        xRange.expand(byFactor: 3.0)
+        yRange.expand(byFactor: 3.0)
         plotSpace.globalXRange = xRange
         plotSpace.globalYRange = yRange
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.blackColor().colorWithAlphaComponent(0.5)
-        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
-        plotSymbol.fill = CPTFill(color: CPTColor.blueColor().colorWithAlphaComponent(0.5))
+        symbolLineStyle.lineColor = CPTColor.black().withAlphaComponent(0.5)
+        let plotSymbol = CPTPlotSymbol.ellipse()
+        plotSymbol.fill = CPTFill(color: CPTColor.blue().withAlphaComponent(0.5))
         plotSymbol.lineStyle = symbolLineStyle
         plotSymbol.size = CGSize(width: 10.0, height: 10.0)
         dataSourceLinePlot.plotSymbol = plotSymbol
@@ -270,10 +270,10 @@ class CurvedScatterPlot: PlotItem {
         graph.legend = CPTLegend(graph: graph)
         graph.legend?.numberOfRows = 1
         graph.legend?.textStyle = x.titleTextStyle
-        graph.legend?.fill = CPTFill(color: CPTColor.darkGrayColor())
+        graph.legend?.fill = CPTFill(color: CPTColor.darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius = 5.0
-        graph.legendAnchor = .Bottom
+        graph.legendAnchor = .bottom
         graph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * 2.0)
     }
 
@@ -283,7 +283,7 @@ class CurvedScatterPlot: PlotItem {
 
 extension CurvedScatterPlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         var numRecords: UInt = 0
         let identifier  = plot.identifier as! String
 
@@ -300,7 +300,7 @@ extension CurvedScatterPlot: CPTPlotDataSource {
         return numRecords
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
         var num: Double? = nil
         let identifier  = plot.identifier as! String
 
@@ -329,7 +329,7 @@ extension CurvedScatterPlot: CPTPlotDataSource {
 
 extension CurvedScatterPlot: CPTPlotSpaceDelegate {
 
-    func plotSpace(space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, forCoordinate coordinate: CPTCoordinate) -> CPTPlotRange? {
+    func plotSpace(_ space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, for coordinate: CPTCoordinate) -> CPTPlotRange? {
         let theGraph = space.graph
         let axisSet = theGraph?.axisSet as! CPTXYAxisSet
 
@@ -337,12 +337,12 @@ extension CurvedScatterPlot: CPTPlotSpaceDelegate {
 
         switch ( coordinate ) {
             case .X:
-                changedRange.expandRangeByFactor(1.025)
+                changedRange.expand(byFactor: 1.025)
                 changedRange.location = newRange.location
                 axisSet.xAxis?.visibleAxisRange = changedRange
 
             case .Y:
-                changedRange.expandRangeByFactor(1.05)
+                changedRange.expand(byFactor: 1.05)
                 axisSet.yAxis?.visibleAxisRange = changedRange
 
             default:
@@ -358,7 +358,7 @@ extension CurvedScatterPlot: CPTPlotSpaceDelegate {
 
 extension CurvedScatterPlot: CPTScatterPlotDelegate {
 
-    func scatterPlot(plot: CPTScatterPlot, plotSymbolWasSelectedAtRecordIndex index: UInt) {
+    func scatterPlot(_ plot: CPTScatterPlot, plotSymbolWasSelectedAtRecord index: UInt) {
         let graph = graphs[0] as! CPTXYGraph
 
         var annotation = self.symbolTextAnnotation
@@ -370,7 +370,7 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.whiteColor()
+        hitAnnotationTextStyle.color    = CPTColor.white()
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 
         // Determine point of symbol in plot coordinates
@@ -383,9 +383,9 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
 
         // Add annotation
         // First make a string for the y value
-        let formatter = NSNumberFormatter()
+        let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
-        let yString = formatter.stringFromNumber(y)
+        let yString = formatter.string(from: NSNumber(value: y))
 
         // Now add the annotation to the plot area
         let textLayer = CPTTextLayer(text: yString, style: hitAnnotationTextStyle)
@@ -398,7 +398,7 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
         textLayer.paddingBottom = 2.0
 
         if let defaultSpace = graph.defaultPlotSpace {
-            annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace, anchorPlotPoint: anchorPoint)
+            annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace, anchorPlotPoint: anchorPoint as [NSNumber]?)
             annotation?.contentLayer = textLayer
             annotation?.contentAnchorPoint = CGPoint(x: 0.5, y: 0.0)
             annotation?.displacement = CGPoint(x: 0.0, y: 10.0)
@@ -406,15 +406,15 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
         }
     }
 
-    func scatterPlotDataLineWasSelected(plot: CPTScatterPlot) {
+    func scatterPlotDataLineWasSelected(_ plot: CPTScatterPlot) {
         NSLog("scatterPlotDataLineWasSelected: \(plot)")
     }
 
-    func scatterPlotDataLineTouchDown(plot: CPTScatterPlot) {
+    func scatterPlotDataLineTouchDown(_ plot: CPTScatterPlot) {
         NSLog("scatterPlotDataLineTouchDown: \(plot)")
     }
 
-    func scatterPlotDataLineTouchUp(plot: CPTScatterPlot) {
+    func scatterPlotDataLineTouchUp(_ plot: CPTScatterPlot) {
         NSLog("scatterPlotDataLineTouchUp: \(plot)")
     }
 
@@ -424,7 +424,7 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
 
 extension CurvedScatterPlot: CPTPlotAreaDelegate {
 
-    func plotAreaWasSelected(plotArea: CPTPlotArea) {
+    func plotAreaWasSelected(_ plotArea: CPTPlotArea) {
         // Remove the annotation
         if let annotation = self.symbolTextAnnotation {
             let graph = graphs[0] as! CPTXYGraph

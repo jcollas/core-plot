@@ -3,12 +3,13 @@
 // CorePlotGallery
 //
 
-#import <Cocoa/Cocoa.h>
-#import <CorePlot/CorePlot.h>
-#import <Quartz/Quartz.h>
+@import Cocoa;
+//#import <CorePlot/CorePlot.h>
+@import Quartz;
 
-#import "PlotGallery.h"
 #import "PlotView.h"
+
+@class PlotItem;
 
 @interface PlotGalleryController : NSObject<NSSplitViewDelegate,
                                             PlotViewDelegate>

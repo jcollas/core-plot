@@ -48,7 +48,7 @@ class GradientScatterPlot: PlotItem {
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -58,7 +58,7 @@ class GradientScatterPlot: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTSlateTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.slateTheme))
 
         // Plot area delegate
         graph.plotAreaFrame?.plotArea?.delegate = self
@@ -72,11 +72,11 @@ class GradientScatterPlot: PlotItem {
         // Grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.1)
 
         // Axes
         // Label x axis with a fixed interval policy
@@ -95,7 +95,7 @@ class GradientScatterPlot: PlotItem {
 
         // Label y with an automatic label policy.
         if let y = axisSet.yAxis {
-            y.labelingPolicy              = .Automatic
+            y.labelingPolicy              = .automatic
             y.orthogonalPosition          = 1.0
             y.minorTicksPerInterval       = 2
             y.preferredNumberOfMajorTicks = 8
@@ -110,19 +110,19 @@ class GradientScatterPlot: PlotItem {
 
         // Create a plot that uses the data source method
         let dataSourceLinePlot = CPTScatterPlot()
-        dataSourceLinePlot.identifier = "Data Source Plot"
+        dataSourceLinePlot.identifier = "Data Source Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth = 5.0
-        lineStyle.lineJoin = .Round
-        lineStyle.lineGradient = CPTGradient(beginningColor: CPTColor.greenColor(), endingColor: CPTColor.whiteColor())
+        lineStyle.lineJoin = .round
+        lineStyle.lineGradient = CPTGradient(beginning: CPTColor.green(), ending: CPTColor.white())
         dataSourceLinePlot.dataLineStyle = lineStyle
         dataSourceLinePlot.dataSource = self
-        graph.addPlot(dataSourceLinePlot)
+        graph.add(dataSourceLinePlot)
 
         // Put an area gradient under the plot above
         let areaColor = CPTColor(componentRed: 0.3, green: 1.0, blue: 0.3, alpha: 0.8)
-        let areaGradient = CPTGradient(beginningColor: areaColor, endingColor: CPTColor.clearColor())
+        let areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
         areaGradient.angle = -90.0
         let areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill = areaGradientFill
@@ -130,20 +130,20 @@ class GradientScatterPlot: PlotItem {
 
         // Add some fill bands
         let band1Color = CPTColor(componentRed: 0.3, green: 0.3, blue:1.0, alpha: 0.8)
-        let band1Gradient = CPTGradient(beginningColor: band1Color,  endingColor: CPTColor.clearColor())
+        let band1Gradient = CPTGradient(beginning: band1Color,  ending: CPTColor.clear())
         band1Gradient.angle = -90.0
         let band1Fill = CPTFill(gradient: band1Gradient)
-        dataSourceLinePlot.addAreaFillBand(CPTLimitBand(range: CPTPlotRange(location:1.05, length:0.15), fill: band1Fill))
+        dataSourceLinePlot.addAreaFill(CPTLimitBand(range: CPTPlotRange(location:1.05, length:0.15), fill: band1Fill))
 
         let band2Color = CPTColor(componentRed: 1.0, green: 0.3, blue: 0.3, alpha: 0.8)
-        let band2Gradient = CPTGradient(beginningColor: band2Color, endingColor: CPTColor.clearColor())
+        let band2Gradient = CPTGradient(beginning: band2Color, ending: CPTColor.clear())
         band2Gradient.angle = -90.0
         let band2Fill = CPTFill(gradient: band2Gradient)
-        dataSourceLinePlot.addAreaFillBand(CPTLimitBand(range: CPTPlotRange(location:1.3, length:0.1), fill: band2Fill))
+        dataSourceLinePlot.addAreaFill(CPTLimitBand(range: CPTPlotRange(location:1.3, length:0.1), fill: band2Fill))
 
         // Auto scale the plot space to fit the plot data
         // Extend the ranges by 30% for neatness
-        plotSpace.scaleToFitPlots([dataSourceLinePlot])
+        plotSpace.scale(toFit: [dataSourceLinePlot])
         let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
         let yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
         plotSpace.xRange = xRange
@@ -154,11 +154,11 @@ class GradientScatterPlot: PlotItem {
         plotSpace.globalYRange = globalYRange
 
         // Add plot symbols
-        let symbolGradient = CPTGradient(beginningColor: CPTColor(componentRed:0.75, green:0.75, blue:1.0, alpha:1.0), endingColor: CPTColor.blueColor())
-        symbolGradient.gradientType = .Radial
+        let symbolGradient = CPTGradient(beginning: CPTColor(componentRed:0.75, green:0.75, blue:1.0, alpha:1.0), ending: CPTColor.blue())
+        symbolGradient.gradientType = .radial
         symbolGradient.startAnchor  = CGPoint(x: 0.25, y: 0.75)
         
-        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
+        let plotSymbol = CPTPlotSymbol.ellipse()
         plotSymbol.fill = CPTFill(gradient: symbolGradient)
         plotSymbol.lineStyle = nil
         plotSymbol.size = CGSize(width: 12.0, height: 12.0)
@@ -176,11 +176,11 @@ class GradientScatterPlot: PlotItem {
 
 extension GradientScatterPlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
 
         guard let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) else {
             return nil
@@ -202,13 +202,13 @@ extension GradientScatterPlot: CPTPlotDataSource {
 
 extension GradientScatterPlot: CPTPlotSpaceDelegate {
 
-    func plotSpace(space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, forCoordinate coordinate: CPTCoordinate) -> CPTPlotRange? {
+    func plotSpace(_ space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, for coordinate: CPTCoordinate) -> CPTPlotRange? {
         // Impose a limit on how far user can scroll in x
         if ( coordinate == .X ) {
             let maxRange = CPTPlotRange(location: -1.0, length:6.0)
             let changedRange = newRange.mutableCopy() as! CPTMutablePlotRange
-            changedRange.shiftEndToFitInRange(maxRange)
-            changedRange.shiftLocationToFitInRange(maxRange)
+            changedRange.shiftEndToFit(in: maxRange)
+            changedRange.shiftLocationToFit(in: maxRange)
             return changedRange
         }
         
@@ -221,7 +221,7 @@ extension GradientScatterPlot: CPTPlotSpaceDelegate {
 
 extension GradientScatterPlot: CPTScatterPlotDelegate {
 
-    func scatterPlot(plot: CPTScatterPlot, plotSymbolWasSelectedAtRecordIndex index: UInt) {
+    func scatterPlot(_ plot: CPTScatterPlot, plotSymbolWasSelectedAtRecord index: UInt) {
         let graph = graphs[0] 
 
         var annotation = self.symbolTextAnnotation
@@ -233,7 +233,7 @@ extension GradientScatterPlot: CPTScatterPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.whiteColor()
+        hitAnnotationTextStyle.color    = CPTColor.white()
         hitAnnotationTextStyle.fontSize = 16.0
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 
@@ -247,14 +247,14 @@ extension GradientScatterPlot: CPTScatterPlotDelegate {
 
         // Add annotation
         // First make a string for the y value
-        let formatter = NSNumberFormatter()
+        let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
-        let yString = formatter.stringFromNumber(y)
+        let yString = formatter.string(from: NSNumber(value: y))
 
         // Now add the annotation to the plot area
         if let defaultSpace = graph.defaultPlotSpace {
             let textLayer = CPTTextLayer(text:yString, style: hitAnnotationTextStyle)
-            annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace,anchorPlotPoint:anchorPoint)
+            annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace,anchorPlotPoint:anchorPoint as [NSNumber]?)
             annotation?.contentLayer   = textLayer
             annotation?.displacement   = CGPoint(x: 0.0, y: 20.0)
             self.symbolTextAnnotation = annotation
@@ -268,7 +268,7 @@ extension GradientScatterPlot: CPTScatterPlotDelegate {
 
 extension GradientScatterPlot: CPTPlotAreaDelegate {
 
-    func plotAreaWasSelected(plotArea: CPTPlotArea) {
+    func plotAreaWasSelected(_ plotArea: CPTPlotArea) {
         // Remove the annotation
         if let annotation = self.symbolTextAnnotation {
             let graph = graphs[0] as! CPTXYGraph

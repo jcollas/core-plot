@@ -17,7 +17,7 @@ class AxisDemo: PlotItem {
         section = kDemoPlots
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
         
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -28,12 +28,12 @@ class AxisDemo: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTSlateTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: .slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGrayColor())
+        graph.fill = CPTFill(color: CPTColor.darkGray())
 
         // Plot area
-        graph.plotAreaFrame?.fill          = CPTFill(color: CPTColor.lightGrayColor())
+        graph.plotAreaFrame?.fill          = CPTFill(color: CPTColor.lightGray())
         graph.plotAreaFrame?.paddingTop    = self.titleSize
         graph.plotAreaFrame?.paddingBottom = self.titleSize * 2.0
         graph.plotAreaFrame?.paddingLeft   = self.titleSize * 2.0
@@ -43,7 +43,7 @@ class AxisDemo: PlotItem {
 
         graph.plotAreaFrame?.axisSet?.borderLineStyle = CPTLineStyle()
 
-        graph.plotAreaFrame?.plotArea?.fill = CPTFill(color: CPTColor.whiteColor())
+        graph.plotAreaFrame?.plotArea?.fill = CPTFill(color: .white())
 
         // Setup plot space
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
@@ -53,15 +53,15 @@ class AxisDemo: PlotItem {
         // Line styles
         let axisLineStyle = CPTMutableLineStyle()
         axisLineStyle.lineWidth = 3.0
-        axisLineStyle.lineCap   = .Round
+        axisLineStyle.lineCap   = .round
 
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor.redColor()
+        majorGridLineStyle.lineColor = .red()
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.blueColor()
+        minorGridLineStyle.lineColor = .blue()
 
         // Text styles
         let axisTitleTextStyle = CPTMutableTextStyle()
@@ -79,7 +79,7 @@ class AxisDemo: PlotItem {
         x.orthogonalPosition    = 0.5
         x.majorIntervalLength   = 0.5
         x.minorTicksPerInterval = 4
-        x.tickDirection         = .None
+        x.tickDirection         = .none
         x.axisLineStyle         = axisLineStyle
         x.majorTickLength       = 12.0
         x.majorTickLineStyle    = axisLineStyle
@@ -90,23 +90,23 @@ class AxisDemo: PlotItem {
         x.titleTextStyle        = axisTitleTextStyle
         x.titleOffset           = self.titleSize
 
-        let redAlpha = CPTColor.redColor().colorWithAlphaComponent(0.1)
-        let greenAlpha = CPTColor.greenColor().colorWithAlphaComponent(0.1)
-        let blueAlpha = CPTColor.blueColor().colorWithAlphaComponent(0.1)
+        let redAlpha = CPTColor.red().withAlphaComponent(0.1)
+        let greenAlpha = CPTColor.green().withAlphaComponent(0.1)
+        let blueAlpha = CPTColor.blue().withAlphaComponent(0.1)
 
         x.alternatingBandFills  = [CPTFill(color: redAlpha), CPTFill(color: greenAlpha)]
         x.delegate              = self
 
         // Label y with an automatic labeling policy.
-        axisLineStyle.lineColor = CPTColor.greenColor()
+        axisLineStyle.lineColor = CPTColor.green()
 
         guard let y = axisSet.yAxis else {
             return
         }
-        y.labelingPolicy        = .Automatic
+        y.labelingPolicy        = .automatic
         y.separateLayers        = true
         y.minorTicksPerInterval = 9
-        y.tickDirection         = .Negative
+        y.tickDirection         = .negative
         y.axisLineStyle         = axisLineStyle
         y.majorTickLength       = 6.0
         y.majorTickLineStyle    = axisLineStyle
@@ -119,23 +119,23 @@ class AxisDemo: PlotItem {
         y.alternatingBandFills  = [CPTFill(color: blueAlpha)]  // TODO
         y.delegate              = self
 
-        let bandFill = CPTFill(color: CPTColor.darkGrayColor().colorWithAlphaComponent(0.5))
+        let bandFill = CPTFill(color: CPTColor.darkGray().withAlphaComponent(0.5))
         y.addBackgroundLimitBand(CPTLimitBand(range: CPTPlotRange(location: 7.0, length: 1.5), fill:bandFill))
         y.addBackgroundLimitBand(CPTLimitBand(range: CPTPlotRange(location: 1.5, length: 3.0), fill:bandFill))
 
         // Label y2 with an equal division labeling policy.
-        axisLineStyle.lineColor = CPTColor.orangeColor()
+        axisLineStyle.lineColor = CPTColor.orange()
 
         let y2 = CPTXYAxis()
         y2.coordinate                  = .Y
         y2.plotSpace                   = plotSpace
         y2.orthogonalPosition          = -10.0
-        y2.labelingPolicy              = .EqualDivisions
+        y2.labelingPolicy              = .equalDivisions
         y2.separateLayers              = false
         y2.preferredNumberOfMajorTicks = 6
         y2.minorTicksPerInterval       = 9
-        y2.tickDirection               = .None
-        y2.tickLabelDirection          = .Positive
+        y2.tickDirection               = .none
+        y2.tickLabelDirection          = .positive
         y2.labelTextStyle              = y.labelTextStyle
         y2.axisLineStyle               = axisLineStyle
         y2.majorTickLength             = 12.0
@@ -156,7 +156,7 @@ class AxisDemo: PlotItem {
 
 extension AxisDemo: CPTAxisDelegate {
 
-    func axis(axis: CPTAxis, labelWasSelected label: CPTAxisLabel) {
+    func axis(_ axis: CPTAxis, labelWasSelected label: CPTAxisLabel) {
         NSLog("\(axis.title) label was selected at location \(label.tickLocation)")
     }
     

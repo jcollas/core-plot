@@ -37,7 +37,7 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
         #if os(iOS) || os(tvOS)
             let bounds = hostingView.bounds
@@ -47,26 +47,26 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         graph.plotAreaFrame?.masksToBorder = false
         graph.axisSet = nil
 
         // Overlay gradient for pie chart
         var overlayGradient = CPTGradient()
-        overlayGradient.gradientType = .Radial
-        overlayGradient = overlayGradient.addColorStop(CPTColor.blackColor().colorWithAlphaComponent(0.0), atPosition: 0.0)
-        overlayGradient = overlayGradient.addColorStop(CPTColor.blackColor().colorWithAlphaComponent(0.3), atPosition: 0.9)
-        overlayGradient = overlayGradient.addColorStop(CPTColor.blackColor().colorWithAlphaComponent(0.7), atPosition: 1.0)
+        overlayGradient.gradientType = .radial
+        overlayGradient = overlayGradient.addColorStop(CPTColor.black().withAlphaComponent(0.0), atPosition: 0.0)
+        overlayGradient = overlayGradient.addColorStop(CPTColor.black().withAlphaComponent(0.3), atPosition: 0.9)
+        overlayGradient = overlayGradient.addColorStop(CPTColor.black().withAlphaComponent(0.7), atPosition: 1.0)
 
         // Add pie chart
         let piePlot = CPTPieChart()
         piePlot.dataSource = self
         piePlot.pieRadius  = min( 0.7 * (hostingView.frame.size.height - 2.0 * graph.paddingLeft) / 2.0,
                                  0.7 * (hostingView.frame.size.width - 2.0 * graph.paddingTop) / 2.0 )
-        piePlot.identifier     = self.title
+        piePlot.identifier     = self.title as (NSCoding & NSCopying & NSObjectProtocol)?
         piePlot.startAngle     = CGFloat(M_PI_4)
-        piePlot.sliceDirection = .CounterClockwise
+        piePlot.sliceDirection = .counterClockwise
         piePlot.overlayFill    = CPTFill(gradient: overlayGradient)
 
         piePlot.labelRotationRelativeToRadius = true
@@ -74,15 +74,15 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
         piePlot.labelOffset = -50.0
 
         piePlot.delegate = self
-        graph.addPlot(piePlot)
+        graph.add(piePlot)
 
         // Add legend
         let theLegend = CPTLegend(graph: graph)
         theLegend.numberOfColumns = 1
-        theLegend.fill            = CPTFill(color: CPTColor.whiteColor())
+        theLegend.fill            = CPTFill(color: CPTColor.white())
         theLegend.borderLineStyle = CPTLineStyle()
 
-        theLegend.entryFill = CPTFill(color: CPTColor.lightGrayColor())
+        theLegend.entryFill = CPTFill(color: CPTColor.lightGray())
         theLegend.entryBorderLineStyle = CPTLineStyle()
         theLegend.entryCornerRadius    = 3.0
         theLegend.entryPaddingLeft     = 3.0
@@ -95,32 +95,21 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
 
         graph.legend = theLegend
 
-        graph.legendAnchor = .Right
+        graph.legendAnchor = .right
         graph.legendDisplacement = CGPoint(x: -graph.paddingRight - 10.0, y: 0.0)
     }
 
-    func dataLabelForPlot(plot: CPTPlot, recordIndex index: UInt) -> CPTLayer? {
-        let whiteText = CPTMutableTextStyle()
-
-        whiteText.color = CPTColor.whiteColor()
-        whiteText.fontSize = self.titleSize * 0.5
-
-        let value = String(format: "%1.0f", plotData[Int(index)])
-        let newLayer = CPTTextLayer(text: "\(value)", style: whiteText)
-        return newLayer
-    }
-    
 }
 
 // MARK: - CPTPieChartDelegate Methods
 
 extension SimplePieChart: CPTPieChartDelegate {
 
-    func plot(plot: CPTPlot, dataLabelWasSelectedAtRecordIndex index: UInt) {
+    func plot(_ plot: CPTPlot, dataLabelWasSelectedAtRecord index: UInt) {
             NSLog("Data label for '\(plot.identifier)' was selected at index \(index).")
     }
 
-    func pieChart(plot: CPTPieChart, sliceWasSelectedAtRecordIndex index: UInt) {
+    func pieChart(_ plot: CPTPieChart, sliceWasSelectedAtRecord index: UInt) {
             NSLog("Slice was selected at index \(index). Value = \(plotData[Int(index)])")
 
             self.offsetIndex = nil
@@ -143,15 +132,18 @@ extension SimplePieChart: CPTPieChartDelegate {
 
 extension SimplePieChart: CPTLegendDelegate {
 
-        func legend(legend: CPTLegend, legendEntryForPlot plot: CPTPlot, wasSelectedAtIndex idx: UInt) {
+        func legend(_ legend: CPTLegend, legendEntryFor plot: CPTPlot, wasSelectedAt idx: UInt) {
             NSLog("Legend entry for '\(plot.identifier)' was selected at index \(idx).")
+
+            let startFrom: CGFloat = idx == self.offsetIndex ? 0.0 : 0.0  // If 1st has a value, should be NAN
+            let endTo: CGFloat = idx == self.offsetIndex ? 0.0 : 35.0
 
             CPTAnimation.animate(self,
                          property: "sliceOffset",
-                             from: idx == self.offsetIndex ? 0.0 : 0.0,  // If 1st has a value, should be NAN
-                               to: idx == self.offsetIndex ? 0.0 : 35.0,
+                             from: startFrom,
+                               to: endTo,
                          duration: 0.5,
-                   animationCurve: .CubicOut,
+                   animationCurve: .cubicOut,
                          delegate: nil)
             
             self.offsetIndex = idx
@@ -163,14 +155,14 @@ extension SimplePieChart: CPTLegendDelegate {
 
 extension SimplePieChart: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(self.plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
 
         if let field = CPTPieChartField(rawValue: Int(fieldEnum)) {
-            if field == .SliceWidth {
+            if field == .sliceWidth {
                 return plotData[Int(index)]
             }
         }
@@ -179,12 +171,23 @@ extension SimplePieChart: CPTPlotDataSource {
 
     }
 
-    func attributedLegendTitleForPieChart(pieChart: CPTPieChart, recordIndex index: UInt) -> NSAttributedString {
+    func dataLabel(for plot: CPTPlot, record index: UInt) -> CPTLayer? {
+        let whiteText = CPTMutableTextStyle()
+
+        whiteText.color = CPTColor.white()
+        whiteText.fontSize = self.titleSize * 0.5
+
+        let value = String(format: "%1.0f", plotData[Int(index)])
+        let newLayer = CPTTextLayer(text: "\(value)", style: whiteText)
+        return newLayer
+    }
+
+    func attributedLegendTitleForPieChart(_ pieChart: CPTPieChart, recordIndex index: UInt) -> NSAttributedString {
 #if os(iOS) || os(tvOS)
-        let sliceColor = CPTPieChart.defaultPieSliceColorForIndex(index).uiColor
+        let sliceColor = CPTPieChart.defaultPieSliceColor(for: index).uiColor
         let labelFont = UIFont(name: "Helvetica", size: self.titleSize * 0.5)
 #else
-        let sliceColor = CPTPieChart.defaultPieSliceColorForIndex(index).nsColor
+        let sliceColor = CPTPieChart.defaultPieSliceColor(for: index).nsColor
         let labelFont = NSFont(name: "Helvetica", size: self.titleSize * 0.5)
 #endif
 
@@ -200,7 +203,7 @@ extension SimplePieChart: CPTPlotDataSource {
             return title
         }
 
-    func radialOffsetForPieChart(pieChart: CPTPieChart, recordIndex index: UInt) -> CGFloat {
+    func radialOffsetForPieChart(_ pieChart: CPTPieChart, recordIndex index: UInt) -> CGFloat {
         return index == self.offsetIndex ? self.sliceOffset : 0.0
     }
 

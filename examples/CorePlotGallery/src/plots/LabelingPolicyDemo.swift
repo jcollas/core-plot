@@ -18,7 +18,7 @@ class LabelingPolicyDemo: PlotItem {
         section = kDemoPlots
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
         let majorTickLength: CGFloat = 12.0
         let minorTickLength: CGFloat = 8.0
@@ -33,9 +33,9 @@ class LabelingPolicyDemo: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTSlateTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGrayColor())
+        graph.fill = CPTFill(color: CPTColor.darkGray())
 
         // Plot area
         graph.plotAreaFrame?.paddingTop    = self.titleSize
@@ -55,11 +55,11 @@ class LabelingPolicyDemo: PlotItem {
 
         let majorTickLineStyle = axisLineStyle.mutableCopy() as! CPTMutableLineStyle
         majorTickLineStyle.lineWidth = 3.0
-        majorTickLineStyle.lineCap   = .Round
+        majorTickLineStyle.lineCap   = .round
 
         let minorTickLineStyle = axisLineStyle.mutableCopy() as! CPTMutableLineStyle
         minorTickLineStyle.lineWidth = 2.0
-        minorTickLineStyle.lineCap   = .Round
+        minorTickLineStyle.lineCap   = .round
 
         // Text styles
         let axisTitleTextStyle = CPTMutableTextStyle()
@@ -73,9 +73,9 @@ class LabelingPolicyDemo: PlotItem {
         // CPTAxisLabelingPolicyNone
         let axisNone = CPTXYAxis()
         axisNone.plotSpace          = graph.defaultPlotSpace
-        axisNone.labelingPolicy     = .None
+        axisNone.labelingPolicy     = .none
         axisNone.orthogonalPosition = 1.0
-        axisNone.tickDirection      = .None
+        axisNone.tickDirection      = .none
         axisNone.axisLineStyle      = axisLineStyle
         axisNone.majorTickLength    = majorTickLength
         axisNone.majorTickLineStyle = majorTickLineStyle
@@ -84,13 +84,13 @@ class LabelingPolicyDemo: PlotItem {
         axisNone.title              = "CPTAxisLabelingPolicyNone"
         axisNone.titleTextStyle     = axisTitleTextStyle
         axisNone.titleOffset        = titleOffset
-        axisNone.majorTickLocations = majorTickLocations
-        axisNone.minorTickLocations = minorTickLocations
+        axisNone.majorTickLocations = majorTickLocations as Set<NSNumber>?
+        axisNone.minorTickLocations = minorTickLocations as Set<NSNumber>?
 
         var newAxisLabels: Set<CPTAxisLabel> = []
         for i in 0..<6 {
             let newLabel = CPTAxisLabel(text: "Label \(i)", textStyle: axisNone.labelTextStyle)
-            newLabel.tickLocation = i * 20
+            newLabel.tickLocation = NSNumber(value: i * 20)
             newLabel.offset = axisNone.labelOffset + axisNone.majorTickLength / 2.0
 
             newAxisLabels.insert(newLabel)
@@ -100,9 +100,9 @@ class LabelingPolicyDemo: PlotItem {
         // CPTAxisLabelingPolicyLocationsProvided
         let axisLocationsProvided = CPTXYAxis()
         axisLocationsProvided.plotSpace          = graph.defaultPlotSpace
-        axisLocationsProvided.labelingPolicy     = .LocationsProvided
+        axisLocationsProvided.labelingPolicy     = .locationsProvided
         axisLocationsProvided.orthogonalPosition = 2.0
-        axisLocationsProvided.tickDirection      = .None
+        axisLocationsProvided.tickDirection      = .none
         axisLocationsProvided.axisLineStyle      = axisLineStyle
         axisLocationsProvided.majorTickLength    = majorTickLength
         axisLocationsProvided.majorTickLineStyle = majorTickLineStyle
@@ -111,17 +111,17 @@ class LabelingPolicyDemo: PlotItem {
         axisLocationsProvided.title              = "CPTAxisLabelingPolicyLocationsProvided"
         axisLocationsProvided.titleTextStyle     = axisTitleTextStyle
         axisLocationsProvided.titleOffset        = titleOffset
-        axisLocationsProvided.majorTickLocations = majorTickLocations
-        axisLocationsProvided.minorTickLocations = minorTickLocations
+        axisLocationsProvided.majorTickLocations = majorTickLocations as Set<NSNumber>?
+        axisLocationsProvided.minorTickLocations = minorTickLocations as Set<NSNumber>?
 
         // CPTAxisLabelingPolicyFixedInterval
         let axisFixedInterval = CPTXYAxis()
         axisFixedInterval.plotSpace             = graph.defaultPlotSpace
-        axisFixedInterval.labelingPolicy        = .FixedInterval
+        axisFixedInterval.labelingPolicy        = .fixedInterval
         axisFixedInterval.orthogonalPosition    = 3.0
         axisFixedInterval.majorIntervalLength   = 25.0
         axisFixedInterval.minorTicksPerInterval = 4
-        axisFixedInterval.tickDirection         = .None
+        axisFixedInterval.tickDirection         = .none
         axisFixedInterval.axisLineStyle         = axisLineStyle
         axisFixedInterval.majorTickLength       = majorTickLength
         axisFixedInterval.majorTickLineStyle    = majorTickLineStyle
@@ -134,10 +134,10 @@ class LabelingPolicyDemo: PlotItem {
         // CPTAxisLabelingPolicyAutomatic
         let axisAutomatic = CPTXYAxis()
         axisAutomatic.plotSpace             = graph.defaultPlotSpace
-        axisAutomatic.labelingPolicy        = .Automatic
+        axisAutomatic.labelingPolicy        = .automatic
         axisAutomatic.orthogonalPosition    = 4.0
         axisAutomatic.minorTicksPerInterval = 9
-        axisAutomatic.tickDirection         = .None
+        axisAutomatic.tickDirection         = .none
         axisAutomatic.axisLineStyle         = axisLineStyle
         axisAutomatic.majorTickLength       = majorTickLength
         axisAutomatic.majorTickLineStyle    = majorTickLineStyle
@@ -150,11 +150,11 @@ class LabelingPolicyDemo: PlotItem {
         // CPTAxisLabelingPolicyEqualDivisions
         let axisEqualDivisions = CPTXYAxis()
         axisEqualDivisions.plotSpace                   = graph.defaultPlotSpace
-        axisEqualDivisions.labelingPolicy              = .EqualDivisions
+        axisEqualDivisions.labelingPolicy              = .equalDivisions
         axisEqualDivisions.orthogonalPosition          = 5.0
         axisEqualDivisions.preferredNumberOfMajorTicks = 7
         axisEqualDivisions.minorTicksPerInterval       = 4
-        axisEqualDivisions.tickDirection               = .None
+        axisEqualDivisions.tickDirection               = .none
         axisEqualDivisions.axisLineStyle               = axisLineStyle
         axisEqualDivisions.majorTickLength             = majorTickLength
         axisEqualDivisions.majorTickLineStyle          = majorTickLineStyle

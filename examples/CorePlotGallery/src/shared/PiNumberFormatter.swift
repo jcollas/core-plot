@@ -3,7 +3,7 @@ import Foundation
 
 /** @brief A number formatter that converts numbers to multiples of π.
  **/
-class PiNumberFormatter: NSNumberFormatter {
+class PiNumberFormatter: NumberFormatter {
 
 //MARK: - Formatting
 
@@ -12,10 +12,10 @@ class PiNumberFormatter: NSNumberFormatter {
  *  @param coordinateValue The numeric value.
  *  @return The formatted string.
  **/
-    override func stringForObjectValue(coordinateValue: AnyObject) -> String? {
+    override func string(for coordinateValue: Any?) -> String? {
         var string: String? = nil
 
-        if coordinateValue.respondsToSelector(Selector("doubleValue")) {
+        if (coordinateValue as AnyObject).responds(to: #selector(getter: NSNumber.doubleValue)) {
             let value = (coordinateValue as! NSNumber).doubleValue / M_PI
 
             var factor = round(self.multiplier!.doubleValue)
@@ -32,13 +32,13 @@ class PiNumberFormatter: NSNumberFormatter {
                 string = "0"
             }
             else if ( abs(fraction) == 1.0 ) {
-                string = String(format:"%@π", signbit(fraction) != 0 ? self.minusSign : "")
+                string = String(format:"%@π", fraction.sign == .minus ? self.minusSign : "")
             }
             else if ( abs(numerator) == 1.0 ) {
-                string = String(format: "%@π/%g", signbit(numerator) != 0 ? self.minusSign : "", denominator)
+                string = String(format: "%@π/%g", numerator.sign == .minus ? self.minusSign : "", denominator)
             }
             else if ( abs(numerator / divisor) == 1.0 ) {
-                string = String(format:"%@π/%g", signbit(numerator) != 0 ? self.minusSign : "", denominator / divisor)
+                string = String(format:"%@π/%g", numerator.sign == .minus ? self.minusSign : "", denominator / divisor)
             }
             else if ( round(fraction) == fraction ) {
                 string = String(format:"%g π", fraction)
@@ -55,7 +55,7 @@ class PiNumberFormatter: NSNumberFormatter {
     }
 
 
-    func gcd(a: Double, b: Double) -> Double {
+    func gcd(_ a: Double, b: Double) -> Double {
         var c: Double = 0.0
 
         var a1 = round(a)

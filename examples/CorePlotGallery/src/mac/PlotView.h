@@ -3,7 +3,7 @@
 // CorePlotGallery
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @protocol PlotViewDelegate<NSObject>
 

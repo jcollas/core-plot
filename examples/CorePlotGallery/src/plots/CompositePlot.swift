@@ -34,7 +34,7 @@ class CompositePlot: PlotItem {
 
 #if os(OSX)
 
-    override func setFrameSize(newSize: NSSize) {
+    override func setFrameSize(_ newSize: NSSize) {
         self.scatterPlotView?.frame = NSMakeRect( 0.0,
                                                 0.0,
                                                 newSize.width,
@@ -56,7 +56,7 @@ class CompositePlot: PlotItem {
     }
 #endif
 
-    override func renderInView(hostingView: PlotGalleryNativeView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInView(_ hostingView: PlotGalleryNativeView, withTheme theme: CPTTheme?, animated: Bool) {
         killGraph()
 
         let scatterView = CPTGraphHostingView()
@@ -69,83 +69,83 @@ class CompositePlot: PlotItem {
             hostingView.addSubview(view)
 
             hostingView.addConstraint(NSLayoutConstraint(item:view,
-                                                                    attribute: .Height,
-                                                                    relatedBy: .Equal,
+                                                                    attribute: .height,
+                                                                    relatedBy: .equal,
                                                                        toItem: hostingView,
-                                                                    attribute: .Height,
+                                                                    attribute: .height,
                                                                    multiplier: 0.5,
                                                                      constant: 0.0))
         }
 
         hostingView.addConstraint(NSLayoutConstraint(item: scatterView,
-                                                     attribute: .Width,
-                                                     relatedBy: .Equal,
+                                                     attribute: .width,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Width,
+                                                     attribute: .width,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: barView,
-                                                     attribute: .Width,
-                                                     relatedBy: .Equal,
+                                                     attribute: .width,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Width,
+                                                     attribute: .width,
                                                      multiplier: 0.5,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: pieView,
-                                                     attribute: .Width,
-                                                     relatedBy: .Equal,
+                                                     attribute: .width,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Width,
+                                                     attribute: .width,
                                                      multiplier: 0.5,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: scatterView,
-                                                     attribute: .Left,
-                                                     relatedBy: .Equal,
+                                                     attribute: .left,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Left,
+                                                     attribute: .left,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: barView,
-                                                     attribute: .Left,
-                                                     relatedBy: .Equal,
+                                                     attribute: .left,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Left,
+                                                     attribute: .left,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: pieView,
-                                                     attribute: .Right,
-                                                     relatedBy: .Equal,
+                                                     attribute: .right,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Right,
+                                                     attribute: .right,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: scatterView,
-                                                     attribute: .Bottom,
-                                                     relatedBy: .Equal,
+                                                     attribute: .bottom,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Bottom,
+                                                     attribute: .bottom,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: barView,
-                                                     attribute: .Top,
-                                                     relatedBy: .Equal,
+                                                     attribute: .top,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Top,
+                                                     attribute: .top,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
         hostingView.addConstraint(NSLayoutConstraint(item: pieView,
-                                                     attribute: .Top,
-                                                     relatedBy: .Equal,
+                                                     attribute: .top,
+                                                     relatedBy: .equal,
                                                      toItem: hostingView,
-                                                     attribute: .Top,
+                                                     attribute: .top,
                                                      multiplier: 1.0,
                                                      constant: 0.0))
 
@@ -169,7 +169,7 @@ class CompositePlot: PlotItem {
 
         for view in [scatterView, barView, pieView] {
             view.autoresizesSubviews = true
-            view.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
+            view.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
 
             hostingView.addSubview(view)
         }
@@ -203,7 +203,7 @@ class CompositePlot: PlotItem {
         super.killGraph()
     }
 
-    func renderScatterPlotInHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
+    func renderScatterPlotInHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -215,7 +215,7 @@ class CompositePlot: PlotItem {
         scatterPlot = newGraph
 
         self.addGraph(newGraph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         scatterPlot?.plotAreaFrame?.plotArea?.delegate = self
 
@@ -249,19 +249,19 @@ class CompositePlot: PlotItem {
 
         // Create a blue plot area
         let boundLinePlot = CPTScatterPlot()
-        boundLinePlot.identifier = "Blue Plot"
+        boundLinePlot.identifier = "Blue Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
 
         var lineStyle = boundLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.miterLimit        = 1.0
         lineStyle.lineWidth         = 3.0
-        lineStyle.lineColor         = CPTColor.blueColor()
+        lineStyle.lineColor         = CPTColor.blue()
         boundLinePlot.dataLineStyle = lineStyle
         boundLinePlot.dataSource    = self
-        scatterPlot?.addPlot(boundLinePlot)
+        scatterPlot?.add(boundLinePlot)
 
         // Do a blue gradient
         let areaColor1 = CPTColor(componentRed: 0.3, green: 0.3, blue: 1.0, alpha: 0.8)
-        let areaGradient1 = CPTGradient(beginningColor: areaColor1, endingColor: CPTColor.clearColor())
+        let areaGradient1 = CPTGradient(beginning: areaColor1, ending: CPTColor.clear())
         areaGradient1.angle = -90.0
         var areaGradientFill = CPTFill(gradient: areaGradient1)
         boundLinePlot.areaFill = areaGradientFill
@@ -270,20 +270,20 @@ class CompositePlot: PlotItem {
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.blackColor()
-        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
-        plotSymbol.fill          = CPTFill(color: CPTColor.blueColor())
+        symbolLineStyle.lineColor = CPTColor.black()
+        let plotSymbol = CPTPlotSymbol.ellipse()
+        plotSymbol.fill          = CPTFill(color: CPTColor.blue())
         plotSymbol.lineStyle     = symbolLineStyle
         plotSymbol.size          = CGSize(width: 10.0, height: 10.0)
         boundLinePlot.plotSymbol = plotSymbol
 
         // Create a green plot area
         let dataSourceLinePlot = CPTScatterPlot()
-        dataSourceLinePlot.identifier = "Green Plot"
+        dataSourceLinePlot.identifier = "Green Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
 
         lineStyle             = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth   = 3.0
-        lineStyle.lineColor   = CPTColor.greenColor()
+        lineStyle.lineColor   = CPTColor.green()
         lineStyle.dashPattern = [5, 5]
 
         dataSourceLinePlot.dataLineStyle = lineStyle
@@ -291,7 +291,7 @@ class CompositePlot: PlotItem {
 
         // Put an area gradient under the plot above
         let areaColor = CPTColor(componentRed: 0.3, green:1.0, blue: 0.3, alpha: 0.8)
-        let areaGradient = CPTGradient(beginningColor: areaColor, endingColor: CPTColor.clearColor())
+        let areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
         areaGradient.angle               = -90.0
         areaGradientFill                 = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill      = areaGradientFill
@@ -299,7 +299,7 @@ class CompositePlot: PlotItem {
 
         // Animate in the new plot, as an example
         dataSourceLinePlot.opacity = 1.0
-        scatterPlot?.addPlot(dataSourceLinePlot)
+        scatterPlot?.add(dataSourceLinePlot)
 
         // Add some initial data
         var contentArray: [[String: Double]] = []
@@ -311,7 +311,7 @@ class CompositePlot: PlotItem {
         self.dataForPlot = contentArray
     }
 
-    func renderBarPlotInHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
+    func renderBarPlotInHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -323,7 +323,7 @@ class CompositePlot: PlotItem {
         barChart = newGraph
 
         self.addGraph(newGraph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         barChart?.plotAreaFrame?.masksToBorder = false
 
@@ -342,7 +342,7 @@ class CompositePlot: PlotItem {
         // Define some custom labels for the data elements
         x.labelOffset    = 2.0
         x.labelRotation  = CGFloat(M_PI_4)
-        x.labelingPolicy = .None
+        x.labelingPolicy = .none
         let customTickLocations: [Double]  = [1, 5, 10, 15]
         let xAxisLabels = ["Label A", "Label B", "Label C", "Label D"]
         var labelLocation = 0
@@ -350,7 +350,7 @@ class CompositePlot: PlotItem {
         for tickLocation in customTickLocations {
             let newLabel = CPTAxisLabel(text: xAxisLabels[labelLocation], textStyle: x.labelTextStyle)
             labelLocation += 1
-            newLabel.tickLocation = tickLocation
+            newLabel.tickLocation = NSNumber(value: tickLocation)
             newLabel.offset       = x.labelOffset
             newLabel.rotation     = CGFloat(M_PI_4)
             customLabels.insert(newLabel)
@@ -368,23 +368,23 @@ class CompositePlot: PlotItem {
         }
 
         // First bar plot
-        var barPlot = CPTBarPlot.tubularBarPlotWithColor(CPTColor.redColor(), horizontalBars: false)
+        var barPlot = CPTBarPlot.tubularBarPlot(with: CPTColor.red(), horizontalBars: false)
         barPlot.dataSource  = self
-        barPlot.identifier  = "Bar Plot 1"
+        barPlot.identifier  = "Bar Plot 1" as (NSCoding & NSCopying & NSObjectProtocol)?
         barPlot.labelOffset = 2.0
-        barChart?.addPlot(barPlot, toPlotSpace: plotSpace)
+        barChart?.add(barPlot, to: plotSpace)
 
         // Second bar plot
-        barPlot = CPTBarPlot.tubularBarPlotWithColor(CPTColor.blueColor(), horizontalBars: false)
+        barPlot = CPTBarPlot.tubularBarPlot(with: CPTColor.blue(), horizontalBars: false)
         barPlot.dataSource      = self
         barPlot.barOffset       = 0.25 // 25% offset, 75% overlap
         barPlot.barCornerRadius = 2.0
-        barPlot.identifier      = "Bar Plot 2"
+        barPlot.identifier      = "Bar Plot 2" as (NSCoding & NSCopying & NSObjectProtocol)?
         barPlot.delegate        = self
-        barChart?.addPlot(barPlot, toPlotSpace: plotSpace)
+        barChart?.add(barPlot, to: plotSpace)
     }
 
-    func renderPieChartInHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
+    func renderPieChartInHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?) {
 
 #if os(iOS) || os(tvOS)
         hostingView.layoutIfNeeded()
@@ -397,7 +397,7 @@ class CompositePlot: PlotItem {
         pieChart = newGraph
 
         self.addGraph(newGraph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         self.pieChart?.plotAreaFrame?.masksToBorder = false
 
@@ -408,11 +408,11 @@ class CompositePlot: PlotItem {
         piePlot.dataSource = self
         piePlot.pieRadius  = min( 0.7 * ((hostingView.frame.size.height - 2.0 * pieChart!.paddingLeft) / 2.0),
                                  0.7 * ((hostingView.frame.size.width - 2.0 * pieChart!.paddingTop) / 2.0) )
-        piePlot.identifier      = "Pie Chart 1"
+        piePlot.identifier      = "Pie Chart 1" as (NSCoding & NSCopying & NSObjectProtocol)?
         piePlot.startAngle      = CGFloat(M_PI_4)
-        piePlot.sliceDirection  = .CounterClockwise
+        piePlot.sliceDirection  = .counterClockwise
         piePlot.borderLineStyle = CPTLineStyle()
-        pieChart?.addPlot(piePlot)
+        pieChart?.add(piePlot)
 
         // Add some initial data
         self.dataForChart = [20.0, 30.0, 60.0]
@@ -424,7 +424,7 @@ class CompositePlot: PlotItem {
 
 extension CompositePlot: CPTBarPlotDelegate {
 
-    func barPlot(plot: CPTBarPlot, barWasSelectedAtRecordIndex index: UInt) {
+    func barPlot(_ plot: CPTBarPlot, barWasSelectedAtRecord index: UInt) {
         NSLog("barWasSelectedAtRecordIndex \(index)")
     }
 
@@ -434,7 +434,7 @@ extension CompositePlot: CPTBarPlotDelegate {
 
 extension CompositePlot: CPTScatterPlotDelegate {
         
-    func scatterPlot(plot: CPTScatterPlot, plotSymbolWasSelectedAtRecordIndex index: UInt) {
+    func scatterPlot(_ plot: CPTScatterPlot, plotSymbolWasSelectedAtRecord index: UInt) {
         if plot.identifier as! String == "Blue Plot" {
             self.selectedIndex = Int(index)
         }
@@ -446,7 +446,7 @@ extension CompositePlot: CPTScatterPlotDelegate {
 
 extension CompositePlot: CPTPlotAreaDelegate {
 
-    func plotAreaWasSelected(plotArea: CPTPlotArea) {
+    func plotAreaWasSelected(_ plotArea: CPTPlotArea) {
         let theGraph = plotArea.graph
 
         if theGraph == scatterPlot {
@@ -460,7 +460,7 @@ extension CompositePlot: CPTPlotAreaDelegate {
 
 extension CompositePlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
 
         if plot is CPTPieChart {
             return UInt(dataForChart.count)
@@ -473,7 +473,7 @@ extension CompositePlot: CPTPlotDataSource {
         }
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
         var num: Double? = nil
 
 
@@ -487,7 +487,7 @@ extension CompositePlot: CPTPlotDataSource {
                 return nil
             }
 
-            if ( field == .SliceWidth ) {
+            if ( field == .sliceWidth ) {
                 return (self.dataForChart)[Int(index)]
             }
             else {
@@ -500,16 +500,16 @@ extension CompositePlot: CPTPlotDataSource {
             }
 
             switch ( field ) {
-                case .BarLocation:
+                case .barLocation:
                     num = Double(index)
 
-                case .BarTip:
+                case .barTip:
                     num = Double((index + 1) * (index + 1))
                     if plot.identifier as! String == "Bar Plot 2" {
                         num = num! - 10
                     }
 
-                case .BarBase:
+                case .barBase:
                     break
             }
         } else {
@@ -531,16 +531,16 @@ extension CompositePlot: CPTPlotDataSource {
         return num
     }
 
-    func dataLabelForPlot(plot: CPTPlot, recordIndex index: UInt) -> CPTLayer? {
+    func dataLabel(for plot: CPTPlot, record index: UInt) -> CPTLayer? {
         var newLayer: CPTTextLayer? = nil
 
         if plot.identifier as! String == "Bar Plot 1" {
             let whiteText = CPTMutableTextStyle()
-            whiteText.color = CPTColor.whiteColor()
+            whiteText.color = CPTColor.white()
             whiteText.fontSize = self.titleSize * 0.5
 
             let redText = CPTMutableTextStyle()
-            redText.color = CPTColor.redColor()
+            redText.color = CPTColor.red()
             redText.fontSize = self.titleSize * 0.5
 
             switch ( index ) {
@@ -558,14 +558,14 @@ extension CompositePlot: CPTPlotDataSource {
         return newLayer
     }
 
-    func symbolForScatterPlot(plot: CPTScatterPlot, recordIndex index: UInt) -> CPTPlotSymbol? {
+    func symbolForScatterPlot(_ plot: CPTScatterPlot, recordIndex index: UInt) -> CPTPlotSymbol? {
         var symbol: CPTPlotSymbol? = nil // Use the default symbol
 
         if plot.identifier as! String == "Blue Plot" && Int(index) == self.selectedIndex {
             let redDot = CPTPlotSymbol()
-            redDot.symbolType = .Ellipse
+            redDot.symbolType = .ellipse
             redDot.size = CGSize(width: 10.0, height: 10.0)
-            redDot.fill = CPTFill(color: CPTColor.redColor())
+            redDot.fill = CPTFill(color: CPTColor.red())
             redDot.lineStyle = CPTLineStyle()
 
             symbol = redDot
@@ -576,18 +576,18 @@ extension CompositePlot: CPTPlotDataSource {
 
 // MARK: - Accessors
 
-    func setSelectedIndex(newIndex: Int?) {
+    func setSelectedIndex(_ newIndex: Int?) {
         if ( newIndex != selectedIndex ) {
             let oldIndex = selectedIndex
             
             selectedIndex = newIndex
             
-            let thePlot = scatterPlot?.plotWithIdentifier("Blue Plot") as? CPTScatterPlot
+            let thePlot = scatterPlot?.plot(withIdentifier: "Blue Plot" as NSCopying?) as? CPTScatterPlot
             if ( oldIndex != nil ) {
-                thePlot?.reloadPlotSymbolsInIndexRange(NSRange(location: oldIndex!, length: 1))
+                thePlot?.reloadPlotSymbols(inIndexRange: NSRange(location: oldIndex!, length: 1))
             }
             if ( newIndex != nil ) {
-                thePlot?.reloadPlotSymbolsInIndexRange(NSRange(location: newIndex!, length: 1))
+                thePlot?.reloadPlotSymbols(inIndexRange: NSRange(location: newIndex!, length: 1))
             }
         }
     }

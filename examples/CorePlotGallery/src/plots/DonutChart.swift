@@ -22,7 +22,7 @@ class DonutChart: PlotItem {
 
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
 #else
@@ -31,18 +31,18 @@ class DonutChart: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         graph.plotAreaFrame?.masksToBorder = false
         graph.axisSet = nil
 
         let whiteLineStyle = CPTMutableLineStyle()
-        whiteLineStyle.lineColor = CPTColor.whiteColor()
+        whiteLineStyle.lineColor = CPTColor.white()
 
         let whiteShadow = CPTMutableShadow()
         whiteShadow.shadowOffset = CGSize(width: 2.0, height: -4.0)
         whiteShadow.shadowBlurRadius = 4.0
-        whiteShadow.shadowColor = CPTColor.whiteColor().colorWithAlphaComponent(0.25)
+        whiteShadow.shadowColor = CPTColor.white().withAlphaComponent(0.25)
 
         // Add pie chart
         let outerRadius = min( 0.7 * (hostingView.frame.size.height - 2.0 * graph.paddingLeft) / 2.0,
@@ -53,14 +53,14 @@ class DonutChart: PlotItem {
         piePlot.dataSource      = self
         piePlot.pieRadius       = outerRadius
         piePlot.pieInnerRadius  = innerRadius + 5.0
-        piePlot.identifier      = outerChartName
+        piePlot.identifier      = outerChartName as (NSCoding & NSCopying & NSObjectProtocol)?
         piePlot.borderLineStyle = whiteLineStyle
         piePlot.startAngle      = CGFloat(animated ? M_PI_2 : M_PI_4)
         piePlot.endAngle        = CGFloat(animated ? M_PI_2 : 3.0 * M_PI_4)
-        piePlot.sliceDirection  = .CounterClockwise
+        piePlot.sliceDirection  = .counterClockwise
         piePlot.shadow          = whiteShadow
         piePlot.delegate        = self
-        graph.addPlot(piePlot)
+        graph.add(piePlot)
 
         if ( animated ) {
             CPTAnimation.animate(piePlot,
@@ -79,14 +79,14 @@ class DonutChart: PlotItem {
         piePlot                 = CPTPieChart()
         piePlot.dataSource      = self
         piePlot.pieRadius       = CGFloat( animated ? 0.0 : innerRadius - 5.0 )
-        piePlot.identifier      = innerChartName
+        piePlot.identifier      = innerChartName as (NSCoding & NSCopying & NSObjectProtocol)?
         piePlot.borderLineStyle = whiteLineStyle
         piePlot.startAngle      = CGFloat(M_PI_4)
-        piePlot.sliceDirection  = .Clockwise
+        piePlot.sliceDirection  = .clockwise
         piePlot.shadow          = whiteShadow
         piePlot.delegate        = self
 
-        graph.addPlot(piePlot)
+        graph.add(piePlot)
 
         if ( animated ) {
             CPTAnimation.animate(piePlot,
@@ -95,34 +95,34 @@ class DonutChart: PlotItem {
                                to:innerRadius - 5.0,
                          duration:0.5,
                         withDelay:0.25,
-                   animationCurve: .BounceOut,
+                   animationCurve: .bounceOut,
                          delegate:self)
         }
     }
 
 }
 
-extension DonutChart: CPTPlotSpaceDelegate {
+extension DonutChart: CPTPieChartDelegate {
 
-    func pieChart(plot: CPTPieChart, sliceWasSelectedAtRecordIndex index: UInt) {
+    func pieChart(_ plot: CPTPieChart, sliceWasSelectedAtRecord index: UInt) {
         NSLog("\(plot.identifier) slice was selected at index \(index). Value = \(plotData[Int(index)])")
     }
-    
+
 }
 
 // MARK: - Plot Data Source Methods
 
 extension DonutChart: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
         var num: Double!
 
         let field = CPTPieChartField(rawValue: Int(fieldEnum))
-        if field == .SliceWidth {
+        if field == .sliceWidth {
             num = self.plotData[Int(index)]
         } else {
             return index
@@ -131,20 +131,17 @@ extension DonutChart: CPTPlotDataSource {
         return num
     }
 
-    func dataLabelForPlot(plot: CPTPlot, recordIndex index: UInt) -> CPTLayer? {
-        var whiteText: CPTMutableTextStyle!
-        var onceToken: dispatch_once_t       = 0
+    func dataLabel(for plot: CPTPlot, record index: UInt) -> CPTLayer? {
 
         if plot.identifier as! String == outerChartName {
-            dispatch_once(&onceToken, {
-                whiteText = CPTMutableTextStyle()
-                whiteText.color = CPTColor.whiteColor()
-                whiteText.fontSize = self.titleSize * 0.5
-            })
+            let whiteText = CPTMutableTextStyle()
+
+            whiteText.color = CPTColor.white()
+            whiteText.fontSize = self.titleSize * 0.5
 
             let text = String(format: "%.0f", self.plotData[Int(index)])
             let newLayer = CPTTextLayer(text: text, style: whiteText)
-            newLayer.fill            = CPTFill(color: CPTColor.darkGrayColor())
+            newLayer.fill            = CPTFill(color: CPTColor.darkGray())
             newLayer.cornerRadius    = 5.0
             newLayer.paddingLeft     = 3.0
             newLayer.paddingTop      = 3.0
@@ -157,7 +154,7 @@ extension DonutChart: CPTPlotDataSource {
         return nil
     }
 
-    func radialOffsetForPieChart(pieChart: CPTPieChart, recordIndex index: UInt) -> CGFloat {
+    func radialOffsetForPieChart(_ pieChart: CPTPieChart, recordIndex index: UInt) -> CGFloat {
         var result: CGFloat = 0.0
 
         if pieChart.identifier as! String == outerChartName {
@@ -173,23 +170,23 @@ extension DonutChart: CPTPlotDataSource {
 
 extension DonutChart: CPTAnimationDelegate {
 
-    func animationDidStartX(operation: CPTAnimationOperation) {
-        NSLog("animationDidStart: \(operation)")
-    }
+//    func animationDidStart(_ operation: CPTAnimationOperation) {
+//        NSLog("animationDidStart: \(operation)")
+//    }
 
-    func animationDidFinish(operation: CPTAnimationOperation) {
+    func animationDidFinish(_ operation: CPTAnimationOperation) {
         NSLog("animationDidFinish: \(operation)")
     }
 
-    func animationCancelled(operation: CPTAnimationOperation) {
+    func animationCancelled(_ operation: CPTAnimationOperation) {
         NSLog("animationCancelled: \(operation)")
     }
 
-    func animationWillUpdate(operation: CPTAnimationOperation) {
+    func animationWillUpdate(_ operation: CPTAnimationOperation) {
         NSLog("animationWillUpdate: \(operation)")
     }
 
-    func animationDidUpdate(operation: CPTAnimationOperation) {
+    func animationDidUpdate(_ operation: CPTAnimationOperation) {
         NSLog("animationDidUpdate: \(operation)")
     }
 

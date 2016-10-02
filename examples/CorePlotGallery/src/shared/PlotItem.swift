@@ -11,6 +11,8 @@ import CorePlot
     typealias CPTNativeImage=UIImage
     typealias CPTNativeEvent=UIEvent
 #else
+    import Quartz
+
     typealias CGNSRect=NSRect
     typealias PlotGalleryNativeView=NSView
     typealias CPTNativeImage=NSImage
@@ -32,10 +34,10 @@ class PlotItem: NSObject {
     var titleSize: CGFloat {
 #if os(iOS)
         switch ( UI_USER_INTERFACE_IDIOM() ) {
-            case .Pad:
+            case .pad:
                 return 24.0
 
-            case .Phone:
+            case .phone:
                 return 16.0
 
             default:
@@ -48,7 +50,7 @@ class PlotItem: NSObject {
 
     var cachedImage: CPTNativeImage!
 
-    class func registerPlotItem(itemClass: PlotItem.Type) {
+    class func registerPlotItem(_ itemClass: PlotItem.Type) {
 
         NSLog("registerPlotItem for class \(itemClass)")
 
@@ -67,13 +69,13 @@ class PlotItem: NSObject {
         title = nil
     }
 
-    func addGraph(graph: CPTGraph, toHostingView hostingView: CPTGraphHostingView?) {
+    func addGraph(_ graph: CPTGraph, toHostingView hostingView: CPTGraphHostingView?) {
         graphs.append(graph)
 
         hostingView?.hostedGraph = graph
     }
 
-    func addGraph(graph: CPTGraph) {
+    func addGraph(_ graph: CPTGraph) {
         self.addGraph(graph, toHostingView: nil)
     }
 
@@ -102,17 +104,17 @@ class PlotItem: NSObject {
 
     }
 
-    func titleCompare(other: PlotItem) -> NSComparisonResult {
+    func titleCompare(_ other: PlotItem) -> ComparisonResult {
         var comparisonResult = section!.caseInsensitiveCompare(other.section!)
 
-        if comparisonResult == .OrderedSame {
+        if comparisonResult == .orderedSame {
             comparisonResult = title!.caseInsensitiveCompare(other.title!)
         }
 
         return comparisonResult
     }
 
-    func setPaddingDefaultsForGraph(graph: CPTGraph) {
+    func setPaddingDefaultsForGraph(_ graph: CPTGraph) {
         let boundsPadding = self.titleSize
 
         graph.paddingLeft = boundsPadding
@@ -134,14 +136,14 @@ class PlotItem: NSObject {
         for graph in self.graphs {
             // Title
             let textStyle = CPTMutableTextStyle()
-            textStyle.color = CPTColor.grayColor()
+            textStyle.color = CPTColor.gray()
             textStyle.fontName = "Helvetica-Bold"
             textStyle.fontSize = graphTitleSize
 
             graph.title = (self.graphs.count == 1 ? self.title : nil)
             graph.titleTextStyle = textStyle
-            graph.titleDisplacement = CGPointMake( 0.0, textStyle.fontSize * 1.5 )
-            graph.titlePlotAreaFrameAnchor = .Top
+            graph.titleDisplacement = CGPoint(x: 0.0, y: textStyle.fontSize * 1.5 )
+            graph.titlePlotAreaFrameAnchor = .top
 
             // Padding
             let boundsPadding = graphTitleSize
@@ -195,7 +197,7 @@ class PlotItem: NSObject {
                     theLegend.textStyle  = textStyle
                 }
 
-                theLegend.swatchSize = CGSizeMake( labelSize * 1.5, labelSize * 1.5 )
+                theLegend.swatchSize = CGSize(width: labelSize * 1.5, height: labelSize * 1.5 )
 
                 theLegend.rowMargin    = labelSize * 0.75
                 theLegend.columnMargin = labelSize * 0.75
@@ -212,10 +214,10 @@ class PlotItem: NSObject {
 
     func image() -> UIImage {
         if ( self.cachedImage == nil ) {
-            let imageFrame = CGRectMake(0, 0, 400, 300)
+            let imageFrame = CGRect(x: 0, y: 0, width: 400, height: 300)
             let imageView = UIView(frame: imageFrame)
-            imageView.opaque = true
-            imageView.userInteractionEnabled = false
+            imageView.isOpaque = true
+            imageView.isUserInteractionEnabled = false
 
             self.renderInView(imageView, withTheme:nil, animated: false)
             imageView.layoutIfNeeded()
@@ -226,24 +228,24 @@ class PlotItem: NSObject {
 
             let context = UIGraphicsGetCurrentContext()
 
-            CGContextSetAllowsAntialiasing(context, true)
+            context!.setAllowsAntialiasing(true)
 
             for subView in imageView.subviews {
                 if subView is CPTGraphHostingView {
                     let hostingView = subView as! CPTGraphHostingView
                     let frame = hostingView.frame
 
-                    CGContextSaveGState(context)
+                    context!.saveGState()
 
-                    CGContextTranslateCTM(context, frame.origin.x, frame.origin.y + frame.size.height)
-                    CGContextScaleCTM(context, 1.0, -1.0)
-                    hostingView.hostedGraph?.layoutAndRenderInContext(context!)
+                    context!.translateBy(x: frame.origin.x, y: frame.origin.y + frame.size.height)
+                    context!.scaleBy(x: 1.0, y: -1.0)
+                    hostingView.hostedGraph?.layoutAndRender(in: context!)
 
-                    CGContextRestoreGState(context)
+                    context!.restoreGState()
                 }
             }
             
-            CGContextSetAllowsAntialiasing(context, false)
+            context!.setAllowsAntialiasing(false)
             
             self.cachedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -256,7 +258,7 @@ class PlotItem: NSObject {
 
     func image() -> NSImage {
         if ( self.cachedImage == nil ) {
-            let imageFrame = CGRectMake(0, 0, 400, 300)
+            let imageFrame = CGRect(x: 0, y: 0, width: 400, height: 300)
 
             let imageView = NSView(frame: NSRectFromCGRect(imageFrame))
             imageView.wantsLayer = true
@@ -279,11 +281,11 @@ class PlotItem: NSObject {
             let bitmapContext = NSGraphicsContext(bitmapImageRep:layerImage!)
             let context = bitmapContext?.graphicsPort as! CGContext
 
-            CGContextClearRect( context, CGRectMake(0.0, 0.0, boundsSize.width, boundsSize.height) )
-            CGContextSetAllowsAntialiasing(context, true)
-            CGContextSetShouldSmoothFonts(context, false)
-            imageView.layer!.renderInContext(context)
-            CGContextFlush(context)
+            context.clear(CGRect(x: 0.0, y: 0.0, width: boundsSize.width, height: boundsSize.height) )
+            context.setAllowsAntialiasing(true)
+            context.setShouldSmoothFonts(false)
+            imageView.layer!.render(in: context)
+            context.flush()
 
             self.cachedImage = NSImage(size:NSSizeFromCGSize(boundsSize))
             self.cachedImage.addRepresentation(layerImage!)
@@ -293,18 +295,18 @@ class PlotItem: NSObject {
     }
 #endif
 
-    func applyTheme(theme: CPTTheme?, toGraph graph: CPTGraph, withDefault defaultTheme: CPTTheme?) {
-        graph.applyTheme(theme ?? defaultTheme)
+    func applyTheme(_ theme: CPTTheme?, toGraph graph: CPTGraph, withDefault defaultTheme: CPTTheme?) {
+        graph.apply(theme ?? defaultTheme)
     }
 
 #if !os(iOS) && !os(tvOS)
 
-    func setFrameSize(size: NSSize) {
+    func setFrameSize(_ size: NSSize) {
 
     }
 #endif
 
-    func renderInView(inView: PlotGalleryNativeView, withTheme theme: CPTTheme?, animated: Bool) {
+    func renderInView(_ inView: PlotGalleryNativeView, withTheme theme: CPTTheme?, animated: Bool) {
 
         killGraph()
 
@@ -315,35 +317,35 @@ class PlotItem: NSObject {
 #if os(iOS) || os(tvOS)
         hostingView.translatesAutoresizingMaskIntoConstraints = false
         inView.addConstraint(NSLayoutConstraint(item:hostingView,
-                                                           attribute: .Left,
-                                                           relatedBy: .Equal,
+                                                           attribute: .left,
+                                                           relatedBy: .equal,
                                                               toItem: inView,
-                                                           attribute: .Left,
+                                                           attribute: .left,
                                                           multiplier: 1.0,
                                                             constant: 0.0))
         inView.addConstraint(NSLayoutConstraint(item:hostingView,
-                                                           attribute: .Top,
-                                                           relatedBy: .Equal,
+                                                           attribute: .top,
+                                                           relatedBy: .equal,
                                                               toItem:inView,
-                                                           attribute: .Top,
+                                                           attribute: .top,
                                                           multiplier: 1.0,
                                                             constant: 0.0))
         inView.addConstraint(NSLayoutConstraint(item:hostingView,
-                                                           attribute: .Right,
-                                                           relatedBy: .Equal,
+                                                           attribute: .right,
+                                                           relatedBy: .equal,
                                                               toItem: inView,
-                                                           attribute: .Right,
+                                                           attribute: .right,
                                                           multiplier: 1.0,
                                                             constant: 0.0))
         inView.addConstraint(NSLayoutConstraint(item:hostingView,
-                                                           attribute: .Bottom,
-                                                           relatedBy: .Equal,
+                                                           attribute: .bottom,
+                                                           relatedBy: .equal,
                                                               toItem: inView,
-                                                           attribute: .Bottom,
+                                                           attribute: .bottom,
                                                           multiplier: 1.0,
                                                             constant: 0.0))
 #else
-        hostingView.autoresizingMask = [.ViewWidthSizable, .ViewHeightSizable]
+        hostingView.autoresizingMask = [.viewWidthSizable, .viewHeightSizable]
         hostingView.autoresizesSubviews = true
 #endif
 
@@ -355,7 +357,7 @@ class PlotItem: NSObject {
         self.defaultLayerHostingView = hostingView
     }
 
-    func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
         NSLog("PlotItem:renderInLayer: Override me")
     }
 
@@ -369,19 +371,19 @@ class PlotItem: NSObject {
 
 #if !os(iOS) && !os(tvOS)
 
-    func imageUID() -> String {
+    override func imageUID() -> String {
         return self.title!
     }
 
-    func imageRepresentationType() -> String {
+    override func imageRepresentationType() -> String {
         return IKImageBrowserNSImageRepresentationType
     }
 
-    func imageRepresentation() -> AnyObject {
+    override func imageRepresentation() -> Any {
         return self.image()
     }
 
-    func imageTitle() -> String {
+    override func imageTitle() -> String {
         return self.title!
     }
 #endif

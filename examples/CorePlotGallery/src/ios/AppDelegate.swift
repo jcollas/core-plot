@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         // initialize the charts.
         _ = ColoredBarChart()
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         splitViewController.delegate = self
 
         let navigationController = splitViewController.viewControllers.last as? UINavigationController
-        navigationController?.topViewController?.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
+        navigationController?.topViewController?.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
 
         return true
     }
@@ -57,11 +57,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UISplitViewControllerDelegate {
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
 
         if let
             navController = secondaryViewController as? UINavigationController,
-            detailViewController = navController.topViewController as? DetailViewController {
+            let detailViewController = navController.topViewController as? DetailViewController {
 
             // Return YES to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             if detailViewController.detailItem == nil {

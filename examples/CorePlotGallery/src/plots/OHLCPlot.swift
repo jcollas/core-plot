@@ -7,7 +7,7 @@ import CorePlot
 
 class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
 
-    let oneDay: NSTimeInterval = 24 * 60 * 60
+    let oneDay: TimeInterval = 24 * 60 * 60
 
     var graph: CPTGraph?
     var plotData: [[CPTTradingRangePlotField: Double]] = []
@@ -35,10 +35,10 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
 
                 newData.append(
                                [ .X: x,
-                                .Open: rOpen,
-                                .High: rHigh,
-                                .Low: rLow,
-                                .Close: rClose ]
+                                .open: rOpen,
+                                .high: rHigh,
+                                .low: rLow,
+                                .close: rClose ]
                                )
             }
             
@@ -46,7 +46,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
         // If you make sure your dates are calculated at noon, you shouldn't have to
         // worry about daylight savings. If you use midnight, you will have to adjust
@@ -62,10 +62,10 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         // Create graph
         let newGraph = CPTXYGraph(frame: bounds)
         self.addGraph(newGraph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: kCPTStocksTheme))
+        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: CPTThemeName.stocksTheme))
 
         let borderLineStyle = CPTMutableLineStyle()
-        borderLineStyle.lineColor = CPTColor.whiteColor()
+        borderLineStyle.lineColor = CPTColor.white()
         borderLineStyle.lineWidth = 2.0
         newGraph.plotAreaFrame?.borderLineStyle = borderLineStyle
         newGraph.plotAreaFrame?.paddingTop      = self.titleSize * 0.5
@@ -79,43 +79,43 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         // Axes
         let xyAxisSet = newGraph.axisSet as! CPTXYAxisSet
 
-        guard let xAxis = xyAxisSet.xAxis, yAxis = xyAxisSet.yAxis else {
+        guard let xAxis = xyAxisSet.xAxis, let yAxis = xyAxisSet.yAxis else {
             return
         }
 
-        xAxis.majorIntervalLength   = oneDay
+        xAxis.majorIntervalLength   = oneDay as NSNumber?
         xAxis.minorTicksPerInterval = 0
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
         let timeFormatter = CPTTimeFormatter(dateFormatter: dateFormatter)
-        timeFormatter.referenceDate = refDate
+        timeFormatter.referenceDate = refDate as Date
         xAxis.labelFormatter = timeFormatter
 
         let lineCap = CPTLineCap()
         lineCap.lineStyle    = xAxis.axisLineStyle
-        lineCap.lineCapType  = .OpenArrow
+        lineCap.lineCapType  = .openArrow
         lineCap.size         = CGSize(width: self.titleSize * 0.5, height: self.titleSize * 0.5)
         xAxis.axisLineCapMax = lineCap
 
-        yAxis.orthogonalPosition = -0.5 * oneDay
+        yAxis.orthogonalPosition = NSNumber(value: -0.5 * oneDay)
 
         // Line plot with gradient fill
         let dataSourceLinePlot = CPTScatterPlot(frame: newGraph.bounds)
-        dataSourceLinePlot.identifier = "Data Source Plot"
+        dataSourceLinePlot.identifier = "Data Source Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
         dataSourceLinePlot.title = "Close Values"
         dataSourceLinePlot.dataLineStyle = nil
         dataSourceLinePlot.dataSource = self
-        newGraph.addPlot(dataSourceLinePlot)
+        newGraph.add(dataSourceLinePlot)
 
         var areaColor = CPTColor(componentRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
-        var areaGradient = CPTGradient(beginningColor: areaColor, endingColor: CPTColor.clearColor())
+        var areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
         areaGradient.angle = -90.0
         var areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill      = areaGradientFill
         dataSourceLinePlot.areaBaseValue = 0.0
 
         areaColor = CPTColor(componentRed: 0.0, green: 1.0, blue: 0.0, alpha: 0.6)
-        areaGradient = CPTGradient(beginningColor: CPTColor.clearColor(), endingColor: areaColor)
+        areaGradient = CPTGradient(beginning: CPTColor.clear(), ending: areaColor)
         areaGradient.angle = -90.0
         areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill2 = areaGradientFill
@@ -123,20 +123,20 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
 
         // OHLC plot
         let whiteLineStyle = CPTMutableLineStyle()
-        whiteLineStyle.lineColor = CPTColor.whiteColor()
+        whiteLineStyle.lineColor = CPTColor.white()
         whiteLineStyle.lineWidth = 2.0
 
         let redLineStyle = whiteLineStyle.mutableCopy() as! CPTMutableLineStyle
-        redLineStyle.lineColor = CPTColor.redColor()
+        redLineStyle.lineColor = CPTColor.red()
 
         let greenLineStyle = whiteLineStyle.mutableCopy() as! CPTMutableLineStyle
-        greenLineStyle.lineColor = CPTColor.greenColor()
+        greenLineStyle.lineColor = CPTColor.green()
 
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color = CPTColor.whiteColor()
+        whiteTextStyle.color = CPTColor.white()
 
         let ohlcPlot = CPTTradingRangePlot(frame: newGraph.bounds)
-        ohlcPlot.identifier = "OHLC"
+        ohlcPlot.identifier = "OHLC" as (NSCoding & NSCopying & NSObjectProtocol)?
 
         ohlcPlot.lineStyle         = whiteLineStyle
         ohlcPlot.increaseLineStyle = greenLineStyle
@@ -148,7 +148,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         ohlcPlot.dataSource     = self
         ohlcPlot.delegate       = self
         ohlcPlot.plotStyle      = .OHLC
-        newGraph.addPlot(ohlcPlot)
+        newGraph.add(ohlcPlot)
 
         // Add legend
         newGraph.legend = CPTLegend(graph: newGraph)
@@ -157,12 +157,12 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         newGraph.legend?.borderLineStyle = newGraph.plotAreaFrame?.borderLineStyle
         newGraph.legend?.cornerRadius = 5.0
         newGraph.legend?.swatchCornerRadius = 5.0
-        newGraph.legendAnchor = .Bottom
+        newGraph.legendAnchor = .bottom
         newGraph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * 3.0)
         
         // Set plot ranges
         let plotSpace = newGraph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.xRange = CPTPlotRange(location: -0.5 * oneDay, length: oneDay * Double(plotData.count))
+        plotSpace.xRange = CPTPlotRange(location: NSNumber(value: -0.5 * oneDay), length: NSNumber(value: oneDay * Double(plotData.count)))
         plotSpace.yRange = CPTPlotRange(location: 0.0, length: 4.0)
     }
 
@@ -172,11 +172,11 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
 
 extension OHLCPlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
         var num: Double? = 0.0
 
         if plot.identifier as! String == "Data Source Plot" {
@@ -190,7 +190,7 @@ extension OHLCPlot: CPTPlotDataSource {
                     num = self.plotData[Int(index)][.X]
 
                 case .Y:
-                    num = self.plotData[Int(index)][.Close]
+                    num = self.plotData[Int(index)][.close]
             }
         } else {
 
@@ -210,7 +210,7 @@ extension OHLCPlot: CPTPlotDataSource {
 
 extension OHLCPlot: CPTTradingRangePlotDelegate {
 
-    func tradingRangePlot(plot: CPTTradingRangePlot, barWasSelectedAtRecordIndex index: UInt) {
+    func tradingRangePlot(_ plot: CPTTradingRangePlot, barWasSelectedAtRecord index: UInt) {
         NSLog("Bar for '\(plot.identifier)' was selected at index \(index).")
     }
 

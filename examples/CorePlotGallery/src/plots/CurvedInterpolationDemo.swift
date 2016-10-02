@@ -57,7 +57,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -68,7 +68,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         graph.plotAreaFrame?.paddingLeft   += self.titleSize * 2.25
         graph.plotAreaFrame?.paddingTop    += self.titleSize
@@ -84,24 +84,24 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         // Grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.1)
 
         let redLineStyle = CPTMutableLineStyle()
         redLineStyle.lineWidth = 10.0
-        redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
+        redLineStyle.lineColor = CPTColor.red().withAlphaComponent(0.5)
 
-        let lineCap = CPTLineCap.sweptArrowPlotLineCap()
+        let lineCap = CPTLineCap.sweptArrowPlot()
         lineCap.size = CGSize(width: self.titleSize * 0.625, height: self.titleSize * 0.625)
 
         // Axes
         // Label x axis with a fixed interval policy
         let axisSet = graph.axisSet as! CPTXYAxisSet
 
-        guard let x = axisSet.xAxis, y = axisSet.yAxis else {
+        guard let x = axisSet.xAxis, let y = axisSet.yAxis else {
             return
         }
 
@@ -122,7 +122,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         x.titleOffset = self.titleSize * 1.25
 
         // Label y with an automatic label policy.
-        y.labelingPolicy              = .Automatic
+        y.labelingPolicy              = .automatic
         y.minorTicksPerInterval       = 4
         y.preferredNumberOfMajorTicks = 8
         y.majorGridLineStyle          = majorGridLineStyle
@@ -147,48 +147,48 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         // Create the plots
         // Bezier
         let bezierPlot = CPTScatterPlot(frame: CGRect.zero)
-        bezierPlot.identifier = bezierCurveIdentifier
+        bezierPlot.identifier = bezierCurveIdentifier as (NSCoding & NSCopying & NSObjectProtocol)?
         // Catmull-Rom
         let cmUniformPlot = CPTScatterPlot(frame: CGRect.zero)
-        cmUniformPlot.identifier = catmullRomUniformIdentifier
+        cmUniformPlot.identifier = catmullRomUniformIdentifier as (NSCoding & NSCopying & NSObjectProtocol)?
         let cmCentripetalPlot = CPTScatterPlot(frame: CGRect.zero)
-        cmCentripetalPlot.identifier = catmullRomCentripetalIdentifier
+        cmCentripetalPlot.identifier = catmullRomCentripetalIdentifier as (NSCoding & NSCopying & NSObjectProtocol)?
         let cmChordalPlot = CPTScatterPlot(frame: CGRect.zero)
-        cmChordalPlot.identifier = catmullRomChordalIdentifier
+        cmChordalPlot.identifier = catmullRomChordalIdentifier as (NSCoding & NSCopying & NSObjectProtocol)?
         // Hermite Cubic
         let hermitePlot = CPTScatterPlot(frame: CGRect.zero)
-        hermitePlot.identifier = hermiteCubicIdentifier
+        hermitePlot.identifier = hermiteCubicIdentifier as (NSCoding & NSCopying & NSObjectProtocol)?
 
         // set interpolation types
-        bezierPlot.interpolation = .Curved
-        cmUniformPlot.interpolation = .Curved
-        cmCentripetalPlot.interpolation = .Curved
-        cmChordalPlot.interpolation = .Curved
-        hermitePlot.interpolation = .Curved
+        bezierPlot.interpolation = .curved
+        cmUniformPlot.interpolation = .curved
+        cmCentripetalPlot.interpolation = .curved
+        cmChordalPlot.interpolation = .curved
+        hermitePlot.interpolation = .curved
 
-        bezierPlot.curvedInterpolationOption        = .Normal
-        cmUniformPlot.curvedInterpolationOption     = .CatmullRomUniform
-        cmChordalPlot.curvedInterpolationOption     = .CatmullRomChordal
-        cmCentripetalPlot.curvedInterpolationOption = .CatmullRomCentripetal
-        hermitePlot.curvedInterpolationOption       = .HermiteCubic
+        bezierPlot.curvedInterpolationOption        = .normal
+        cmUniformPlot.curvedInterpolationOption     = .catmullRomUniform
+        cmChordalPlot.curvedInterpolationOption     = .catmullRomChordal
+        cmCentripetalPlot.curvedInterpolationOption = .catmullRomCentripetal
+        hermitePlot.curvedInterpolationOption       = .hermiteCubic
 
         // style plots
         let lineStyle = bezierPlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth = 2.0
-        lineStyle.lineColor = CPTColor.greenColor()
+        lineStyle.lineColor = CPTColor.green()
 
         bezierPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor         = CPTColor.redColor()
+        lineStyle.lineColor         = CPTColor.red()
         cmUniformPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor             = CPTColor.orangeColor()
+        lineStyle.lineColor             = CPTColor.orange()
         cmCentripetalPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor         = CPTColor.yellowColor()
+        lineStyle.lineColor         = CPTColor.yellow()
         cmChordalPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor       = CPTColor.cyanColor()
+        lineStyle.lineColor       = CPTColor.cyan()
         hermitePlot.dataLineStyle = lineStyle
 
         // set data source and add plots
@@ -198,39 +198,39 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         cmChordalPlot.dataSource = self
         hermitePlot.dataSource = self
 
-        graph.addPlot(bezierPlot)
-        graph.addPlot(cmUniformPlot)
-        graph.addPlot(cmCentripetalPlot)
-        graph.addPlot(cmChordalPlot)
-        graph.addPlot(hermitePlot)
+        graph.add(bezierPlot)
+        graph.add(cmUniformPlot)
+        graph.add(cmCentripetalPlot)
+        graph.add(cmChordalPlot)
+        graph.add(hermitePlot)
 
         // Auto scale the plot space to fit the plot data
-        plotSpace.scaleToFitPlots(graph.allPlots())
+        plotSpace.scale(toFit: graph.allPlots())
         let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
         let yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
 
         // Expand the ranges to put some space around the plot
-        xRange.expandRangeByFactor(1.2)
-        yRange.expandRangeByFactor(1.2)
+        xRange.expand(byFactor: 1.2)
+        yRange.expand(byFactor: 1.2)
         plotSpace.xRange = xRange
         plotSpace.yRange = yRange
 
-        xRange.expandRangeByFactor(1.025)
+        xRange.expand(byFactor: 1.025)
         xRange.location = plotSpace.xRange.location
-        yRange.expandRangeByFactor(1.05)
+        yRange.expand(byFactor: 1.05)
         x.visibleAxisRange = xRange
         y.visibleAxisRange = yRange
 
-        xRange.expandRangeByFactor(3.0)
-        yRange.expandRangeByFactor(3.0)
+        xRange.expand(byFactor: 3.0)
+        yRange.expand(byFactor: 3.0)
         plotSpace.globalXRange = xRange
         plotSpace.globalYRange = yRange
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.blackColor().colorWithAlphaComponent(0.5)
-        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
-        plotSymbol.fill       = CPTFill(color: CPTColor.blueColor().colorWithAlphaComponent(0.5))
+        symbolLineStyle.lineColor = CPTColor.black().withAlphaComponent(0.5)
+        let plotSymbol = CPTPlotSymbol.ellipse()
+        plotSymbol.fill       = CPTFill(color: CPTColor.blue().withAlphaComponent(0.5))
         plotSymbol.lineStyle  = symbolLineStyle
         plotSymbol.size       = CGSize(width: 5.0, height: 5.0)
         bezierPlot.plotSymbol = plotSymbol
@@ -243,10 +243,10 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         graph.legend                 = CPTLegend(graph: graph)
         graph.legend?.numberOfRows    = 2
         graph.legend?.textStyle       = x.titleTextStyle
-        graph.legend?.fill            = CPTFill(color: CPTColor.darkGrayColor())
+        graph.legend?.fill            = CPTFill(color: CPTColor.darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
-        graph.legendAnchor           = .Bottom
+        graph.legendAnchor           = .bottom
         graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 2.0)
     }
 
@@ -256,11 +256,11 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
 
 extension CurvedInterpolationDemo: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
         let identifier = plot.identifier as! String
 
         guard let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) else {
@@ -297,7 +297,7 @@ extension CurvedInterpolationDemo: CPTPlotDataSource {
 
 extension CurvedInterpolationDemo: CPTPlotSpaceDelegate {
 
-    func plotSpace(space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, forCoordinate coordinate: CPTCoordinate) -> CPTPlotRange? {
+    func plotSpace(_ space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, for coordinate: CPTCoordinate) -> CPTPlotRange? {
         let theGraph = space.graph!
         let axisSet = theGraph.axisSet as! CPTXYAxisSet
 
@@ -305,12 +305,12 @@ extension CurvedInterpolationDemo: CPTPlotSpaceDelegate {
 
         switch ( coordinate ) {
             case .X:
-                changedRange.expandRangeByFactor(1.025)
+                changedRange.expand(byFactor: 1.025)
                 changedRange.location = newRange.location
                 axisSet.xAxis?.visibleAxisRange = changedRange
 
             case .Y:
-                changedRange.expandRangeByFactor(1.05)
+                changedRange.expand(byFactor: 1.05)
                 axisSet.yAxis?.visibleAxisRange = changedRange
 
             default:

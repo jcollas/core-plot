@@ -25,7 +25,7 @@ class ColoredBarChart: PlotItem {
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -36,7 +36,7 @@ class ColoredBarChart: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTSlateTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: .slateTheme))
 
 
         graph.plotAreaFrame?.paddingLeft   += self.titleSize * 2.5
@@ -48,11 +48,11 @@ class ColoredBarChart: PlotItem {
         // Create grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 1.0
-        majorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 1.0
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.25)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.25)
 
         // Create axes
         let axisSet = graph.axisSet as! CPTXYAxisSet
@@ -80,7 +80,7 @@ class ColoredBarChart: PlotItem {
             y.minorTickLineStyle          = nil
             y.labelOffset                 = self.titleSize * 0.375
             y.labelRotation               = CGFloat(M_PI_2)
-            y.labelingPolicy              = .Automatic
+            y.labelingPolicy              = .automatic
 
             y.title       = "Y Axis"
             y.titleOffset = self.titleSize * 1.25
@@ -89,7 +89,7 @@ class ColoredBarChart: PlotItem {
         // Create a bar line style
         let barLineStyle = CPTMutableLineStyle()
         barLineStyle.lineWidth = 1.0
-        barLineStyle.lineColor = CPTColor.whiteColor()
+        barLineStyle.lineColor = CPTColor.white()
 
         // Create bar plot
         let barPlot = CPTBarPlot()
@@ -98,13 +98,13 @@ class ColoredBarChart: PlotItem {
         barPlot.barCornerRadius   = 4.0
         barPlot.barsAreHorizontal = false
         barPlot.dataSource        = self
-        barPlot.identifier        = "Bar Plot 1"
+        barPlot.identifier        = "Bar Plot 1" as (NSCoding & NSCopying & NSObjectProtocol)?
 
-        graph.addPlot(barPlot)
+        graph.add(barPlot)
 
         // Plot space
         let barRange = barPlot.plotRangeEnclosingBars()?.mutableCopy() as! CPTMutablePlotRange
-        barRange.expandRangeByFactor(1.05)
+        barRange.expand(byFactor: 1.05)
 
         let barPlotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         barPlotSpace.xRange = barRange
@@ -116,12 +116,12 @@ class ColoredBarChart: PlotItem {
         theLegend.borderLineStyle = barLineStyle
         theLegend.cornerRadius    = 10.0
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color   = CPTColor.whiteColor()
+        whiteTextStyle.color   = CPTColor.white()
         theLegend.textStyle    = whiteTextStyle
         theLegend.numberOfRows = 1
 
         graph.legend             = theLegend
-        graph.legendAnchor       = .Top
+        graph.legendAnchor       = .top
         graph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * -2.625)
     }
     
@@ -131,11 +131,11 @@ class ColoredBarChart: PlotItem {
 
 extension ColoredBarChart: CPTPlotDataSource {
 
-        func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+        func numberOfRecords(for plot: CPTPlot) -> UInt {
             return UInt(plotData.count)
         }
 
-        func numbersForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndexRange indexRange: NSRange) -> [AnyObject]? {
+        func numbers(for plot: CPTPlot, field fieldEnum: UInt, recordIndexRange indexRange: NSRange) -> [Any]? {
             var nums: [Double] = []
 
             guard let field = CPTBarPlotField(rawValue: Int(fieldEnum)) else {
@@ -143,13 +143,13 @@ extension ColoredBarChart: CPTPlotDataSource {
             }
 
             switch ( field ) {
-                case .BarLocation:
+                case .barLocation:
                     for i in indexRange.location..<NSMaxRange(indexRange) {
                         nums.append(Double(i))
                     }
 
-                case .BarTip:
-                    nums = (plotData as NSArray).objectsAtIndexes(NSIndexSet(indexesInRange: indexRange)) as! [Double]
+                case .barTip:
+                    nums = (plotData as NSArray).objects(at: NSIndexSet(indexesIn: indexRange) as IndexSet) as! [Double]
 
                 default:
                     break
@@ -162,21 +162,21 @@ extension ColoredBarChart: CPTPlotDataSource {
 
 extension ColoredBarChart: CPTBarPlotDataSource {
 
-    func barFillForBarPlot(barPlot: CPTBarPlot, recordIndex index: UInt) -> CPTFill? {
-        let colors: [CPTColor] = [.redColor(), .greenColor(), .blueColor(), .yellowColor(), .purpleColor(), .cyanColor(), .orangeColor(), .magentaColor()]
+    func barFill(for barPlot: CPTBarPlot, record index: UInt) -> CPTFill? {
+        let colors: [CPTColor] = [.red(), .green(), .blue(), .yellow(), .purple(), .cyan(), .orange(), .magenta()]
 
-        var color = CPTColor.blackColor()
+        var color = CPTColor.black()
 
         if Int(index) < colors.count {
             color = colors[Int(index)]
         }
 
-        let fillGradient = CPTGradient(beginningColor: color, endingColor: CPTColor.blackColor())
+        let fillGradient = CPTGradient(beginning: color, ending: CPTColor.black())
         
         return CPTFill(gradient: fillGradient)
     }
 
-    func legendTitleForBarPlot(barPlot: CPTBarPlot, recordIndex idx: UInt) -> String? {
+    func legendTitle(for barPlot: CPTBarPlot, record idx: UInt) -> String? {
         return "Bar \(idx + 1)"
     }
 

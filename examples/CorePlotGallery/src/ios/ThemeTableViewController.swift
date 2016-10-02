@@ -23,7 +23,7 @@ class ThemeTableViewController: UITableViewController {
         themeList.append(kThemeTableViewControllerNoTheme)
 
         for themeClass in CPTTheme.themeClasses() ?? [] {
-            themeList.append(themeClass.name())
+            themeList.append(themeClass.name().rawValue)
         }
 
         self.themes = themeList
@@ -35,7 +35,7 @@ class ThemeTableViewController: UITableViewController {
         self.setupThemes()
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
        self.setupThemes()
@@ -47,33 +47,33 @@ class ThemeTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.themes.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("ThemeCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath)
 
-        cell.textLabel?.text = self.themes[indexPath.row]
+        cell.textLabel?.text = self.themes[(indexPath as NSIndexPath).row]
 
         return cell
     }
 
     // MARK: - Table view delegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let themeInfo = [PlotGalleryThemeNameKey: self.themes[indexPath.row]]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let themeInfo = [PlotGalleryThemeNameKey: self.themes[(indexPath as NSIndexPath).row]]
 
-        NSNotificationCenter.defaultCenter().postNotificationName(PlotGalleryThemeDidChangeNotification,
+        NotificationCenter.default.post(name: Notification.Name(rawValue: PlotGalleryThemeDidChangeNotification),
                                                         object: self,
                                                       userInfo: themeInfo)
 
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

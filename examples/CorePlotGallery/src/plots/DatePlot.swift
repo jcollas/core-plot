@@ -7,7 +7,7 @@ import CorePlot
 
 class DatePlot: PlotItem {
 
-    let oneDay: NSTimeInterval = 24 * 60 * 60
+    let oneDay: TimeInterval = 24 * 60 * 60
 
     var plotData: [[CPTScatterPlotField: Double]] = []
 
@@ -43,7 +43,7 @@ class DatePlot: PlotItem {
     }
 
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
         // If you make sure your dates are calculated at noon, you shouldn't have to
         // worry about daylight savings. If you use midnight, you will have to adjust
@@ -57,8 +57,8 @@ class DatePlot: PlotItem {
         dateComponents.minute = 0
         dateComponents.second = 0
 
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let refDate = gregorian?.dateFromComponents(dateComponents)
+        let gregorian = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
+        let refDate = gregorian?.date(from: dateComponents as DateComponents)
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -69,22 +69,22 @@ class DatePlot: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         // Setup scatter plot space
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        let  xLow: NSTimeInterval       = 0.0
-        plotSpace.xRange = CPTPlotRange(location: xLow, length:oneDay * 5.0)
+        let  xLow: TimeInterval       = 0.0
+        plotSpace.xRange = CPTPlotRange(location: NSNumber(value: xLow), length: NSNumber(value: oneDay * 5.0))
         plotSpace.yRange = CPTPlotRange(location: 1.0, length:3.0)
 
         // Axes
         let axisSet = graph.axisSet as! CPTXYAxisSet
         if let x          = axisSet.xAxis {
-            x.majorIntervalLength   = oneDay
+            x.majorIntervalLength   = oneDay as NSNumber?
             x.orthogonalPosition    = 2.0
             x.minorTicksPerInterval = 0
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateStyle = .ShortStyle
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
             let timeFormatter = CPTTimeFormatter(dateFormatter:dateFormatter)
             timeFormatter.referenceDate = refDate
             x.labelFormatter            = timeFormatter
@@ -94,20 +94,20 @@ class DatePlot: PlotItem {
         if let y = axisSet.yAxis {
             y.majorIntervalLength   = 0.5
             y.minorTicksPerInterval = 5
-            y.orthogonalPosition    = oneDay
+            y.orthogonalPosition    = oneDay as NSNumber?
         }
 
         // Create a plot that uses the data source method
         let dataSourceLinePlot = CPTScatterPlot()
-        dataSourceLinePlot.identifier = "Date Plot"
+        dataSourceLinePlot.identifier = "Date Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth              = 3.0
-        lineStyle.lineColor              = CPTColor.greenColor()
+        lineStyle.lineColor              = CPTColor.green()
         dataSourceLinePlot.dataLineStyle = lineStyle
         
         dataSourceLinePlot.dataSource = self
-        graph.addPlot(dataSourceLinePlot)
+        graph.add(dataSourceLinePlot)
     }
 
 }
@@ -116,11 +116,11 @@ class DatePlot: PlotItem {
 
 extension DatePlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
 
         guard let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) else {
             return nil

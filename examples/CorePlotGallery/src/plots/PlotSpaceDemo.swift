@@ -17,7 +17,7 @@ class PlotSpaceDemo: PlotItem {
         section = kDemoPlots
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
         let majorTickLength: CGFloat = 12.0
         let minorTickLength: CGFloat = 8.0
         let titleOffset: CGFloat = self.titleSize
@@ -30,9 +30,9 @@ class PlotSpaceDemo: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGrayColor())
+        graph.fill = CPTFill(color: CPTColor.darkGray())
 
         // Plot area
         graph.plotAreaFrame?.paddingTop    = self.titleSize
@@ -47,11 +47,11 @@ class PlotSpaceDemo: PlotItem {
 
         let majorTickLineStyle = axisLineStyle.mutableCopy() as! CPTMutableLineStyle
         majorTickLineStyle.lineWidth = 3.0
-        majorTickLineStyle.lineCap   = .Round
+        majorTickLineStyle.lineCap   = .round
 
         let minorTickLineStyle = axisLineStyle.mutableCopy() as! CPTMutableLineStyle
         minorTickLineStyle.lineWidth = 2.0
-        minorTickLineStyle.lineCap   = .Round
+        minorTickLineStyle.lineCap   = .round
 
         // Text styles
         let axisTitleTextStyle = CPTMutableTextStyle()
@@ -67,41 +67,41 @@ class PlotSpaceDemo: PlotItem {
         negativeLinearPlotSpace.yRange = linearPlotSpace.yRange
 
         let logPlotSpace = CPTXYPlotSpace()
-        logPlotSpace.xScaleType = .Log
+        logPlotSpace.xScaleType = .log
         logPlotSpace.xRange     = CPTPlotRange(location: 0.1, length: 99.9)
         logPlotSpace.yRange     = linearPlotSpace.yRange
 
         let negativeLogPlotSpace = CPTXYPlotSpace()
-        negativeLogPlotSpace.xScaleType = .Log
+        negativeLogPlotSpace.xScaleType = .log
         negativeLogPlotSpace.xRange     = CPTPlotRange(location: 100.0, length: -99.9)
         negativeLogPlotSpace.yRange     = linearPlotSpace.yRange
 
         let logModulusPlotSpace = CPTXYPlotSpace()
-        logModulusPlotSpace.xScaleType = .LogModulus
+        logModulusPlotSpace.xScaleType = .logModulus
         logModulusPlotSpace.xRange     = CPTPlotRange(location: -100.0, length: 1100.0)
         logModulusPlotSpace.yRange     = linearPlotSpace.yRange
 
         let negativeLogModulusPlotSpace = CPTXYPlotSpace()
-        negativeLogModulusPlotSpace.xScaleType = .LogModulus
+        negativeLogModulusPlotSpace.xScaleType = .logModulus
         negativeLogModulusPlotSpace.xRange     = CPTPlotRange(location: 0.1, length: -0.2)
         negativeLogModulusPlotSpace.yRange     = linearPlotSpace.yRange
 
-        graph.removePlotSpace(graph.defaultPlotSpace)
-        graph.addPlotSpace(linearPlotSpace)
-        graph.addPlotSpace(negativeLinearPlotSpace)
-        graph.addPlotSpace(logPlotSpace)
-        graph.addPlotSpace(negativeLogPlotSpace)
-        graph.addPlotSpace(logModulusPlotSpace)
-        graph.addPlotSpace(negativeLogModulusPlotSpace)
+        graph.remove(graph.defaultPlotSpace)
+        graph.add(linearPlotSpace)
+        graph.add(negativeLinearPlotSpace)
+        graph.add(logPlotSpace)
+        graph.add(negativeLogPlotSpace)
+        graph.add(logModulusPlotSpace)
+        graph.add(negativeLogModulusPlotSpace)
 
         // Axes
         // Linear axis--positive direction
         let linearAxis = CPTXYAxis()
         linearAxis.plotSpace             = linearPlotSpace
-        linearAxis.labelingPolicy        = .Automatic
+        linearAxis.labelingPolicy        = .automatic
         linearAxis.orthogonalPosition    = 1.0
         linearAxis.minorTicksPerInterval = 9
-        linearAxis.tickDirection         = .None
+        linearAxis.tickDirection         = .none
         linearAxis.axisLineStyle         = axisLineStyle
         linearAxis.majorTickLength       = majorTickLength
         linearAxis.majorTickLineStyle    = majorTickLineStyle
@@ -114,10 +114,10 @@ class PlotSpaceDemo: PlotItem {
         // Linear axis--negative direction
         let negativeLinearAxis = CPTXYAxis()
         negativeLinearAxis.plotSpace             = negativeLinearPlotSpace
-        negativeLinearAxis.labelingPolicy        = .Automatic
+        negativeLinearAxis.labelingPolicy        = .automatic
         negativeLinearAxis.orthogonalPosition    = 2.0
         negativeLinearAxis.minorTicksPerInterval = 4
-        negativeLinearAxis.tickDirection         = .None
+        negativeLinearAxis.tickDirection         = .none
         negativeLinearAxis.axisLineStyle         = axisLineStyle
         negativeLinearAxis.majorTickLength       = majorTickLength
         negativeLinearAxis.majorTickLineStyle    = majorTickLineStyle
@@ -130,10 +130,10 @@ class PlotSpaceDemo: PlotItem {
         // Log axis--positive direction
         let logAxis = CPTXYAxis()
         logAxis.plotSpace             = logPlotSpace
-        logAxis.labelingPolicy        = .Automatic
+        logAxis.labelingPolicy        = .automatic
         logAxis.orthogonalPosition    = 3.0
         logAxis.minorTicksPerInterval = 8
-        logAxis.tickDirection         = .None
+        logAxis.tickDirection         = .none
         logAxis.axisLineStyle         = axisLineStyle
         logAxis.majorTickLength       = majorTickLength
         logAxis.majorTickLineStyle    = majorTickLineStyle
@@ -146,10 +146,10 @@ class PlotSpaceDemo: PlotItem {
         // Log axis--negative direction
         let negativeLogAxis = CPTXYAxis()
         negativeLogAxis.plotSpace             = negativeLogPlotSpace
-        negativeLogAxis.labelingPolicy        = .Automatic
+        negativeLogAxis.labelingPolicy        = .automatic
         negativeLogAxis.orthogonalPosition    = 4.0
         negativeLogAxis.minorTicksPerInterval = 4
-        negativeLogAxis.tickDirection         = .None
+        negativeLogAxis.tickDirection         = .none
         negativeLogAxis.axisLineStyle         = axisLineStyle
         negativeLogAxis.majorTickLength       = majorTickLength
         negativeLogAxis.majorTickLineStyle    = majorTickLineStyle
@@ -162,10 +162,10 @@ class PlotSpaceDemo: PlotItem {
         // Log modulus axis--positive direction
         let logModulusAxis = CPTXYAxis()
         logModulusAxis.plotSpace             = logModulusPlotSpace
-        logModulusAxis.labelingPolicy        = .Automatic
+        logModulusAxis.labelingPolicy        = .automatic
         logModulusAxis.orthogonalPosition    = 5.0
         logModulusAxis.minorTicksPerInterval = 8
-        logModulusAxis.tickDirection         = .None
+        logModulusAxis.tickDirection         = .none
         logModulusAxis.axisLineStyle         = axisLineStyle
         logModulusAxis.majorTickLength       = majorTickLength
         logModulusAxis.majorTickLineStyle    = majorTickLineStyle
@@ -178,10 +178,10 @@ class PlotSpaceDemo: PlotItem {
         // Log modulus axis--negative direction
         let negativeLogModulusAxis = CPTXYAxis()
         negativeLogModulusAxis.plotSpace             = negativeLogModulusPlotSpace
-        negativeLogModulusAxis.labelingPolicy        = .Automatic
+        negativeLogModulusAxis.labelingPolicy        = .automatic
         negativeLogModulusAxis.orthogonalPosition    = 6.0
         negativeLogModulusAxis.minorTicksPerInterval = 4
-        negativeLogModulusAxis.tickDirection         = .None
+        negativeLogModulusAxis.tickDirection         = .none
         negativeLogModulusAxis.axisLineStyle         = axisLineStyle
         negativeLogModulusAxis.majorTickLength       = majorTickLength
         negativeLogModulusAxis.majorTickLineStyle    = majorTickLineStyle

@@ -18,7 +18,7 @@ class LineCapDemo: PlotItem {
         section = kDemoPlots
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
         
         #if os(iOS) || os(tvOS)
             let bounds = hostingView.bounds
@@ -29,9 +29,9 @@ class LineCapDemo: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTSlateTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: .slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGrayColor())
+        graph.fill = CPTFill(color: .darkGray())
 
         // Plot area
         graph.plotAreaFrame?.paddingTop    = self.titleSize
@@ -53,18 +53,18 @@ class LineCapDemo: PlotItem {
         let lineCap = CPTLineCap()
         lineCap.size      = CGSize(width: 15.0, height: 15.0)
         lineCap.lineStyle = axisLineStyle
-        lineCap.fill      = CPTFill(color: CPTColor.blueColor())
+        lineCap.fill      = CPTFill(color: .blue())
 
         // Axes
         var axes: [CPTAxis] = []
-        let maxCapType = CPTLineCapType.Custom.rawValue
+        let maxCapType = CPTLineCapType.custom.rawValue
         var lineCapType = 0
 
         while ( lineCapType < maxCapType ) {
             let axis = CPTXYAxis()
             axis.plotSpace          = graph.defaultPlotSpace
-            axis.labelingPolicy     = .None
-            axis.orthogonalPosition = lineCapType / 2
+            axis.labelingPolicy     = .none
+            axis.orthogonalPosition = NSNumber(value: lineCapType / 2)
             axis.axisLineStyle      = axisLineStyle
 
             lineCap.lineCapType = CPTLineCapType(rawValue: lineCapType)!

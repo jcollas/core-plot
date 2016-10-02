@@ -50,7 +50,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -61,7 +61,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTPlainWhiteTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: .plainWhiteTheme))
 
         graph.plotAreaFrame?.paddingTop    = self.titleSize * 0.5
         graph.plotAreaFrame?.paddingRight  = self.titleSize * 0.5
@@ -72,17 +72,17 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         // Grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.1)
 
         let redLineStyle = CPTMutableLineStyle()
         redLineStyle.lineWidth = 10.0
-        redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
+        redLineStyle.lineColor = CPTColor.red().withAlphaComponent(0.5)
 
-        let labelFormatter = NSNumberFormatter()
+        let labelFormatter = NumberFormatter()
         labelFormatter.maximumFractionDigits = 0
 
         // Axes
@@ -91,11 +91,11 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
         guard let
         x = axisSet.xAxis,
-        y = axisSet.yAxis else {
+        let y = axisSet.yAxis else {
             return
         }
 
-        x.labelingPolicy     = .Automatic
+        x.labelingPolicy     = .automatic
         x.majorGridLineStyle = majorGridLineStyle
         x.minorGridLineStyle = minorGridLineStyle
         x.labelFormatter     = labelFormatter
@@ -104,7 +104,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         x.titleOffset = self.titleSize * 1.25
 
         // Y axis
-        y.labelingPolicy     = .Automatic
+        y.labelingPolicy     = .automatic
         y.majorGridLineStyle = majorGridLineStyle
         y.minorGridLineStyle = minorGridLineStyle
         y.labelFormatter     = labelFormatter
@@ -114,65 +114,65 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
         // Center line
         let centerLinePlot = CPTScatterPlot()
-        centerLinePlot.identifier = kCenterLine
+        centerLinePlot.identifier = kCenterLine as (NSCoding & NSCopying & NSObjectProtocol)?
 
         var lineStyle = CPTMutableLineStyle()
         lineStyle.lineWidth          = 2.0
-        lineStyle.lineColor          = CPTColor.greenColor()
+        lineStyle.lineColor          = CPTColor.green()
         centerLinePlot.dataLineStyle = lineStyle
 
         centerLinePlot.dataSource = self
-        graph.addPlot(centerLinePlot)
+        graph.add(centerLinePlot)
 
         // Control lines
         let controlLinePlot = CPTScatterPlot()
-        controlLinePlot.identifier = kControlLine
+        controlLinePlot.identifier = kControlLine as (NSCoding & NSCopying & NSObjectProtocol)?
 
         lineStyle                     = CPTMutableLineStyle()
         lineStyle.lineWidth           = 2.0
-        lineStyle.lineColor           = CPTColor.redColor()
+        lineStyle.lineColor           = CPTColor.red()
         lineStyle.dashPattern         = [10, 6]
         controlLinePlot.dataLineStyle = lineStyle
 
         controlLinePlot.dataSource = self
-        graph.addPlot(controlLinePlot)
+        graph.add(controlLinePlot)
 
         // Warning lines
         let warningLinePlot = CPTScatterPlot()
-        warningLinePlot.identifier = kWarningLine
+        warningLinePlot.identifier = kWarningLine as (NSCoding & NSCopying & NSObjectProtocol)?
 
         lineStyle                     = CPTMutableLineStyle()
         lineStyle.lineWidth           = 1.0
-        lineStyle.lineColor           = CPTColor.orangeColor()
+        lineStyle.lineColor           = CPTColor.orange()
         lineStyle.dashPattern         = [5, 5]
         warningLinePlot.dataLineStyle = lineStyle
 
         warningLinePlot.dataSource = self
-        graph.addPlot(warningLinePlot)
+        graph.add(warningLinePlot)
 
         // Data line
         let linePlot = CPTScatterPlot()
-        linePlot.identifier = kDataLine
+        linePlot.identifier = kDataLine as (NSCoding & NSCopying & NSObjectProtocol)?
 
         lineStyle              = CPTMutableLineStyle()
         lineStyle.lineWidth    = 3.0
         linePlot.dataLineStyle = lineStyle
 
         linePlot.dataSource = self
-        graph.addPlot(linePlot)
+        graph.add(linePlot)
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.blackColor()
-        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
-        plotSymbol.fill      = CPTFill(color: CPTColor.lightGrayColor())
+        symbolLineStyle.lineColor = CPTColor.black()
+        let plotSymbol = CPTPlotSymbol.ellipse()
+        plotSymbol.fill      = CPTFill(color: CPTColor.lightGray())
         plotSymbol.lineStyle = symbolLineStyle
         plotSymbol.size      = CGSize(width: 10.0, height: 10.0)
         linePlot.plotSymbol  = plotSymbol
 
         // Auto scale the plot space to fit the plot data
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.scaleToFitPlots([linePlot])
+        plotSpace.scale(toFit: [linePlot])
 
         // Adjust visible ranges so plot symbols along the edges are not clipped
         let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
@@ -187,19 +187,19 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         x.gridLinesRange = yRange
         y.gridLinesRange = xRange
 
-        xRange.expandRangeByFactor(1.05)
-        yRange.expandRangeByFactor(1.05)
+        xRange.expand(byFactor: 1.05)
+        yRange.expand(byFactor: 1.05)
         plotSpace.xRange = xRange
         plotSpace.yRange = yRange
         
         // Add legend
         graph.legend = CPTLegend(plots:[linePlot, controlLinePlot, warningLinePlot, centerLinePlot])
-        graph.legend?.fill = CPTFill(color: CPTColor.whiteColor())
+        graph.legend?.fill = CPTFill(color: CPTColor.white())
         graph.legend?.textStyle       = x.titleTextStyle
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
         graph.legend?.numberOfRows    = 1
-        graph.legendAnchor           = .Bottom
+        graph.legendAnchor           = .bottom
         graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 4.0)
     }
 
@@ -209,7 +209,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
 extension ControlChart: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         if plot.identifier as! String == kDataLine {
             return UInt(plotData.count)
         } else if plot.identifier as! String == kCenterLine {
@@ -219,7 +219,7 @@ extension ControlChart: CPTPlotDataSource {
         }
     }
 
-    func doubleForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> Double {
+    func double(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Double {
         var number: Double = 0.0 / 0.0
 
         guard let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) else {

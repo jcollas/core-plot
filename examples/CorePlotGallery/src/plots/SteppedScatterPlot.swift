@@ -31,7 +31,7 @@ class SteppedScatterPlot: PlotItem {
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
         
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -41,33 +41,33 @@ class SteppedScatterPlot: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         let dataSourceLinePlot = CPTScatterPlot()
-        dataSourceLinePlot.cachePrecision = .Double
+        dataSourceLinePlot.cachePrecision = .double
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth              = 1.0
-        lineStyle.lineColor              = CPTColor.greenColor()
+        lineStyle.lineColor              = CPTColor.green()
         dataSourceLinePlot.dataLineStyle = lineStyle
 
         dataSourceLinePlot.dataSource = self
         dataSourceLinePlot.delegate   = self
 
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color              = CPTColor.whiteColor()
+        whiteTextStyle.color              = CPTColor.white()
         dataSourceLinePlot.labelTextStyle = whiteTextStyle
         dataSourceLinePlot.labelOffset    = 5.0
         dataSourceLinePlot.labelRotation  = CGFloat(M_PI_4)
-        dataSourceLinePlot.identifier     = "Stepped Plot"
-        graph.addPlot(dataSourceLinePlot)
+        dataSourceLinePlot.identifier     = "Stepped Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
+        graph.add(dataSourceLinePlot)
 
         // Make the data source line use stepped interpolation
-        dataSourceLinePlot.interpolation = .Stepped
+        dataSourceLinePlot.interpolation = .stepped
 
         // Put an area gradient under the plot above
         let areaColor = CPTColor(componentRed: 0.3, green: 1.0, blue: 0.3, alpha: 0.8)
-        let areaGradient = CPTGradient(beginningColor: areaColor, endingColor: CPTColor.clearColor())
+        let areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
         areaGradient.angle = -90.0
         let areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill      = areaGradientFill
@@ -76,9 +76,9 @@ class SteppedScatterPlot: PlotItem {
         // Auto scale the plot space to fit the plot data
         // Extend the y range by 10% for neatness
         let plotSpace = graph.defaultPlotSpace as? CPTXYPlotSpace
-        plotSpace?.scaleToFitPlots([dataSourceLinePlot])
+        plotSpace?.scale(toFit: [dataSourceLinePlot])
         let yRange = plotSpace?.yRange.mutableCopy() as! CPTMutablePlotRange
-        yRange.expandRangeByFactor(1.1)
+        yRange.expand(byFactor: 1.1)
         plotSpace?.yRange = yRange
         
         // Restrict y range to a global range
@@ -92,7 +92,7 @@ class SteppedScatterPlot: PlotItem {
 
 extension SteppedScatterPlot: CPTScatterPlotDelegate {
 
-    func plot(plot: CPTPlot, dataLabelWasSelectedAtRecordIndex index: UInt) {
+    func plot(_ plot: CPTPlot, dataLabelWasSelectedAtRecord index: UInt) {
         NSLog("Data label for '\(plot.identifier)' was selected at index \(index).")
     }
 
@@ -102,11 +102,11 @@ extension SteppedScatterPlot: CPTScatterPlotDelegate {
 
 extension SteppedScatterPlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(self.plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
         if let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) {
             let key = field == .X ? "x" : "y"
             return self.plotData[Int(index)][key]

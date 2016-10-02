@@ -3,6 +3,7 @@
 // CorePlotGallery
 //
 
+#import "Plot_Gallery-Swift.h"
 #import "PlotGalleryController.h"
 
 #import "dlfcn.h"

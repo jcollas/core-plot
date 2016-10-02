@@ -27,7 +27,7 @@ class FunctionPlot: PlotItem {
         super.killGraph()
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -37,24 +37,24 @@ class FunctionPlot: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         graph.plotAreaFrame?.paddingLeft += titleSize * 2.25
 
         // Setup scatter plot space
         let plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         plotSpace.allowsUserInteraction = true
-        plotSpace.xRange = CPTPlotRange(location: 0.0, length: 2.0 * M_PI)
+        plotSpace.xRange = CPTPlotRange(location: 0.0, length: NSNumber(value: 2.0 * .pi))
         plotSpace.yRange = CPTPlotRange(location: -1.1, length: 2.2)
 
         // Grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.1)
 
         // Axes
         let formatter = PiNumberFormatter()
@@ -67,7 +67,7 @@ class FunctionPlot: PlotItem {
             return
         }
 
-            x.majorIntervalLength   = M_PI_4
+            x.majorIntervalLength   = M_PI_4 as NSNumber?
             x.minorTicksPerInterval = 3
             x.labelFormatter        = formatter
             x.majorGridLineStyle    = majorGridLineStyle
@@ -79,7 +79,7 @@ class FunctionPlot: PlotItem {
 
         // Label y with an automatic label policy.
         if let y = axisSet.yAxis {
-            y.labelingPolicy              = .Automatic
+            y.labelingPolicy              = .automatic
             y.minorTicksPerInterval       = 4
             y.preferredNumberOfMajorTicks = 8
             y.majorGridLineStyle          = majorGridLineStyle
@@ -101,26 +101,26 @@ class FunctionPlot: PlotItem {
                 case 0:
                     titleString = "y = sin(x)"
                     block = { (xVal: Double) -> Double in return sin(xVal) }
-                    lineColor   = CPTColor.redColor()
+                    lineColor   = CPTColor.red()
 
                 case 1:
                     titleString = "y = cos(x)"
                     block = { (xVal: Double) -> Double in return cos(xVal) }
-                    lineColor = CPTColor.greenColor()
+                    lineColor = CPTColor.green()
 
                 case 2:
                     titleString = "y = tan(x)"
                     block = { (xVal: Double) -> Double in return tan(xVal) }
-                    lineColor   = CPTColor.blueColor()
+                    lineColor   = CPTColor.blue()
 
                 default:
                     break
             }
 
             let linePlot = CPTScatterPlot()
-            linePlot.identifier = "Function Plot \(plotNum + 1)"
+            linePlot.identifier = "Function Plot \(plotNum + 1)" as (NSCoding & NSCopying & NSObjectProtocol)?
 
-            let textAttributes: [String: AnyObject] = x.titleTextStyle!.attributes
+            let textAttributes: [String: Any] = x.titleTextStyle!.attributes
 
             let title = NSMutableAttributedString(string: titleString!, attributes: textAttributes)
 
@@ -151,12 +151,12 @@ class FunctionPlot: PlotItem {
 
             linePlot.alignsPointsToPixels = false
 
-            let plotDataSource = CPTFunctionDataSource(forPlot: linePlot, withBlock: block!)
+            let plotDataSource = CPTFunctionDataSource(for: linePlot, with: block!)
             plotDataSource.resolution = 2.0
 
             dataSources.insert(plotDataSource)
             
-            graph.addPlot(linePlot)
+            graph.add(linePlot)
         }
         
         // Restrict y range to a global range
@@ -165,23 +165,23 @@ class FunctionPlot: PlotItem {
         
         // Add legend
         graph.legend                 = CPTLegend(graph: graph)
-        graph.legend?.fill            = CPTFill(color: CPTColor.darkGrayColor())
+        graph.legend?.fill            = CPTFill(color: CPTColor.darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
         graph.legend?.numberOfRows    = 1
         graph.legend?.delegate        = self
-        graph.legendAnchor           = .Bottom
+        graph.legendAnchor           = .bottom
         graph.legendDisplacement     = CGPoint(x: 0.0, y: self.titleSize * 1.25)
     }
 
 #if os(iOS) || os(tvOS)
-    func italicFontForFont(oldFont: UIFont) -> UIFont? {
+    func italicFontForFont(_ oldFont: UIFont) -> UIFont? {
         var italicName: String? = nil
 
-        let fontNames = UIFont.fontNamesForFamilyName(oldFont.familyName)
+        let fontNames = UIFont.fontNames(forFamilyName: oldFont.familyName)
 
         for fontName in fontNames {
-            if fontName.uppercaseString.containsString("ITALIC") {
+            if fontName.uppercased().contains("ITALIC") {
                 italicName = fontName
                 break
             }
@@ -189,7 +189,7 @@ class FunctionPlot: PlotItem {
 
         if italicName == nil {
             for fontName in fontNames {
-                if fontName.uppercaseString.containsString("OBLIQUE") {
+                if fontName.uppercased().contains("OBLIQUE") {
                     italicName = fontName
                     break
                 }
@@ -204,8 +204,8 @@ class FunctionPlot: PlotItem {
     }
 
 #else
-    func italicFontForFont(oldFont: NSFont) -> NSFont? {
-        return NSFontManager.sharedFontManager().convertFont(oldFont, toHaveTrait: NSFontItalicTrait)
+    func italicFontForFont(_ oldFont: NSFont) -> NSFont? {
+        return NSFontManager.shared().convert(oldFont, toHaveTrait: NSFontTraitMask(rawValue: UInt(NSFontItalicTrait)))
     }
 #endif
 
@@ -215,8 +215,8 @@ class FunctionPlot: PlotItem {
 
 extension FunctionPlot: CPTLegendDelegate {
 
-    func Legend(legend: CPTLegend, legendEntryForPlot plot: CPTPlot, wasSelectedAtIndex idx: UInt) {
-        plot.hidden = !plot.hidden
+    func legend(_ legend: CPTLegend, legendEntryFor plot: CPTPlot, wasSelectedAt idx: UInt) {
+        plot.isHidden = !plot.isHidden
     }
 
 }

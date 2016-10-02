@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
 
     func setupView() {
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(themeChanged(_:)), name: PlotGalleryThemeDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(_:)), name: NSNotification.Name(rawValue: PlotGalleryThemeDidChangeNotification), object: nil)
 
         if let hostView = self.hostingView {
             detailItem?.renderInView(hostView, withTheme: self.currentTheme(), animated: true)
@@ -47,7 +47,7 @@ class DetailViewController: UIViewController {
         self.setupView()
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 
         self.setupView()
@@ -58,12 +58,12 @@ class DetailViewController: UIViewController {
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - View lifecycle
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         self.setupView()
@@ -81,10 +81,10 @@ class DetailViewController: UIViewController {
             return nil
         }
 
-        return CPTTheme(named: currentThemeName)
+        return CPTTheme(named: CPTThemeName(rawValue: currentThemeName))
     }
 
-    func themeSelectedWithName(themeName: String) {
+    func themeSelectedWithName(_ themeName: String) {
         self.currentThemeName = themeName
 
         if let hostView = self.hostingView {
@@ -92,8 +92,8 @@ class DetailViewController: UIViewController {
         }
     }
 
-    func themeChanged(notification: NSNotification) {
-        let themeInfo = notification.userInfo
+    func themeChanged(_ notification: Notification) {
+        let themeInfo = (notification as NSNotification).userInfo
 
         if let themeName = themeInfo?[PlotGalleryThemeNameKey] as? String {
             self.themeSelectedWithName(themeName)

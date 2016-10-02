@@ -9,7 +9,7 @@ class SimpleScatterPlot: PlotItem {
 
     var symbolTextAnnotation: CPTPlotSpaceAnnotation?
     var plotData: [[String: Double]] = []
-    var histogramOption: CPTScatterPlotHistogramOption = .SkipSecond
+    var histogramOption: CPTScatterPlotHistogramOption = .skipSecond
 
     override class func initialize() {
         super.registerPlotItem(self)
@@ -47,7 +47,7 @@ class SimpleScatterPlot: PlotItem {
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
         #if os(iOS) || os(tvOS)
             let bounds = hostingView.bounds
@@ -57,7 +57,7 @@ class SimpleScatterPlot: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         // Plot area delegate
         graph.plotAreaFrame?.plotArea?.delegate = self
@@ -70,21 +70,21 @@ class SimpleScatterPlot: PlotItem {
         // Grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 0.75
-        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor(genericGray: 0.2).withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 0.25
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.1)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.1)
 
         let redLineStyle = CPTMutableLineStyle()
         redLineStyle.lineWidth = 10.0
-        redLineStyle.lineColor = CPTColor.redColor().colorWithAlphaComponent(0.5)
+        redLineStyle.lineColor = CPTColor.red().withAlphaComponent(0.5)
 
         // Axes
         // Label x axis with a fixed interval policy
         let axisSet = graph.axisSet as! CPTXYAxisSet
 
-        guard let x = axisSet.xAxis, y = axisSet.yAxis else {
+        guard let x = axisSet.xAxis, let y = axisSet.yAxis else {
             return
         }
 
@@ -99,7 +99,7 @@ class SimpleScatterPlot: PlotItem {
         x.titleLocation = 1.25
 
         // Label y with an automatic label policy.
-        y.labelingPolicy = .Automatic
+        y.labelingPolicy = .automatic
         y.orthogonalPosition = 1.0
         y.minorTicksPerInterval = 2
         y.preferredNumberOfMajorTicks = 8
@@ -116,24 +116,24 @@ class SimpleScatterPlot: PlotItem {
 
         // Create a plot that uses the data source method
         let dataSourceLinePlot = CPTScatterPlot()
-        dataSourceLinePlot.identifier = "Data Source Plot"
+        dataSourceLinePlot.identifier = "Data Source Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth = 3.0
-        lineStyle.lineColor = CPTColor.greenColor()
+        lineStyle.lineColor = CPTColor.green()
         dataSourceLinePlot.dataLineStyle   = lineStyle
         dataSourceLinePlot.histogramOption = self.histogramOption
 
         dataSourceLinePlot.dataSource = self
-        graph.addPlot(dataSourceLinePlot)
+        graph.add(dataSourceLinePlot)
 
         // Auto scale the plot space to fit the plot data
         // Extend the ranges by 30% for neatness
-        plotSpace.scaleToFitPlots([dataSourceLinePlot])
+        plotSpace.scale(toFit: [dataSourceLinePlot])
         let xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
         let yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
-        xRange.expandRangeByFactor(1.3)
-        yRange.expandRangeByFactor(1.3)
+        xRange.expand(byFactor: 1.3)
+        yRange.expand(byFactor: 1.3)
         plotSpace.xRange = xRange
         plotSpace.yRange = yRange
 
@@ -143,9 +143,9 @@ class SimpleScatterPlot: PlotItem {
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.blackColor()
-        let plotSymbol = CPTPlotSymbol.ellipsePlotSymbol()
-        plotSymbol.fill               = CPTFill(color: CPTColor.blueColor())
+        symbolLineStyle.lineColor = CPTColor.black()
+        let plotSymbol = CPTPlotSymbol.ellipse()
+        plotSymbol.fill               = CPTFill(color: CPTColor.blue())
         plotSymbol.lineStyle          = symbolLineStyle
         plotSymbol.size               = CGSize(width: 10.0, height: 10.0)
         dataSourceLinePlot.plotSymbol = plotSymbol
@@ -158,10 +158,10 @@ class SimpleScatterPlot: PlotItem {
         // Add legend
         graph.legend = CPTLegend(graph: graph)
         graph.legend?.textStyle       = x.titleTextStyle
-        graph.legend?.fill            = CPTFill(color: CPTColor.darkGrayColor())
+        graph.legend?.fill            = CPTFill(color: CPTColor.darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
-        graph.legendAnchor           = .Bottom
+        graph.legendAnchor           = .bottom
         graph.legendDisplacement     = CGPoint(x: 0.0, y: 12.0)
     }
     
@@ -171,11 +171,11 @@ class SimpleScatterPlot: PlotItem {
 
 extension SimpleScatterPlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(self.plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
 
         if let field = CPTScatterPlotField(rawValue: Int(fieldEnum)) {
             let key = field == .X ? "x" : "y"
@@ -191,14 +191,14 @@ extension SimpleScatterPlot: CPTPlotDataSource {
 
 extension SimpleScatterPlot: CPTPlotSpaceDelegate {
 
-    func plotSpace(space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, forCoordinate coordinate: CPTCoordinate) -> CPTPlotRange? {
+    func plotSpace(_ space: CPTPlotSpace, willChangePlotRangeTo newRange: CPTPlotRange, for coordinate: CPTCoordinate) -> CPTPlotRange? {
         // Impose a limit on how far user can scroll in x
         if coordinate == .X {
             let maxRange = CPTPlotRange(location: -1.0, length: 6.0)
             let changedRange = newRange.mutableCopy() as! CPTMutablePlotRange
 
-            changedRange.shiftEndToFitInRange(maxRange)
-            changedRange.shiftLocationToFitInRange(maxRange)
+            changedRange.shiftEndToFit(in: maxRange)
+            changedRange.shiftLocationToFit(in: maxRange)
 
             return changedRange
         }
@@ -212,7 +212,7 @@ extension SimpleScatterPlot: CPTPlotSpaceDelegate {
 
 extension SimpleScatterPlot: CPTScatterPlotDelegate {
 
-    func scatterPlot(plot: CPTScatterPlot, plotSymbolWasSelectedAtRecordIndex index: UInt) {
+    func scatterPlot(_ plot: CPTScatterPlot, plotSymbolWasSelectedAtRecord index: UInt) {
         let graph = self.graphs[0]
 
         if let annotation = self.symbolTextAnnotation {
@@ -221,7 +221,7 @@ extension SimpleScatterPlot: CPTScatterPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.whiteColor()
+        hitAnnotationTextStyle.color    = CPTColor.white()
         hitAnnotationTextStyle.fontSize = 16.0
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 
@@ -235,14 +235,14 @@ extension SimpleScatterPlot: CPTScatterPlotDelegate {
 
         // Add annotation
         // First make a string for the y value
-        let formatter = NSNumberFormatter()
+        let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
-        let yString = formatter.stringFromNumber(y)
+        let yString = formatter.string(from: NSNumber(value: y))
 
         // Now add the annotation to the plot area
         if let defaultSpace = graph.defaultPlotSpace {
             let textLayer = CPTTextLayer(text: yString, style: hitAnnotationTextStyle)
-            let annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace, anchorPlotPoint: anchorPoint)
+            let annotation = CPTPlotSpaceAnnotation(plotSpace: defaultSpace, anchorPlotPoint: anchorPoint as [NSNumber]?)
             annotation.contentLayer   = textLayer
             annotation.displacement   = CGPoint(x: 0.0, y: 20.0)
             self.symbolTextAnnotation = annotation
@@ -250,15 +250,15 @@ extension SimpleScatterPlot: CPTScatterPlotDelegate {
         }
     }
 
-    func scatterPlotDataLineWasSelected(plot: CPTScatterPlot) {
+    func scatterPlotDataLineWasSelected(_ plot: CPTScatterPlot) {
         NSLog("scatterPlotDataLineWasSelected: \(plot)")
     }
 
-    func scatterPlotDataLineTouchDown(plot: CPTScatterPlot) {
+    func scatterPlotDataLineTouchDown(_ plot: CPTScatterPlot) {
         NSLog("scatterPlotDataLineTouchDown: \(plot)")
     }
 
-    func scatterPlotDataLineTouchUp(plot: CPTScatterPlot) {
+    func scatterPlotDataLineTouchUp(_ plot: CPTScatterPlot) {
         NSLog("scatterPlotDataLineTouchUp: \(plot)")
     }
 
@@ -268,7 +268,7 @@ extension SimpleScatterPlot: CPTScatterPlotDelegate {
 
 extension SimpleScatterPlot: CPTPlotAreaDelegate {
 
-    func plotAreaWasSelected(plotArea: CPTPlotArea) {
+    func plotAreaWasSelected(_ plotArea: CPTPlotArea) {
         let graph = self.graphs[0] as? CPTXYGraph
 
         if graph != nil {
@@ -277,18 +277,18 @@ extension SimpleScatterPlot: CPTPlotAreaDelegate {
                 graph?.plotAreaFrame?.plotArea?.removeAnnotation(annotation)
                 self.symbolTextAnnotation = nil
             } else {
-                var interpolation: CPTScatterPlotInterpolation = .Histogram
+                var interpolation: CPTScatterPlotInterpolation = .histogram
 
                 // Decrease the histogram display option, and if < 0 display linear graph
                 let optionValue = self.histogramOption.rawValue
                 if ( CPTScatterPlotHistogramOption(rawValue: optionValue - 1) == nil ) {
-                    interpolation = .Linear
+                    interpolation = .linear
 
                     // Set the histogram option to the count, as that is guaranteed to be the last available option + 1
                     // (thus the next time the user clicks in the empty plot area the value will be decremented, becoming last option)
-                    self.histogramOption = .OptionCount
+                    self.histogramOption = .optionCount
                 }
-                let dataSourceLinePlot = graph?.plotWithIdentifier("Data Source Plot") as! CPTScatterPlot
+                let dataSourceLinePlot = graph?.plot(withIdentifier: "Data Source Plot" as NSCopying?) as! CPTScatterPlot
                 dataSourceLinePlot.interpolation   = interpolation
                 dataSourceLinePlot.histogramOption = self.histogramOption
             }

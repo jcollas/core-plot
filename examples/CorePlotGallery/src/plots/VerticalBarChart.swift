@@ -39,7 +39,7 @@ class VerticalBarChart: PlotItem {
 
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -49,7 +49,7 @@ class VerticalBarChart: PlotItem {
 
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: .darkGradientTheme))
 
         let textSize = self.titleSize
 
@@ -63,7 +63,7 @@ class VerticalBarChart: PlotItem {
 
         // Add plot space for bar charts
         let barPlotSpace = CPTXYPlotSpace()
-        barPlotSpace.setScaleType(.Category, forCoordinate: .X)
+        barPlotSpace.setScaleType(.category, for: .X)
         if ( kUseHorizontalBars ) {
             barPlotSpace.xRange = CPTPlotRange(location: -10.0, length: 120.0)
             barPlotSpace.yRange = CPTPlotRange(location: -1.0, length: 11.0)
@@ -72,23 +72,23 @@ class VerticalBarChart: PlotItem {
             barPlotSpace.xRange = CPTPlotRange(location: -1.0, length: 11.0)
             barPlotSpace.yRange = CPTPlotRange(location: -10.0, length: 120.0)
         }
-        graph.addPlotSpace(barPlotSpace)
+        graph.add(barPlotSpace)
 
         // Create grid line styles
         let majorGridLineStyle = CPTMutableLineStyle()
         majorGridLineStyle.lineWidth = 1.0
-        majorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.75)
+        majorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.75)
 
         let minorGridLineStyle = CPTMutableLineStyle()
         minorGridLineStyle.lineWidth = 1.0
-        minorGridLineStyle.lineColor = CPTColor.whiteColor().colorWithAlphaComponent(0.25)
+        minorGridLineStyle.lineColor = CPTColor.white().withAlphaComponent(0.25)
 
         // Create axes
         let axisSet = graph.axisSet as! CPTXYAxisSet
 
         guard let
             x = axisSet.xAxis,
-            y = axisSet.yAxis else {
+            let y = axisSet.yAxis else {
                 return
         }
 
@@ -154,7 +154,7 @@ class VerticalBarChart: PlotItem {
         // Create a bar line style
         let barLineStyle = CPTMutableLineStyle()
         barLineStyle.lineWidth = 1.0
-        barLineStyle.lineColor = CPTColor.whiteColor()
+        barLineStyle.lineColor = .white()
 
         // Create first bar plot
         let barPlot = CPTBarPlot()
@@ -167,19 +167,19 @@ class VerticalBarChart: PlotItem {
         barPlot.barsAreHorizontal = kUseHorizontalBars
 
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color = CPTColor.whiteColor()
+        whiteTextStyle.color = .white()
 
         barPlot.labelTextStyle = whiteTextStyle
         barPlot.labelOffset    = 0.0
 
         barPlot.delegate   = self
         barPlot.dataSource = self
-        barPlot.identifier = "Bar Plot 1"
+        barPlot.identifier = "Bar Plot 1" as (NSCoding & NSCopying & NSObjectProtocol)?
 
-        graph.addPlot(barPlot, toPlotSpace:barPlotSpace)
+        graph.add(barPlot, to:barPlotSpace)
 
         // Create second bar plot
-        let barPlot2 = CPTBarPlot.tubularBarPlotWithColor(CPTColor.blueColor(), horizontalBars: false)
+        let barPlot2 = CPTBarPlot.tubularBarPlot(with: CPTColor.blue(), horizontalBars: false)
 
         barPlot2.lineStyle       = barLineStyle
         barPlot2.fill = CPTFill(color: CPTColor(componentRed:0.0, green:1.0, blue:0.5, alpha:0.5))
@@ -191,9 +191,9 @@ class VerticalBarChart: PlotItem {
 
         barPlot2.delegate   = self
         barPlot2.dataSource = self
-        barPlot2.identifier = "Bar Plot 2"
+        barPlot2.identifier = "Bar Plot 2" as (NSCoding & NSCopying & NSObjectProtocol)?
 
-        graph.addPlot(barPlot2, toPlotSpace: barPlotSpace)
+        graph.add(barPlot2, to: barPlotSpace)
 
         // Add legend
         let theLegend = CPTLegend(graph: graph)
@@ -213,7 +213,7 @@ class VerticalBarChart: PlotItem {
         
         let plotPoint = (kUseHorizontalBars ? [95, 0] : [0, 95])
         
-        let legendAnnotation = CPTPlotSpaceAnnotation(plotSpace:barPlotSpace, anchorPlotPoint: plotPoint)
+        let legendAnnotation = CPTPlotSpaceAnnotation(plotSpace:barPlotSpace, anchorPlotPoint: plotPoint as [NSNumber]?)
         legendAnnotation.contentLayer = theLegend
         
         legendAnnotation.contentAnchorPoint = kUseHorizontalBars ? CGPoint(x: 1.0, y: 0.0) : CGPoint(x: 0.0, y: 1.0)
@@ -227,12 +227,12 @@ class VerticalBarChart: PlotItem {
 
 extension VerticalBarChart: CPTBarPlotDelegate {
 
-    func plot(plot: CPTPlot, dataLabelWasSelectedAtRecordIndex index: UInt) {
+    func plot(_ plot: CPTPlot, dataLabelWasSelectedAtRecord index: UInt) {
         NSLog("Data label for '\(plot.identifier)' was selected at index \(index).")
     }
 
-    func barPlot(plot: CPTBarPlot, barWasSelectedAtRecordIndex index: UInt) {
-        let value = numberForPlot(plot, field: UInt(CPTBarPlotField.BarTip.rawValue), recordIndex:index)
+    func barPlot(_ plot: CPTBarPlot, barWasSelectedAtRecord index: UInt) {
+        let value = number(for: plot, field: UInt(CPTBarPlotField.barTip.rawValue), record: index)
 
         NSLog("Bar for '\(plot.identifier)' was selected at index \(index). Value = \(value)")
 
@@ -246,7 +246,7 @@ extension VerticalBarChart: CPTBarPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.orangeColor()
+        hitAnnotationTextStyle.color    = CPTColor.orange()
         hitAnnotationTextStyle.fontSize = 16.0
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 
@@ -258,14 +258,14 @@ extension VerticalBarChart: CPTBarPlotDelegate {
 
         // Add annotation
         // First make a string for the y value
-        let formatter = NSNumberFormatter()
+        let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
-        let yString = formatter.stringFromNumber(value as! NSNumber)
+        let yString = formatter.string(from: value as! NSNumber)
 
         // Now add the annotation to the plot area
         if let space = plot.plotSpace {
             let textLayer = CPTTextLayer(text:yString, style:hitAnnotationTextStyle)
-            annotation = CPTPlotSpaceAnnotation(plotSpace: space, anchorPlotPoint: anchorPoint)
+            annotation = CPTPlotSpaceAnnotation(plotSpace: space, anchorPlotPoint: anchorPoint as [NSNumber]?)
             annotation?.contentLayer   = textLayer
             annotation?.displacement   = CGPoint(x: 0.0, y: 0.0)
             self.symbolTextAnnotation = annotation
@@ -280,11 +280,11 @@ extension VerticalBarChart: CPTBarPlotDelegate {
 
 extension VerticalBarChart: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return 10
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
 
         guard let field = CPTBarPlotField(rawValue: Int(fieldEnum)) else {
             return nil
@@ -292,11 +292,11 @@ extension VerticalBarChart: CPTPlotDataSource {
 
         switch field {
 
-        case .BarLocation:
+        case .barLocation:
             // location
             return "Cat \(index)"
 
-        case .BarTip:
+        case .barTip:
             // length
             return plot.identifier as! String == "Bar Plot 2" ? index : (index + 1) * (index + 1)
 

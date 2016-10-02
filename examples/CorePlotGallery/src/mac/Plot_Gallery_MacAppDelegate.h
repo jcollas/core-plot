@@ -3,7 +3,7 @@
 // CorePlotGallery
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface Plot_Gallery_MacAppDelegate : NSObject<NSApplicationDelegate>
 

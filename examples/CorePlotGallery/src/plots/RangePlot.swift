@@ -7,7 +7,7 @@ import CorePlot
 
 class RangePlot: PlotItem {
 
-    let oneDay: NSTimeInterval = 24 * 60 * 60
+    let oneDay: TimeInterval = 24 * 60 * 60
 
     var graph: CPTGraph? = nil
     var plotData: [[CPTRangePlotField: Double]] = []
@@ -39,10 +39,10 @@ class RangePlot: PlotItem {
                 newData.append(
                  [ .X: x,
                     .Y: y,
-                    .High: rHigh,
-                    .Low: rLow,
-                    .Left: rLeft,
-                    .Right: rRight ]
+                    .high: rHigh,
+                    .low: rLow,
+                    .left: rLeft,
+                    .right: rRight ]
                  )
             }
             
@@ -50,7 +50,7 @@ class RangePlot: PlotItem {
         }
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
         // If you make sure your dates are calculated at noon, you shouldn't have to
         // worry about daylight savings. If you use midnight, you will have to adjust
@@ -68,13 +68,13 @@ class RangePlot: PlotItem {
         graph = newGraph
 
         self.addGraph(newGraph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: kCPTDarkGradientTheme))
+        self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
         newGraph.plotAreaFrame?.masksToBorder = false
 
         // Instructions
         let textStyle = CPTMutableTextStyle()
-        textStyle.color    = CPTColor.whiteColor()
+        textStyle.color    = CPTColor.white()
         textStyle.fontName = "Helvetica"
         textStyle.fontSize = self.titleSize * 0.5
 
@@ -87,7 +87,7 @@ class RangePlot: PlotItem {
         if let anchorLayer = newGraph.plotAreaFrame?.plotArea {
             let instructionsAnnotation = CPTLayerAnnotation(anchorLayer: anchorLayer)
             instructionsAnnotation.contentLayer = textLayer
-            instructionsAnnotation.rectAnchor = .Bottom
+            instructionsAnnotation.rectAnchor = .bottom
             instructionsAnnotation.contentAnchorPoint = CGPoint(x: 0.5, y: 0.0)
             instructionsAnnotation.displacement = CGPoint(x: 0.0, y: 10.0)
             newGraph.plotAreaFrame?.plotArea?.addAnnotation(instructionsAnnotation)
@@ -95,21 +95,21 @@ class RangePlot: PlotItem {
 
         // Setup fill and bar style
         if self.areaFill == nil {
-            let transparentGreen = CPTColor.greenColor().colorWithAlphaComponent(0.2)
+            let transparentGreen = CPTColor.green().withAlphaComponent(0.2)
             self.areaFill = CPTFill(color: transparentGreen)
         }
 
         if self.barLineStyle == nil {
             let lineStyle = CPTMutableLineStyle()
             lineStyle.lineWidth = 1.0
-            lineStyle.lineColor = CPTColor.greenColor()
+            lineStyle.lineColor = CPTColor.green()
             self.barLineStyle   = lineStyle
         }
 
         // Setup scatter plot space
         let plotSpace = newGraph.defaultPlotSpace as! CPTXYPlotSpace
         let xLow = oneDay * 0.5
-        plotSpace.xRange = CPTPlotRange(location:xLow, length:oneDay * 5.0)
+        plotSpace.xRange = CPTPlotRange(location: NSNumber(value: xLow), length: NSNumber(value: oneDay * 5.0))
         plotSpace.yRange = CPTPlotRange(location:1.5, length:3.5)
 
         // Axes
@@ -117,26 +117,26 @@ class RangePlot: PlotItem {
 
         guard let
             x = axisSet.xAxis,
-            y = axisSet.yAxis else {
+            let y = axisSet.yAxis else {
                 return
         }
 
-        x.majorIntervalLength   = oneDay
+        x.majorIntervalLength   = oneDay as NSNumber?
         x.orthogonalPosition    = 2.0
         x.minorTicksPerInterval = 0
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateStyle = .ShortStyle
-        let timeFormatter = CPTTimeFormatter(dateFormatter:dateFormatter)
-        timeFormatter.referenceDate = refDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        let timeFormatter = CPTTimeFormatter(dateFormatter: dateFormatter)
+        timeFormatter.referenceDate = refDate as Date
         x.labelFormatter = timeFormatter
 
         y.majorIntervalLength   = 0.5
         y.minorTicksPerInterval = 5
-        y.orthogonalPosition    = oneDay
+        y.orthogonalPosition    = oneDay as NSNumber?
 
         // Create a plot that uses the data source method
         let rangePlot = CPTRangePlot()
-        rangePlot.identifier   = "Range Plot"
+        rangePlot.identifier   = "Range Plot" as (NSCoding & NSCopying & NSObjectProtocol)?
         rangePlot.barLineStyle = self.barLineStyle
         rangePlot.dataSource   = self
         rangePlot.delegate     = self
@@ -147,17 +147,17 @@ class RangePlot: PlotItem {
         rangePlot.gapHeight = 20.0
 
         // Add plot
-        newGraph.addPlot(rangePlot)
+        newGraph.add(rangePlot)
         newGraph.defaultPlotSpace?.delegate = self
 
         // Add legend
         newGraph.legend = CPTLegend(graph: newGraph)
         newGraph.legend?.textStyle = x.titleTextStyle
-        newGraph.legend?.fill = CPTFill(color: CPTColor.darkGrayColor())
+        newGraph.legend?.fill = CPTFill(color: CPTColor.darkGray())
         newGraph.legend?.borderLineStyle = x.axisLineStyle
         newGraph.legend?.cornerRadius = 5.0
         newGraph.legend?.swatchCornerRadius = 3.0
-        newGraph.legendAnchor = .Top
+        newGraph.legendAnchor = .top
         newGraph.legendDisplacement = CGPoint(x: 0.0, y: self.titleSize * -2.0 - 12.0)
     }
 
@@ -167,11 +167,11 @@ class RangePlot: PlotItem {
 
 extension RangePlot: CPTPlotDataSource {
 
-    func numberOfRecordsForPlot(plot: CPTPlot) -> UInt {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(plotData.count)
     }
 
-    func numberForPlot(plot: CPTPlot, field fieldEnum: UInt, recordIndex index: UInt) -> AnyObject? {
+    func number(for plot: CPTPlot, field fieldEnum: UInt, record index: UInt) -> Any? {
 
         guard let field = CPTRangePlotField(rawValue: Int(fieldEnum)) else {
             return nil
@@ -186,14 +186,14 @@ extension RangePlot: CPTPlotDataSource {
 
 extension RangePlot: CPTPlotSpaceDelegate {
 
-    func plotSpace(space: CPTPlotSpace, shouldHandlePointingDeviceUpEvent event: CPTNativeEvent, atPoint point: CGPoint) -> Bool {
-        let rangePlot = graph?.plotWithIdentifier("Range Plot") as! CPTRangePlot
+    func plotSpace(_ space: CPTPlotSpace, shouldHandlePointingDeviceUp event: CPTNativeEvent, at point: CGPoint) -> Bool {
+        let rangePlot = graph?.plot(withIdentifier: "Range Plot" as NSCopying?) as! CPTRangePlot
 
         rangePlot.areaFill = (rangePlot.areaFill != nil ? nil : self.areaFill)
 
         if rangePlot.areaFill != nil {
             let lineStyle = CPTMutableLineStyle()
-            lineStyle.lineColor = CPTColor.lightGrayColor()
+            lineStyle.lineColor = CPTColor.lightGray()
 
             rangePlot.areaBorderLineStyle = lineStyle
         }
@@ -210,7 +210,7 @@ extension RangePlot: CPTPlotSpaceDelegate {
 
 extension RangePlot: CPTRangePlotDelegate {
 
-    func rangePlot(plot: CPTRangePlot, rangeWasSelectedAtRecordIndex index: UInt) {
+    func rangePlot(_ plot: CPTRangePlot, rangeWasSelectedAtRecord index: UInt) {
         NSLog("Range for '\(plot.identifier)' was selected at index \(index).")
     }
 

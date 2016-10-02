@@ -21,7 +21,7 @@ class PlotGallery: NSObject {
 
     var sectionTitles: [String] {
         let titles = plotSections.allObjects as! [String]
-        return titles.sort { $0.lowercaseString < $1.lowercaseString }
+        return titles.sorted { $0.lowercased() < $1.lowercased() }
     }
 
     class var sharedPlotGallery: PlotGallery {
@@ -35,16 +35,16 @@ class PlotGallery: NSObject {
         super.init()
     }
 
-    func addPlotItem(plotItem: PlotItem) {
+    func addPlotItem(_ plotItem: PlotItem) {
         plotItems.append(plotItem)
-        plotSections.addObject(plotItem.section!)
+        plotSections.add(plotItem.section!)
     }
 
-    func numberOfRowsInSection(section: Int) -> Int {
-        return plotSections.countForObject(sectionTitles[section])
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        return plotSections.count(for: sectionTitles[section])
     }
 
-    func objectInSection(section: Int, atIndex index: Int) -> PlotItem {
+    func objectInSection(_ section: Int, atIndex index: Int) -> PlotItem {
         var offset = 0
 
         for i in 0..<section {
@@ -55,7 +55,7 @@ class PlotGallery: NSObject {
     }
 
     func sortByTitle() {
-        plotItems.sortInPlace { $0.titleCompare($1) == .OrderedAscending }
+        plotItems.sort { $0.titleCompare($1) == .orderedAscending }
     }
 
 }

@@ -17,7 +17,7 @@ class ImageDemo: PlotItem {
         section = kDemoPlots
     }
 
-    override func renderInGraphHostingView(hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
+    override func renderInGraphHostingView(_ hostingView: CPTGraphHostingView, withTheme theme: CPTTheme?, animated: Bool) {
 
 #if os(iOS) || os(tvOS)
         let bounds = hostingView.bounds
@@ -28,11 +28,11 @@ class ImageDemo: PlotItem {
         // Create graph
         let graph = CPTXYGraph(frame: bounds)
         self.addGraph(graph, toHostingView: hostingView)
-        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: kCPTSlateTheme))
+        self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGrayColor())
+        graph.fill = CPTFill(color: CPTColor.darkGray())
 
-        graph.plotAreaFrame?.fill = CPTFill(color: CPTColor.lightGrayColor())
+        graph.plotAreaFrame?.fill = CPTFill(color: CPTColor.lightGray())
         graph.plotAreaFrame?.paddingTop    = self.titleSize
         graph.plotAreaFrame?.paddingBottom = self.titleSize * 2.0
         graph.plotAreaFrame?.paddingLeft   = self.titleSize * 2.0
@@ -44,24 +44,24 @@ class ImageDemo: PlotItem {
         let textStyle = CPTMutableTextStyle()
         textStyle.fontName      = "Helvetica"
         textStyle.fontSize      = self.titleSize * 0.5
-        textStyle.textAlignment = .Center
+        textStyle.textAlignment = .center
 
         let thePlotArea = graph.plotAreaFrame?.plotArea
 
         // Note
         var titleLayer = CPTTextLayer(text: "Standard images have a blue tint.\nHi-res (@2x) images have a green tint.\n@3x images have a red tint.", style: textStyle)
         let titleAnnotation = CPTLayerAnnotation(anchorLayer: thePlotArea!)
-        titleAnnotation.rectAnchor         = .Top
+        titleAnnotation.rectAnchor         = .top
         titleAnnotation.contentLayer       = titleLayer
         titleAnnotation.contentAnchorPoint = CGPoint(x: 0.5, y: 1.0)
         thePlotArea?.addAnnotation(titleAnnotation)
 
-        textStyle.color = CPTColor.darkGrayColor()
+        textStyle.color = CPTColor.darkGray()
 
         // Tiled
         titleLayer = CPTTextLayer(text:"Tiled image", style: textStyle)
         let fillImage = CPTImage(named: "Checkerboard")
-        fillImage.tiled = true
+        fillImage.isTiled = true
         titleLayer.fill = CPTFill(image: fillImage)
         titleLayer.paddingLeft   = self.titleSize
         titleLayer.paddingRight  = self.titleSize
@@ -69,14 +69,14 @@ class ImageDemo: PlotItem {
         titleLayer.paddingBottom = self.titleSize * 0.25
 
         var annotation = CPTLayerAnnotation(anchorLayer: thePlotArea!)
-        annotation.rectAnchor         = .BottomLeft
+        annotation.rectAnchor         = .bottomLeft
         annotation.contentLayer       = titleLayer
         annotation.contentAnchorPoint = CGPoint(x: 0.0, y: 0.0)
         thePlotArea?.addAnnotation(annotation)
 
         // Stretched
         titleLayer = CPTTextLayer(text: "Stretched image", style: textStyle)
-        fillImage.tiled          = false
+        fillImage.isTiled          = false
         titleLayer.fill = CPTFill(image: fillImage)
         titleLayer.paddingLeft   = self.titleSize
         titleLayer.paddingRight  = self.titleSize
@@ -85,7 +85,7 @@ class ImageDemo: PlotItem {
 
         if let anchorLayer = graph.plotAreaFrame?.plotArea {
             annotation = CPTLayerAnnotation(anchorLayer: anchorLayer)
-            annotation.rectAnchor = .BottomRight
+            annotation.rectAnchor = .bottomRight
             annotation.contentLayer       = titleLayer
             annotation.contentAnchorPoint = CGPoint(x: 1.0, y: 0.0)
             graph.plotAreaFrame?.plotArea?.addAnnotation(annotation)
