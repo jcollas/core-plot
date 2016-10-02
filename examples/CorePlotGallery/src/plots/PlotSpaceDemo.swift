@@ -32,7 +32,7 @@ class PlotSpaceDemo: PlotItem {
         self.addGraph(graph, toHostingView: hostingView)
         self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.darkGradientTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGray())
+        graph.fill = CPTFill(color: .darkGray())
 
         // Plot area
         graph.plotAreaFrame?.paddingTop    = self.titleSize

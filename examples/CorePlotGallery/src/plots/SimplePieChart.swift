@@ -79,10 +79,10 @@ class SimplePieChart: PlotItem { //<CPTPlotSpaceDelegate>
         // Add legend
         let theLegend = CPTLegend(graph: graph)
         theLegend.numberOfColumns = 1
-        theLegend.fill            = CPTFill(color: CPTColor.white())
+        theLegend.fill            = CPTFill(color: .white())
         theLegend.borderLineStyle = CPTLineStyle()
 
-        theLegend.entryFill = CPTFill(color: CPTColor.lightGray())
+        theLegend.entryFill = CPTFill(color: .lightGray())
         theLegend.entryBorderLineStyle = CPTLineStyle()
         theLegend.entryCornerRadius    = 3.0
         theLegend.entryPaddingLeft     = 3.0
@@ -135,7 +135,7 @@ extension SimplePieChart: CPTLegendDelegate {
         func legend(_ legend: CPTLegend, legendEntryFor plot: CPTPlot, wasSelectedAt idx: UInt) {
             NSLog("Legend entry for '\(plot.identifier)' was selected at index \(idx).")
 
-            let startFrom: CGFloat = idx == self.offsetIndex ? 0.0 : 0.0  // If 1st has a value, should be NAN
+            let startFrom: CGFloat = idx == self.offsetIndex ? .nan : 0.0  // If 1st has a value, should be NAN
             let endTo: CGFloat = idx == self.offsetIndex ? 0.0 : 35.0
 
             CPTAnimation.animate(self,
@@ -174,7 +174,7 @@ extension SimplePieChart: CPTPlotDataSource {
     func dataLabel(for plot: CPTPlot, record index: UInt) -> CPTLayer? {
         let whiteText = CPTMutableTextStyle()
 
-        whiteText.color = CPTColor.white()
+        whiteText.color = .white()
         whiteText.fontSize = self.titleSize * 0.5
 
         let value = String(format: "%1.0f", plotData[Int(index)])

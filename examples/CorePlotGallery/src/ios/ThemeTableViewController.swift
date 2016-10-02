@@ -59,7 +59,7 @@ class ThemeTableViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ThemeCell", for: indexPath)
 
-        cell.textLabel?.text = self.themes[(indexPath as NSIndexPath).row]
+        cell.textLabel?.text = self.themes[indexPath.row]
 
         return cell
     }
@@ -67,7 +67,7 @@ class ThemeTableViewController: UITableViewController {
     // MARK: - Table view delegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let themeInfo = [PlotGalleryThemeNameKey: self.themes[(indexPath as NSIndexPath).row]]
+        let themeInfo = [PlotGalleryThemeNameKey: self.themes[indexPath.row]]
 
         NotificationCenter.default.post(name: Notification.Name(rawValue: PlotGalleryThemeDidChangeNotification),
                                                         object: self,

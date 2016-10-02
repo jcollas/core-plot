@@ -133,7 +133,7 @@ class CandlestickPlot: PlotItem {
 
         // OHLC plot
         let whiteLineStyle = CPTMutableLineStyle()
-        whiteLineStyle.lineColor = CPTColor.white()
+        whiteLineStyle.lineColor = .white()
         whiteLineStyle.lineWidth = 2.0
         let ohlcPlot = CPTTradingRangePlot(frame: newGraph.bounds)
         ohlcPlot.identifier = "OHLC" as (NSCoding & NSCopying & NSObjectProtocol)?

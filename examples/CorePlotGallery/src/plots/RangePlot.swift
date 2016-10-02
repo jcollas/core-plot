@@ -74,7 +74,7 @@ class RangePlot: PlotItem {
 
         // Instructions
         let textStyle = CPTMutableTextStyle()
-        textStyle.color    = CPTColor.white()
+        textStyle.color    = .white()
         textStyle.fontName = "Helvetica"
         textStyle.fontSize = self.titleSize * 0.5
 
@@ -102,7 +102,7 @@ class RangePlot: PlotItem {
         if self.barLineStyle == nil {
             let lineStyle = CPTMutableLineStyle()
             lineStyle.lineWidth = 1.0
-            lineStyle.lineColor = CPTColor.green()
+            lineStyle.lineColor = .green()
             self.barLineStyle   = lineStyle
         }
 
@@ -153,7 +153,7 @@ class RangePlot: PlotItem {
         // Add legend
         newGraph.legend = CPTLegend(graph: newGraph)
         newGraph.legend?.textStyle = x.titleTextStyle
-        newGraph.legend?.fill = CPTFill(color: CPTColor.darkGray())
+        newGraph.legend?.fill = CPTFill(color: .darkGray())
         newGraph.legend?.borderLineStyle = x.axisLineStyle
         newGraph.legend?.cornerRadius = 5.0
         newGraph.legend?.swatchCornerRadius = 3.0
@@ -193,7 +193,7 @@ extension RangePlot: CPTPlotSpaceDelegate {
 
         if rangePlot.areaFill != nil {
             let lineStyle = CPTMutableLineStyle()
-            lineStyle.lineColor = CPTColor.lightGray()
+            lineStyle.lineColor = .lightGray()
 
             rangePlot.areaBorderLineStyle = lineStyle
         }

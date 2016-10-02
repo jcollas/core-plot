@@ -30,9 +30,9 @@ class ImageDemo: PlotItem {
         self.addGraph(graph, toHostingView: hostingView)
         self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGray())
+        graph.fill = CPTFill(color: .darkGray())
 
-        graph.plotAreaFrame?.fill = CPTFill(color: CPTColor.lightGray())
+        graph.plotAreaFrame?.fill = CPTFill(color: .lightGray())
         graph.plotAreaFrame?.paddingTop    = self.titleSize
         graph.plotAreaFrame?.paddingBottom = self.titleSize * 2.0
         graph.plotAreaFrame?.paddingLeft   = self.titleSize * 2.0
@@ -56,7 +56,7 @@ class ImageDemo: PlotItem {
         titleAnnotation.contentAnchorPoint = CGPoint(x: 0.5, y: 1.0)
         thePlotArea?.addAnnotation(titleAnnotation)
 
-        textStyle.color = CPTColor.darkGray()
+        textStyle.color = .darkGray()
 
         // Tiled
         titleLayer = CPTTextLayer(text:"Tiled image", style: textStyle)

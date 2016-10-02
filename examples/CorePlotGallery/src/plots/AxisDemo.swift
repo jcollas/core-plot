@@ -30,10 +30,10 @@ class AxisDemo: PlotItem {
         self.addGraph(graph, toHostingView: hostingView)
         self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: .slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGray())
+        graph.fill = CPTFill(color: .darkGray())
 
         // Plot area
-        graph.plotAreaFrame?.fill          = CPTFill(color: CPTColor.lightGray())
+        graph.plotAreaFrame?.fill          = CPTFill(color: .lightGray())
         graph.plotAreaFrame?.paddingTop    = self.titleSize
         graph.plotAreaFrame?.paddingBottom = self.titleSize * 2.0
         graph.plotAreaFrame?.paddingLeft   = self.titleSize * 2.0
@@ -98,7 +98,7 @@ class AxisDemo: PlotItem {
         x.delegate              = self
 
         // Label y with an automatic labeling policy.
-        axisLineStyle.lineColor = CPTColor.green()
+        axisLineStyle.lineColor = .green()
 
         guard let y = axisSet.yAxis else {
             return
@@ -124,7 +124,7 @@ class AxisDemo: PlotItem {
         y.addBackgroundLimitBand(CPTLimitBand(range: CPTPlotRange(location: 1.5, length: 3.0), fill:bandFill))
 
         // Label y2 with an equal division labeling policy.
-        axisLineStyle.lineColor = CPTColor.orange()
+        axisLineStyle.lineColor = .orange()
 
         let y2 = CPTXYAxis()
         y2.coordinate                  = .Y

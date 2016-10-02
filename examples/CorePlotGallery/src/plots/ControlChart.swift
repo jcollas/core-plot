@@ -118,7 +118,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
         var lineStyle = CPTMutableLineStyle()
         lineStyle.lineWidth          = 2.0
-        lineStyle.lineColor          = CPTColor.green()
+        lineStyle.lineColor          = .green()
         centerLinePlot.dataLineStyle = lineStyle
 
         centerLinePlot.dataSource = self
@@ -130,7 +130,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
         lineStyle                     = CPTMutableLineStyle()
         lineStyle.lineWidth           = 2.0
-        lineStyle.lineColor           = CPTColor.red()
+        lineStyle.lineColor           = .red()
         lineStyle.dashPattern         = [10, 6]
         controlLinePlot.dataLineStyle = lineStyle
 
@@ -143,7 +143,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
         lineStyle                     = CPTMutableLineStyle()
         lineStyle.lineWidth           = 1.0
-        lineStyle.lineColor           = CPTColor.orange()
+        lineStyle.lineColor           = .orange()
         lineStyle.dashPattern         = [5, 5]
         warningLinePlot.dataLineStyle = lineStyle
 
@@ -163,9 +163,9 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.black()
+        symbolLineStyle.lineColor = .black()
         let plotSymbol = CPTPlotSymbol.ellipse()
-        plotSymbol.fill      = CPTFill(color: CPTColor.lightGray())
+        plotSymbol.fill      = CPTFill(color: .lightGray())
         plotSymbol.lineStyle = symbolLineStyle
         plotSymbol.size      = CGSize(width: 10.0, height: 10.0)
         linePlot.plotSymbol  = plotSymbol
@@ -194,7 +194,7 @@ class ControlChart: PlotItem { //<CPTPlotDataSource>
         
         // Add legend
         graph.legend = CPTLegend(plots:[linePlot, controlLinePlot, warningLinePlot, centerLinePlot])
-        graph.legend?.fill = CPTFill(color: CPTColor.white())
+        graph.legend?.fill = CPTFill(color: .white())
         graph.legend?.textStyle       = x.titleTextStyle
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0

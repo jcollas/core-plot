@@ -101,17 +101,17 @@ class FunctionPlot: PlotItem {
                 case 0:
                     titleString = "y = sin(x)"
                     block = { (xVal: Double) -> Double in return sin(xVal) }
-                    lineColor   = CPTColor.red()
+                    lineColor   = .red()
 
                 case 1:
                     titleString = "y = cos(x)"
                     block = { (xVal: Double) -> Double in return cos(xVal) }
-                    lineColor = CPTColor.green()
+                    lineColor = .green()
 
                 case 2:
                     titleString = "y = tan(x)"
                     block = { (xVal: Double) -> Double in return tan(xVal) }
-                    lineColor   = CPTColor.blue()
+                    lineColor   = .blue()
 
                 default:
                     break
@@ -165,7 +165,7 @@ class FunctionPlot: PlotItem {
         
         // Add legend
         graph.legend                 = CPTLegend(graph: graph)
-        graph.legend?.fill            = CPTFill(color: CPTColor.darkGray())
+        graph.legend?.fill            = CPTFill(color: .darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
         graph.legend?.numberOfRows    = 1

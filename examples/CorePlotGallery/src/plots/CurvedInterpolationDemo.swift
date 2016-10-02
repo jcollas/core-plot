@@ -175,20 +175,20 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         // style plots
         let lineStyle = bezierPlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth = 2.0
-        lineStyle.lineColor = CPTColor.green()
+        lineStyle.lineColor = .green()
 
         bezierPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor         = CPTColor.red()
+        lineStyle.lineColor         = .red()
         cmUniformPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor             = CPTColor.orange()
+        lineStyle.lineColor             = .orange()
         cmCentripetalPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor         = CPTColor.yellow()
+        lineStyle.lineColor         = .yellow()
         cmChordalPlot.dataLineStyle = lineStyle
 
-        lineStyle.lineColor       = CPTColor.cyan()
+        lineStyle.lineColor       = .cyan()
         hermitePlot.dataLineStyle = lineStyle
 
         // set data source and add plots
@@ -243,7 +243,7 @@ let hermiteCubicIdentifier          = "Hermite Cubic"
         graph.legend                 = CPTLegend(graph: graph)
         graph.legend?.numberOfRows    = 2
         graph.legend?.textStyle       = x.titleTextStyle
-        graph.legend?.fill            = CPTFill(color: CPTColor.darkGray())
+        graph.legend?.fill            = CPTFill(color: .darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
         graph.legendAnchor           = .bottom

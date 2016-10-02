@@ -115,14 +115,14 @@ class GradientScatterPlot: PlotItem {
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth = 5.0
         lineStyle.lineJoin = .round
-        lineStyle.lineGradient = CPTGradient(beginning: CPTColor.green(), ending: CPTColor.white())
+        lineStyle.lineGradient = CPTGradient(beginning: .green(), ending: .white())
         dataSourceLinePlot.dataLineStyle = lineStyle
         dataSourceLinePlot.dataSource = self
         graph.add(dataSourceLinePlot)
 
         // Put an area gradient under the plot above
         let areaColor = CPTColor(componentRed: 0.3, green: 1.0, blue: 0.3, alpha: 0.8)
-        let areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
+        let areaGradient = CPTGradient(beginning: areaColor, ending: .clear())
         areaGradient.angle = -90.0
         let areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill = areaGradientFill
@@ -130,13 +130,13 @@ class GradientScatterPlot: PlotItem {
 
         // Add some fill bands
         let band1Color = CPTColor(componentRed: 0.3, green: 0.3, blue:1.0, alpha: 0.8)
-        let band1Gradient = CPTGradient(beginning: band1Color,  ending: CPTColor.clear())
+        let band1Gradient = CPTGradient(beginning: band1Color,  ending: .clear())
         band1Gradient.angle = -90.0
         let band1Fill = CPTFill(gradient: band1Gradient)
         dataSourceLinePlot.addAreaFill(CPTLimitBand(range: CPTPlotRange(location:1.05, length:0.15), fill: band1Fill))
 
         let band2Color = CPTColor(componentRed: 1.0, green: 0.3, blue: 0.3, alpha: 0.8)
-        let band2Gradient = CPTGradient(beginning: band2Color, ending: CPTColor.clear())
+        let band2Gradient = CPTGradient(beginning: band2Color, ending: .clear())
         band2Gradient.angle = -90.0
         let band2Fill = CPTFill(gradient: band2Gradient)
         dataSourceLinePlot.addAreaFill(CPTLimitBand(range: CPTPlotRange(location:1.3, length:0.1), fill: band2Fill))
@@ -154,7 +154,7 @@ class GradientScatterPlot: PlotItem {
         plotSpace.globalYRange = globalYRange
 
         // Add plot symbols
-        let symbolGradient = CPTGradient(beginning: CPTColor(componentRed:0.75, green:0.75, blue:1.0, alpha:1.0), ending: CPTColor.blue())
+        let symbolGradient = CPTGradient(beginning: CPTColor(componentRed:0.75, green:0.75, blue:1.0, alpha:1.0), ending: .blue())
         symbolGradient.gradientType = .radial
         symbolGradient.startAnchor  = CGPoint(x: 0.25, y: 0.75)
         
@@ -233,7 +233,7 @@ extension GradientScatterPlot: CPTScatterPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.white()
+        hitAnnotationTextStyle.color    = .white()
         hitAnnotationTextStyle.fontSize = 16.0
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 

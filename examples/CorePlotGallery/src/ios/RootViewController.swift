@@ -16,7 +16,7 @@ class RootViewController: UITableViewController {
 
         self.currentThemeName = kThemeTableViewControllerDefaultTheme
 
-        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(_:)), name:NSNotification.Name(rawValue: PlotGalleryThemeDidChangeNotification), object:nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(_:)), name:Notification.Name(PlotGalleryThemeDidChangeNotification), object:nil)
     }
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -45,19 +45,19 @@ class RootViewController: UITableViewController {
 
             controller.currentThemeName = self.currentThemeName
 
-            let indexPath = self.tableView.indexPathForSelectedRow
+            if let indexPath = self.tableView.indexPathForSelectedRow {
 
-            let plotItem = PlotGallery.sharedPlotGallery.objectInSection((indexPath! as NSIndexPath).section,
-                                                                          atIndex: (indexPath! as NSIndexPath).row)
+                let plotItem = PlotGallery.sharedPlotGallery.objectInSection(indexPath.section, atIndex: indexPath.row)
 
-            controller.detailItem = plotItem
+                controller.detailItem = plotItem
+            }
         }
     }
 
     // MARK: - Theme Selection
 
     func themeChanged(_ notification: Notification) {
-        let themeInfo = (notification as NSNotification).userInfo
+        let themeInfo = notification.userInfo
 
         if let themeName = themeInfo?[PlotGalleryThemeNameKey] as? String {
             self.currentThemeName = themeName
@@ -78,7 +78,7 @@ class RootViewController: UITableViewController {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlotCell", for: indexPath)
 
-        let plotItem = PlotGallery.sharedPlotGallery.objectInSection((indexPath as NSIndexPath).section, atIndex: (indexPath as NSIndexPath).row)
+        let plotItem = PlotGallery.sharedPlotGallery.objectInSection(indexPath.section, atIndex: indexPath.row)
 
         cell.imageView?.image = plotItem.image()
         cell.textLabel?.text  = plotItem.title

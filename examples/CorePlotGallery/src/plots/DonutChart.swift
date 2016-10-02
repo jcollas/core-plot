@@ -37,7 +37,7 @@ class DonutChart: PlotItem {
         graph.axisSet = nil
 
         let whiteLineStyle = CPTMutableLineStyle()
-        whiteLineStyle.lineColor = CPTColor.white()
+        whiteLineStyle.lineColor = .white()
 
         let whiteShadow = CPTMutableShadow()
         whiteShadow.shadowOffset = CGSize(width: 2.0, height: -4.0)
@@ -136,12 +136,12 @@ extension DonutChart: CPTPlotDataSource {
         if plot.identifier as! String == outerChartName {
             let whiteText = CPTMutableTextStyle()
 
-            whiteText.color = CPTColor.white()
+            whiteText.color = .white()
             whiteText.fontSize = self.titleSize * 0.5
 
             let text = String(format: "%.0f", self.plotData[Int(index)])
             let newLayer = CPTTextLayer(text: text, style: whiteText)
-            newLayer.fill            = CPTFill(color: CPTColor.darkGray())
+            newLayer.fill            = CPTFill(color: .darkGray())
             newLayer.cornerRadius    = 5.0
             newLayer.paddingLeft     = 3.0
             newLayer.paddingTop      = 3.0

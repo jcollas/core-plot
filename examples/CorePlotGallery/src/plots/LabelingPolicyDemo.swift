@@ -35,7 +35,7 @@ class LabelingPolicyDemo: PlotItem {
         self.addGraph(graph, toHostingView: hostingView)
         self.applyTheme(theme, toGraph: graph, withDefault: CPTTheme(named: CPTThemeName.slateTheme))
 
-        graph.fill = CPTFill(color: CPTColor.darkGray())
+        graph.fill = CPTFill(color: .darkGray())
 
         // Plot area
         graph.plotAreaFrame?.paddingTop    = self.titleSize

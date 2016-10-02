@@ -179,7 +179,7 @@ class VerticalBarChart: PlotItem {
         graph.add(barPlot, to:barPlotSpace)
 
         // Create second bar plot
-        let barPlot2 = CPTBarPlot.tubularBarPlot(with: CPTColor.blue(), horizontalBars: false)
+        let barPlot2 = CPTBarPlot.tubularBarPlot(with: .blue(), horizontalBars: false)
 
         barPlot2.lineStyle       = barLineStyle
         barPlot2.fill = CPTFill(color: CPTColor(componentRed:0.0, green:1.0, blue:0.5, alpha:0.5))
@@ -246,7 +246,7 @@ extension VerticalBarChart: CPTBarPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.orange()
+        hitAnnotationTextStyle.color    = .orange()
         hitAnnotationTextStyle.fontSize = 16.0
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 

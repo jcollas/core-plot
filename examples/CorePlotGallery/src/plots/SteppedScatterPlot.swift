@@ -48,14 +48,14 @@ class SteppedScatterPlot: PlotItem {
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth              = 1.0
-        lineStyle.lineColor              = CPTColor.green()
+        lineStyle.lineColor              = .green()
         dataSourceLinePlot.dataLineStyle = lineStyle
 
         dataSourceLinePlot.dataSource = self
         dataSourceLinePlot.delegate   = self
 
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color              = CPTColor.white()
+        whiteTextStyle.color              = .white()
         dataSourceLinePlot.labelTextStyle = whiteTextStyle
         dataSourceLinePlot.labelOffset    = 5.0
         dataSourceLinePlot.labelRotation  = CGFloat(M_PI_4)
@@ -67,7 +67,7 @@ class SteppedScatterPlot: PlotItem {
 
         // Put an area gradient under the plot above
         let areaColor = CPTColor(componentRed: 0.3, green: 1.0, blue: 0.3, alpha: 0.8)
-        let areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
+        let areaGradient = CPTGradient(beginning: areaColor, ending: .clear())
         areaGradient.angle = -90.0
         let areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill      = areaGradientFill

@@ -209,7 +209,7 @@ class CurvedScatterPlot: PlotItem {
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth              = 3.0
-        lineStyle.lineColor              = CPTColor.green()
+        lineStyle.lineColor              = .green()
         dataSourceLinePlot.dataLineStyle = lineStyle
 
         dataSourceLinePlot.dataSource = self
@@ -219,7 +219,7 @@ class CurvedScatterPlot: PlotItem {
         let firstPlot = CPTScatterPlot()
         firstPlot.identifier    = kFirst as (NSCoding & NSCopying & NSObjectProtocol)?
         lineStyle.lineWidth     = 2.0
-        lineStyle.lineColor     = CPTColor.red()
+        lineStyle.lineColor     = .red()
         firstPlot.dataLineStyle = lineStyle
         firstPlot.dataSource    = self
 
@@ -228,7 +228,7 @@ class CurvedScatterPlot: PlotItem {
         // Second derivative
         let secondPlot = CPTScatterPlot()
         secondPlot.identifier    = kSecond as (NSCoding & NSCopying & NSObjectProtocol)?
-        lineStyle.lineColor      = CPTColor.blue()
+        lineStyle.lineColor      = .blue()
         secondPlot.dataLineStyle = lineStyle
         secondPlot.dataSource    = self
 
@@ -270,7 +270,7 @@ class CurvedScatterPlot: PlotItem {
         graph.legend = CPTLegend(graph: graph)
         graph.legend?.numberOfRows = 1
         graph.legend?.textStyle = x.titleTextStyle
-        graph.legend?.fill = CPTFill(color: CPTColor.darkGray())
+        graph.legend?.fill = CPTFill(color: .darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius = 5.0
         graph.legendAnchor = .bottom
@@ -370,7 +370,7 @@ extension CurvedScatterPlot: CPTScatterPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.white()
+        hitAnnotationTextStyle.color    = .white()
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 
         // Determine point of symbol in plot coordinates

@@ -103,7 +103,7 @@ class DatePlot: PlotItem {
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth              = 3.0
-        lineStyle.lineColor              = CPTColor.green()
+        lineStyle.lineColor              = .green()
         dataSourceLinePlot.dataLineStyle = lineStyle
         
         dataSourceLinePlot.dataSource = self

@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
 
     func setupView() {
 
-        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(_:)), name: NSNotification.Name(rawValue: PlotGalleryThemeDidChangeNotification), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeChanged(_:)), name: Notification.Name(PlotGalleryThemeDidChangeNotification), object: nil)
 
         if let hostView = self.hostingView {
             detailItem?.renderInView(hostView, withTheme: self.currentTheme(), animated: true)
@@ -93,7 +93,7 @@ class DetailViewController: UIViewController {
     }
 
     func themeChanged(_ notification: Notification) {
-        let themeInfo = (notification as NSNotification).userInfo
+        let themeInfo = notification.userInfo
 
         if let themeName = themeInfo?[PlotGalleryThemeNameKey] as? String {
             self.themeSelectedWithName(themeName)

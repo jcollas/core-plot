@@ -65,7 +65,7 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         self.applyTheme(theme, toGraph: newGraph, withDefault: CPTTheme(named: CPTThemeName.stocksTheme))
 
         let borderLineStyle = CPTMutableLineStyle()
-        borderLineStyle.lineColor = CPTColor.white()
+        borderLineStyle.lineColor = .white()
         borderLineStyle.lineWidth = 2.0
         newGraph.plotAreaFrame?.borderLineStyle = borderLineStyle
         newGraph.plotAreaFrame?.paddingTop      = self.titleSize * 0.5
@@ -108,14 +108,14 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
         newGraph.add(dataSourceLinePlot)
 
         var areaColor = CPTColor(componentRed: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
-        var areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
+        var areaGradient = CPTGradient(beginning: areaColor, ending: .clear())
         areaGradient.angle = -90.0
         var areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill      = areaGradientFill
         dataSourceLinePlot.areaBaseValue = 0.0
 
         areaColor = CPTColor(componentRed: 0.0, green: 1.0, blue: 0.0, alpha: 0.6)
-        areaGradient = CPTGradient(beginning: CPTColor.clear(), ending: areaColor)
+        areaGradient = CPTGradient(beginning: .clear(), ending: areaColor)
         areaGradient.angle = -90.0
         areaGradientFill = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill2 = areaGradientFill
@@ -123,17 +123,17 @@ class OHLCPlot: PlotItem { //<CPTPlotDataSource,CPTTradingRangePlotDelegate>
 
         // OHLC plot
         let whiteLineStyle = CPTMutableLineStyle()
-        whiteLineStyle.lineColor = CPTColor.white()
+        whiteLineStyle.lineColor = .white()
         whiteLineStyle.lineWidth = 2.0
 
         let redLineStyle = whiteLineStyle.mutableCopy() as! CPTMutableLineStyle
-        redLineStyle.lineColor = CPTColor.red()
+        redLineStyle.lineColor = .red()
 
         let greenLineStyle = whiteLineStyle.mutableCopy() as! CPTMutableLineStyle
-        greenLineStyle.lineColor = CPTColor.green()
+        greenLineStyle.lineColor = .green()
 
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color = CPTColor.white()
+        whiteTextStyle.color = .white()
 
         let ohlcPlot = CPTTradingRangePlot(frame: newGraph.bounds)
         ohlcPlot.identifier = "OHLC" as (NSCoding & NSCopying & NSObjectProtocol)?

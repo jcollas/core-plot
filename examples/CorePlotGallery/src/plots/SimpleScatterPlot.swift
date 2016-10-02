@@ -120,7 +120,7 @@ class SimpleScatterPlot: PlotItem {
 
         let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth = 3.0
-        lineStyle.lineColor = CPTColor.green()
+        lineStyle.lineColor = .green()
         dataSourceLinePlot.dataLineStyle   = lineStyle
         dataSourceLinePlot.histogramOption = self.histogramOption
 
@@ -143,9 +143,9 @@ class SimpleScatterPlot: PlotItem {
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.black()
+        symbolLineStyle.lineColor = .black()
         let plotSymbol = CPTPlotSymbol.ellipse()
-        plotSymbol.fill               = CPTFill(color: CPTColor.blue())
+        plotSymbol.fill               = CPTFill(color: .blue())
         plotSymbol.lineStyle          = symbolLineStyle
         plotSymbol.size               = CGSize(width: 10.0, height: 10.0)
         dataSourceLinePlot.plotSymbol = plotSymbol
@@ -158,7 +158,7 @@ class SimpleScatterPlot: PlotItem {
         // Add legend
         graph.legend = CPTLegend(graph: graph)
         graph.legend?.textStyle       = x.titleTextStyle
-        graph.legend?.fill            = CPTFill(color: CPTColor.darkGray())
+        graph.legend?.fill            = CPTFill(color: .darkGray())
         graph.legend?.borderLineStyle = x.axisLineStyle
         graph.legend?.cornerRadius    = 5.0
         graph.legendAnchor           = .bottom
@@ -221,7 +221,7 @@ extension SimpleScatterPlot: CPTScatterPlotDelegate {
 
         // Setup a style for the annotation
         let hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color    = CPTColor.white()
+        hitAnnotationTextStyle.color    = .white()
         hitAnnotationTextStyle.fontSize = 16.0
         hitAnnotationTextStyle.fontName = "Helvetica-Bold"
 

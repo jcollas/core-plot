@@ -33,7 +33,7 @@ class PlotItem: NSObject {
     var title: String? = nil
     var titleSize: CGFloat {
 #if os(iOS)
-        switch ( UI_USER_INTERFACE_IDIOM() ) {
+        switch UIDevice.current.userInterfaceIdiom {
             case .pad:
                 return 24.0
 
@@ -136,7 +136,7 @@ class PlotItem: NSObject {
         for graph in self.graphs {
             // Title
             let textStyle = CPTMutableTextStyle()
-            textStyle.color = CPTColor.gray()
+            textStyle.color = .gray()
             textStyle.fontName = "Helvetica-Bold"
             textStyle.fontSize = graphTitleSize
 

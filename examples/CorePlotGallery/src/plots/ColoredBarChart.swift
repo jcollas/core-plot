@@ -89,7 +89,7 @@ class ColoredBarChart: PlotItem {
         // Create a bar line style
         let barLineStyle = CPTMutableLineStyle()
         barLineStyle.lineWidth = 1.0
-        barLineStyle.lineColor = CPTColor.white()
+        barLineStyle.lineColor = .white()
 
         // Create bar plot
         let barPlot = CPTBarPlot()
@@ -116,7 +116,7 @@ class ColoredBarChart: PlotItem {
         theLegend.borderLineStyle = barLineStyle
         theLegend.cornerRadius    = 10.0
         let whiteTextStyle = CPTMutableTextStyle()
-        whiteTextStyle.color   = CPTColor.white()
+        whiteTextStyle.color   = .white()
         theLegend.textStyle    = whiteTextStyle
         theLegend.numberOfRows = 1
 
@@ -171,7 +171,7 @@ extension ColoredBarChart: CPTBarPlotDataSource {
             color = colors[Int(index)]
         }
 
-        let fillGradient = CPTGradient(beginning: color, ending: CPTColor.black())
+        let fillGradient = CPTGradient(beginning: color, ending: .black())
         
         return CPTFill(gradient: fillGradient)
     }

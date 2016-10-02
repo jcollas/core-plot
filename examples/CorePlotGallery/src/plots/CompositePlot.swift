@@ -254,7 +254,7 @@ class CompositePlot: PlotItem {
         var lineStyle = boundLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.miterLimit        = 1.0
         lineStyle.lineWidth         = 3.0
-        lineStyle.lineColor         = CPTColor.blue()
+        lineStyle.lineColor         = .blue()
         boundLinePlot.dataLineStyle = lineStyle
         boundLinePlot.dataSource    = self
         scatterPlot?.add(boundLinePlot)
@@ -270,9 +270,9 @@ class CompositePlot: PlotItem {
 
         // Add plot symbols
         let symbolLineStyle = CPTMutableLineStyle()
-        symbolLineStyle.lineColor = CPTColor.black()
+        symbolLineStyle.lineColor = .black()
         let plotSymbol = CPTPlotSymbol.ellipse()
-        plotSymbol.fill          = CPTFill(color: CPTColor.blue())
+        plotSymbol.fill          = CPTFill(color: .blue())
         plotSymbol.lineStyle     = symbolLineStyle
         plotSymbol.size          = CGSize(width: 10.0, height: 10.0)
         boundLinePlot.plotSymbol = plotSymbol
@@ -283,7 +283,7 @@ class CompositePlot: PlotItem {
 
         lineStyle             = dataSourceLinePlot.dataLineStyle?.mutableCopy() as! CPTMutableLineStyle
         lineStyle.lineWidth   = 3.0
-        lineStyle.lineColor   = CPTColor.green()
+        lineStyle.lineColor   = .green()
         lineStyle.dashPattern = [5, 5]
 
         dataSourceLinePlot.dataLineStyle = lineStyle
@@ -291,7 +291,7 @@ class CompositePlot: PlotItem {
 
         // Put an area gradient under the plot above
         let areaColor = CPTColor(componentRed: 0.3, green:1.0, blue: 0.3, alpha: 0.8)
-        let areaGradient = CPTGradient(beginning: areaColor, ending: CPTColor.clear())
+        let areaGradient = CPTGradient(beginning: areaColor, ending: .clear())
         areaGradient.angle               = -90.0
         areaGradientFill                 = CPTFill(gradient: areaGradient)
         dataSourceLinePlot.areaFill      = areaGradientFill
@@ -368,14 +368,14 @@ class CompositePlot: PlotItem {
         }
 
         // First bar plot
-        var barPlot = CPTBarPlot.tubularBarPlot(with: CPTColor.red(), horizontalBars: false)
+        var barPlot = CPTBarPlot.tubularBarPlot(with: .red(), horizontalBars: false)
         barPlot.dataSource  = self
         barPlot.identifier  = "Bar Plot 1" as (NSCoding & NSCopying & NSObjectProtocol)?
         barPlot.labelOffset = 2.0
         barChart?.add(barPlot, to: plotSpace)
 
         // Second bar plot
-        barPlot = CPTBarPlot.tubularBarPlot(with: CPTColor.blue(), horizontalBars: false)
+        barPlot = CPTBarPlot.tubularBarPlot(with: .blue(), horizontalBars: false)
         barPlot.dataSource      = self
         barPlot.barOffset       = 0.25 // 25% offset, 75% overlap
         barPlot.barCornerRadius = 2.0
@@ -536,11 +536,11 @@ extension CompositePlot: CPTPlotDataSource {
 
         if plot.identifier as! String == "Bar Plot 1" {
             let whiteText = CPTMutableTextStyle()
-            whiteText.color = CPTColor.white()
+            whiteText.color = .white()
             whiteText.fontSize = self.titleSize * 0.5
 
             let redText = CPTMutableTextStyle()
-            redText.color = CPTColor.red()
+            redText.color = .red()
             redText.fontSize = self.titleSize * 0.5
 
             switch ( index ) {
@@ -565,7 +565,7 @@ extension CompositePlot: CPTPlotDataSource {
             let redDot = CPTPlotSymbol()
             redDot.symbolType = .ellipse
             redDot.size = CGSize(width: 10.0, height: 10.0)
-            redDot.fill = CPTFill(color: CPTColor.red())
+            redDot.fill = CPTFill(color: .red())
             redDot.lineStyle = CPTLineStyle()
 
             symbol = redDot
