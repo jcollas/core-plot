@@ -40,6 +40,7 @@
     NSFont *styleFont = attributes[NSFontAttributeName];
 
     if ( styleFont ) {
+        newStyle.font     = styleFont;
         newStyle.fontName = styleFont.fontName;
         newStyle.fontSize = styleFont.pointSize;
     }
@@ -54,7 +55,7 @@
         else {
             const NSInteger numberOfComponents = styleColor.numberOfComponents;
 
-            CGFloat *components = calloc( (size_t)numberOfComponents, sizeof(CGFloat) );
+            CGFloat *components = calloc((size_t)numberOfComponents, sizeof(CGFloat));
             [styleColor getComponents:components];
 
             CGColorSpaceRef colorSpace = styleColor.colorSpace.CGColorSpace;
@@ -87,10 +88,10 @@
     CPTMutableDictionary *myAttributes = [NSMutableDictionary dictionary];
 
     // Font
-    NSFont *styleFont  = nil;
+    NSFont *styleFont  = self.font;
     NSString *fontName = self.fontName;
 
-    if ( fontName ) {
+    if ((styleFont == nil) && fontName ) {
         styleFont = [NSFont fontWithName:fontName size:self.fontSize];
     }
 
@@ -146,6 +147,7 @@
     NSFont *styleFont = attributes[NSFontAttributeName];
 
     if ( styleFont ) {
+        newStyle.font     = styleFont;
         newStyle.fontName = styleFont.fontName;
         newStyle.fontSize = styleFont.pointSize;
     }
@@ -160,7 +162,7 @@
         else {
             const NSInteger numberOfComponents = styleColor.numberOfComponents;
 
-            CGFloat *components = calloc( (size_t)numberOfComponents, sizeof(CGFloat) );
+            CGFloat *components = calloc((size_t)numberOfComponents, sizeof(CGFloat));
             [styleColor getComponents:components];
 
             CGColorSpaceRef colorSpace = styleColor.colorSpace.CGColorSpace;
@@ -198,10 +200,19 @@
  **/
 -(CGSize)sizeWithTextStyle:(nullable CPTTextStyle *)style
 {
-    CGRect rect = [self boundingRectWithSize:CPTSizeMake(10000.0, 10000.0)
-                                     options:CPTStringDrawingOptions
-                                  attributes:style.attributes
-                                     context:nil];
+    CGRect rect = CGRectZero;
+
+    if ( [self respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)] ) {
+        rect = [self boundingRectWithSize:CPTSizeMake(10000.0, 10000.0)
+                                  options:CPTStringDrawingOptions
+                               attributes:style.attributes
+                                  context:nil];
+    }
+    else {
+        rect = [self boundingRectWithSize:CPTSizeMake(10000.0, 10000.0)
+                                  options:CPTStringDrawingOptions
+                               attributes:style.attributes];
+    }
 
     CGSize textSize = rect.size;
 
@@ -232,10 +243,10 @@
 
     CPTPushCGContext(context);
 
-    NSFont *theFont    = nil;
+    NSFont *theFont    = style.font;
     NSString *fontName = style.fontName;
 
-    if ( fontName ) {
+    if ((theFont == nil) && fontName ) {
         theFont = [NSFont fontWithName:fontName size:style.fontSize];
     }
 
@@ -246,9 +257,9 @@
         paragraphStyle.lineBreakMode = style.lineBreakMode;
 
         CPTDictionary *attributes = @{
-            NSFontAttributeName: theFont,
-            NSForegroundColorAttributeName: foregroundColor,
-            NSParagraphStyleAttributeName: paragraphStyle
+                                        NSFontAttributeName: theFont,
+                                        NSForegroundColorAttributeName: foregroundColor,
+                                        NSParagraphStyleAttributeName: paragraphStyle
         };
         [self drawWithRect:NSRectFromCGRect(rect)
                    options:CPTStringDrawingOptions

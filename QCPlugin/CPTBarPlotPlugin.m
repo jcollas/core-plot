@@ -1,4 +1,4 @@
-#import "CPTBarPlotPlugIn.h"
+#import "CPTBarPlotPlugin.h"
 
 @implementation CPTBarPlotPlugIn
 
@@ -30,8 +30,8 @@
 +(nonnull NSDictionary<NSString *, NSString *> *)attributes
 {
     return @{
-               QCPlugInAttributeNameKey: @"Core Plot Bar Chart",
-               QCPlugInAttributeDescriptionKey: @"Bar chart"
+        QCPlugInAttributeNameKey: @"Core Plot Bar Chart",
+        QCPlugInAttributeDescriptionKey: @"Bar chart"
     };
 }
 
@@ -41,58 +41,58 @@
 
     if ( [key isEqualToString:@"inputBarWidth"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Bar Width",
-                   QCPortAttributeDefaultValueKey: @1.0,
-                   QCPortAttributeMinimumValueKey: @0.0
+            QCPortAttributeNameKey: @"Bar Width",
+            QCPortAttributeDefaultValueKey: @1.0,
+            QCPortAttributeMinimumValueKey: @0.0
         };
     }
 
     if ( [key isEqualToString:@"inputBarOffset"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Bar Offset",
-                   QCPortAttributeDefaultValueKey: @0.5
+            QCPortAttributeNameKey: @"Bar Offset",
+            QCPortAttributeDefaultValueKey: @0.5
         };
     }
 
     if ( [key isEqualToString:@"inputBaseValue"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Base Value",
-                   QCPortAttributeDefaultValueKey: @0.0
+            QCPortAttributeNameKey: @"Base Value",
+            QCPortAttributeDefaultValueKey: @0.0
         };
     }
 
     if ( [key isEqualToString:@"inputHorizontalBars"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Horizontal Bars",
-                   QCPortAttributeDefaultValueKey: @NO
+            QCPortAttributeNameKey: @"Horizontal Bars",
+            QCPortAttributeDefaultValueKey: @NO
         };
     }
 
     if ( [key isEqualToString:@"inputXMin"] ) {
         return @{
-                   QCPortAttributeNameKey: @"X Range Min",
-                   QCPortAttributeDefaultValueKey: @0.0
+            QCPortAttributeNameKey: @"X Range Min",
+            QCPortAttributeDefaultValueKey: @0.0
         };
     }
 
     if ( [key isEqualToString:@"inputXMax"] ) {
         return @{
-                   QCPortAttributeNameKey: @"X Range Max",
-                   QCPortAttributeDefaultValueKey: @5.0
+            QCPortAttributeNameKey: @"X Range Max",
+            QCPortAttributeDefaultValueKey: @5.0
         };
     }
 
     if ( [key isEqualToString:@"inputYMin"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Y Range Min",
-                   QCPortAttributeDefaultValueKey: @0.0
+            QCPortAttributeNameKey: @"Y Range Min",
+            QCPortAttributeDefaultValueKey: @0.0
         };
     }
 
     if ( [key isEqualToString:@"inputYMax"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Y Range Max",
-                   QCPortAttributeDefaultValueKey: @5.0
+            QCPortAttributeNameKey: @"Y Range Max",
+            QCPortAttributeDefaultValueKey: @5.0
         };
     }
 
@@ -114,7 +114,7 @@
                         forKey:[NSString stringWithFormat:@"plotDataLineColor%lu", (unsigned long)index]
                 withAttributes:@{ QCPortAttributeNameKey: [NSString stringWithFormat:@"Plot Line Color %lu", (unsigned long)(index + 1)],
                                   QCPortAttributeTypeKey: QCPortTypeColor,
-                                  QCPortAttributeDefaultValueKey: CFBridgingRelease(lineColor) }
+                                  QCPortAttributeDefaultValueKey: (id)CFBridgingRelease(lineColor) }
     ];
 
     CGColorRef fillColor = [self newDefaultColorForPlot:index alpha:0.25];
@@ -122,7 +122,7 @@
                         forKey:[NSString stringWithFormat:@"plotFillColor%lu", (unsigned long)index]
                 withAttributes:@{ QCPortAttributeNameKey: [NSString stringWithFormat:@"Plot Fill Color %lu", (unsigned long)(index + 1)],
                                   QCPortAttributeTypeKey: QCPortTypeColor,
-                                  QCPortAttributeDefaultValueKey: CFBridgingRelease(fillColor) }
+                                  QCPortAttributeDefaultValueKey: (id)CFBridgingRelease(fillColor) }
     ];
 
     [self addInputPortWithType:QCPortTypeNumber
@@ -199,7 +199,7 @@
     return [[self valueForInputKey:key] count];
 }
 
--(nullable NSArray *)numbersForPlot:(nonnull CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange)indexRange
+-(nullable NSArray *)numbersForPlot:(nonnull CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndexRange:(NSRange __unused)indexRange
 {
     NSUInteger plotIndex = [[self.graph allPlots] indexOfObject:plot];
     NSString *key        = [NSString stringWithFormat:@"plotNumbers%lu", (unsigned long)plotIndex];

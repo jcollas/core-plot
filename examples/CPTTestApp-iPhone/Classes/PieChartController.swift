@@ -5,7 +5,7 @@ class PieChartController : UIViewController, CPTPieChartDataSource, CPTPieChartD
 
     let dataForChart = [20.0, 30.0, 60.0]
 
-    // MARK: Initialization
+    // MARK: - Initialization
 
     override func viewDidAppear(_ animated : Bool)
     {
@@ -36,8 +36,8 @@ class PieChartController : UIViewController, CPTPieChartDataSource, CPTPieChartD
         let piePlot = CPTPieChart(frame: .zero)
         piePlot.dataSource      = self
         piePlot.pieRadius       = 131.0
-        piePlot.identifier      = NSString.init(string: "Pie Chart 1")
-        piePlot.startAngle      = CGFloat(M_PI_4)
+        piePlot.identifier      = "Pie Chart 1" as NSString
+        piePlot.startAngle      = CGFloat(.pi / 4.0)
         piePlot.sliceDirection  = .counterClockwise
         piePlot.centerAnchor    = CGPoint(x: 0.5, y: 0.38)
         piePlot.borderLineStyle = CPTLineStyle()
@@ -95,9 +95,8 @@ class PieChartController : UIViewController, CPTPieChartDataSource, CPTPieChartD
     }
 
     // MARK: - Delegate Methods
-    
-    private func pieChart(_ plot: CPTPlot, sliceWasSelectedAtRecordIndex recordIndex: UInt)
-    {
-        self.pieGraph?.title = "Selected index: \(recordIndex)"
+
+    func pieChart(_ plot: CPTPieChart, sliceWasSelectedAtRecord idx: UInt) {
+        self.pieGraph?.title = "Selected index: \(idx)"
     }
 }

@@ -28,8 +28,8 @@
 +(nonnull NSDictionary<NSString *, NSString *> *)attributes
 {
     return @{
-               QCPlugInAttributeNameKey: @"Core Plot Pie Chart",
-               QCPlugInAttributeDescriptionKey: @"Pie chart"
+        QCPlugInAttributeNameKey: @"Core Plot Pie Chart",
+        QCPlugInAttributeDescriptionKey: @"Pie chart"
     };
 }
 
@@ -72,51 +72,51 @@
     // A few additional ports for the pie chart type ...
     if ( [key isEqualToString:@"inputPieRadius"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Pie Radius",
-                   QCPortAttributeMinimumValueKey: @0.0,
-                   QCPortAttributeDefaultValueKey: @0.75
+            QCPortAttributeNameKey: @"Pie Radius",
+            QCPortAttributeMinimumValueKey: @0.0,
+            QCPortAttributeDefaultValueKey: @0.75
         };
     }
     else if ( [key isEqualToString:@"inputSliceLabelOffset"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Label Offset",
-                   QCPortAttributeDefaultValueKey: @20.0
+            QCPortAttributeNameKey: @"Label Offset",
+            QCPortAttributeDefaultValueKey: @20.0
         };
     }
     else if ( [key isEqualToString:@"inputStartAngle"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Start Angle",
-                   QCPortAttributeDefaultValueKey: @0.0
+            QCPortAttributeNameKey: @"Start Angle",
+            QCPortAttributeDefaultValueKey: @0.0
         };
     }
     else if ( [key isEqualToString:@"inputSliceDirection"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Slice Direction",
-                   QCPortAttributeMaximumValueKey: @1,
-                   QCPortAttributeMenuItemsKey: @[@"Clockwise", @"Counter-Clockwise"],
-                   QCPortAttributeDefaultValueKey: @0
+            QCPortAttributeNameKey: @"Slice Direction",
+            QCPortAttributeMaximumValueKey: @1,
+            QCPortAttributeMenuItemsKey: @[@"Clockwise", @"Counter-Clockwise"],
+            QCPortAttributeDefaultValueKey: @0
         };
     }
     else if ( [key isEqualToString:@"inputBorderWidth"] ) {
         return @{
-                   QCPortAttributeNameKey: @"Border Width",
-                   QCPortAttributeMinimumValueKey: @0.0,
-                   QCPortAttributeDefaultValueKey: @1.0
+            QCPortAttributeNameKey: @"Border Width",
+            QCPortAttributeMinimumValueKey: @0.0,
+            QCPortAttributeDefaultValueKey: @1.0
         };
     }
     else if ( [key isEqualToString:@"inputBorderColor"] ) {
         CGColorRef grayColor  = CGColorCreateGenericGray(0.0, 1.0);
         CPTDictionary *result = @{
-            QCPortAttributeNameKey: @"Border Color",
-            QCPortAttributeDefaultValueKey: CFBridgingRelease(grayColor)
+                                    QCPortAttributeNameKey: @"Border Color",
+                                    QCPortAttributeDefaultValueKey: (id)CFBridgingRelease(grayColor)
         };
         return result;
     }
     else if ( [key isEqualToString:@"inputLabelColor"] ) {
         CGColorRef grayColor  = CGColorCreateGenericGray(1.0, 1.0);
         CPTDictionary *result = @{
-            QCPortAttributeNameKey: @"Label Color",
-            QCPortAttributeDefaultValueKey: CFBridgingRelease(grayColor)
+                                    QCPortAttributeNameKey: @"Label Color",
+                                    QCPortAttributeDefaultValueKey: (id)CFBridgingRelease(grayColor)
         };
         return result;
     }
@@ -147,7 +147,7 @@
                             forKey:[NSString stringWithFormat:@"plotFillColor%lu", (unsigned long)index]
                     withAttributes:@{ QCPortAttributeNameKey: [NSString stringWithFormat:@"Primary Fill Color %lu", (unsigned long)(index + 1)],
                                       QCPortAttributeTypeKey: QCPortTypeColor,
-                                      QCPortAttributeDefaultValueKey: CFBridgingRelease(grayColor) }
+                                      QCPortAttributeDefaultValueKey: (id)CFBridgingRelease(grayColor) }
         ];
 
         // Add the new plot to the graph
@@ -224,7 +224,7 @@
     return [[self valueForInputKey:key] count];
 }
 
--(nullable id)numberForPlot:(nonnull CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
+-(nullable id)numberForPlot:(nonnull CPTPlot *)plot field:(NSUInteger __unused)fieldEnum recordIndex:(NSUInteger)index
 {
     NSUInteger plotIndex = [[self.graph allPlots] indexOfObject:plot];
     NSString *key        = [NSString stringWithFormat:@"plotNumbers%lu", (unsigned long)plotIndex];
@@ -239,7 +239,7 @@
     }
 }
 
--(nullable CPTFill *)sliceFillForPieChart:(nonnull CPTPieChart *)pieChart recordIndex:(NSUInteger)index
+-(nullable CPTFill *)sliceFillForPieChart:(nonnull CPTPieChart *__unused)pieChart recordIndex:(NSUInteger)index
 {
     CGColorRef plotFillColor  = [CPTPieChart defaultPieSliceColorForIndex:index].cgColor;
     CGColorRef inputFillColor = (CGColorRef)[self areaFillColor:0];

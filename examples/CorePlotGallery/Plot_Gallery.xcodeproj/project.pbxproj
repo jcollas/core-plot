@@ -11,8 +11,14 @@
 		4F22FF4C1234298E006BF615 /* Plot_Gallery_MacAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF4B1234298E006BF615 /* Plot_Gallery_MacAppDelegate.m */; };
 		4F22FF5B12342A21006BF615 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4F22FF5712342A21006BF615 /* InfoPlist.strings */; };
 		4F22FF5C12342A21006BF615 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F22FF5912342A21006BF615 /* MainMenu.xib */; };
+		4F22FFA412342D7C006BF615 /* CompositePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9B12342D7C006BF615 /* CompositePlot.m */; };
+		4F22FFA512342D7C006BF615 /* GradientScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9D12342D7C006BF615 /* GradientScatterPlot.m */; };
+		4F22FFA612342D7C006BF615 /* SimplePieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9F12342D7C006BF615 /* SimplePieChart.m */; };
+		4F22FFA712342D7C006BF615 /* SimpleScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFA112342D7C006BF615 /* SimpleScatterPlot.m */; };
+		4F22FFA812342D7C006BF615 /* VerticalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFA312342D7C006BF615 /* VerticalBarChart.m */; };
+		4F22FFAF12342DB1006BF615 /* PlotGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFAC12342DB1006BF615 /* PlotGallery.m */; };
+		4F22FFB012342DB1006BF615 /* PlotItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFAE12342DB1006BF615 /* PlotItem.m */; };
 		4F22FFE8123431D2006BF615 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F22FFE7123431D2006BF615 /* Quartz.framework */; };
-		4F35EBBD12360D89007C3389 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4F35EBBC12360D89007C3389 /* Icon.icns */; };
 		4F35EBF7123611E3007C3389 /* PlotGalleryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F35EBF4123611E3007C3389 /* PlotGalleryController.m */; };
 		4F35EBF8123611E3007C3389 /* PlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F35EBF6123611E3007C3389 /* PlotView.m */; };
 		4FABDD421291110D003A2DB7 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4892891290FFCD00EDB93F /* CorePlot.framework */; };
@@ -94,14 +100,39 @@
 		C04CC5451CC796C800B3513B /* PlotItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C31CC4E7E800B3513B /* PlotItem.swift */; };
 		C04CC5461CC796CA00B3513B /* PlotGallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C21CC4E7E800B3513B /* PlotGallery.swift */; };
 		C04CC5471CC796CD00B3513B /* PiNumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04CC4C11CC4E7E800B3513B /* PiNumberFormatter.swift */; };
+		C309C23423B3E12500DEDE9D /* PlotViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = C309C23323B3E12500DEDE9D /* PlotViewItem.xib */; };
+		C309C23623B3E21500DEDE9D /* PlotViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C309C23523B3E21500DEDE9D /* PlotViewItem.m */; };
 		C30B12431BCADD300084C567 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D4146F1A7D824700B6F5D6 /* CorePlot.framework */; };
 		C30B12441BCADD300084C567 /* CorePlot.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C3D4146F1A7D824700B6F5D6 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C30D8AFA1BCAF99D0003BB70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D8AF91BCAF99D0003BB70 /* main.m */; };
 		C30D8AFD1BCAF99D0003BB70 /* AppDelegateTV.m in Sources */ = {isa = PBXBuildFile; fileRef = C30D8AFC1BCAF99D0003BB70 /* AppDelegateTV.m */; };
 		C30D8B081BCAF99D0003BB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C30D8B071BCAF99D0003BB70 /* Assets.xcassets */; };
-		C30D8B201BCAFC140003BB70 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4892891290FFCD00EDB93F /* CorePlot.framework */; };
 		C30D8B211BCAFD3E0003BB70 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D2FE6219FF1D03002CD4D6 /* Images.xcassets */; };
 		C30D8B3B1BCAFFAE0003BB70 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30D8B3A1BCAFFAE0003BB70 /* Accelerate.framework */; };
+		C30D8B221BCAFD3E0003BB70 /* PlotItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFAE12342DB1006BF615 /* PlotItem.m */; };
+		C30D8B231BCAFD3E0003BB70 /* PlotGallery.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFAC12342DB1006BF615 /* PlotGallery.m */; };
+		C30D8B241BCAFD3E0003BB70 /* PiNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3457A4C17AD7C5D000880F3 /* PiNumberFormatter.m */; };
+		C30D8B251BCAFDE20003BB70 /* AxisDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E1CC112908B0000D2035F /* AxisDemo.m */; };
+		C30D8B261BCAFDE20003BB70 /* CandlestickPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C360E1DF13B18CAE007994B6 /* CandlestickPlot.m */; };
+		C30D8B271BCAFDE20003BB70 /* ColoredBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A31A5514DF782A00734AB7 /* ColoredBarChart.m */; };
+		C30D8B281BCAFDE20003BB70 /* CompositePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9B12342D7C006BF615 /* CompositePlot.m */; };
+		C30D8B291BCAFDE20003BB70 /* ControlChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C35597951437E07800B41DA7 /* ControlChart.m */; };
+		C30D8B2A1BCAFDE20003BB70 /* CurvedScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F42A2714D3A75F0044B323 /* CurvedScatterPlot.m */; };
+		C30D8B2B1BCAFDE20003BB70 /* DatePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E1C13129077C200D2035F /* DatePlot.m */; };
+		C30D8B2C1BCAFDE20003BB70 /* DonutChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F34F1412AB2598008FBDC3 /* DonutChart.m */; };
+		C30D8B2D1BCAFDE20003BB70 /* FunctionPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F97F1817A9DE2000A52FF2 /* FunctionPlot.m */; };
+		C30D8B2E1BCAFDE20003BB70 /* GradientScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9D12342D7C006BF615 /* GradientScatterPlot.m */; };
+		C30D8B2F1BCAFDE20003BB70 /* ImageDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D70BA5175EB29E00F27173 /* ImageDemo.m */; };
+		C30D8B301BCAFDE20003BB70 /* LabelingPolicyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39C4E4013BFE1A900CD9194 /* LabelingPolicyDemo.m */; };
+		C30D8B311BCAFDE20003BB70 /* LineCapDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C367249213E103910070F47A /* LineCapDemo.m */; };
+		C30D8B321BCAFDE20003BB70 /* OHLCPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C360E1C513B18AAF007994B6 /* OHLCPlot.m */; };
+		C30D8B331BCAFDE20003BB70 /* PlotSpaceDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39C4E4313BFE1B400CD9194 /* PlotSpaceDemo.m */; };
+		C30D8B341BCAFDE20003BB70 /* RangePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A14BEB13AEB7E700D103EA /* RangePlot.m */; };
+		C30D8B351BCAFDE20003BB70 /* RealTimePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C354C0D613C7CDBE00DA8822 /* RealTimePlot.m */; };
+		C30D8B361BCAFDE20003BB70 /* SteppedScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E1C85129083B000D2035F /* SteppedScatterPlot.m */; };
+		C30D8B371BCAFDE20003BB70 /* SimplePieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9F12342D7C006BF615 /* SimplePieChart.m */; };
+		C30D8B381BCAFDE20003BB70 /* SimpleScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFA112342D7C006BF615 /* SimpleScatterPlot.m */; };
+		C30D8B391BCAFDE20003BB70 /* VerticalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFA312342D7C006BF615 /* VerticalBarChart.m */; };
 		C30D8B3D1BCAFFB50003BB70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30D8B3C1BCAFFB50003BB70 /* CoreGraphics.framework */; };
 		C30D8B3F1BCAFFBB0003BB70 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30D8B3E1BCAFFBB0003BB70 /* QuartzCore.framework */; };
 		C30D8B411BCAFFC10003BB70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30D8B401BCAFFC10003BB70 /* Foundation.framework */; };
@@ -109,6 +140,15 @@
 		C34CB5461BC9A83C009270A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C34CB5451BC9A83C009270A0 /* Images.xcassets */; };
 		C34CB5561BC9A889009270A0 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C34CB54B1BC9A889009270A0 /* Launch Screen.xib */; };
 		C34CB5581BC9A889009270A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C34CB54D1BC9A889009270A0 /* Main.storyboard */; };
+		C32D229E23B1086600043720 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32D229C23B1086600043720 /* MainMenu.xib */; };
+		C3457A4D17AD7C5D000880F3 /* PiNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = C3457A4C17AD7C5D000880F3 /* PiNumberFormatter.m */; };
+		C3490DD820E025760089F309 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = C3490DDA20E025760089F309 /* Icon.icns */; };
+		C34CB5461BC9A83C009270A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C34CB5451BC9A83C009270A0 /* Images.xcassets */; };
+		C34CB5541BC9A889009270A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C34CB5481BC9A889009270A0 /* AppDelegate.m */; };
+		C34CB5551BC9A889009270A0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34CB54A1BC9A889009270A0 /* DetailViewController.m */; };
+		C34CB5571BC9A889009270A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C34CB54C1BC9A889009270A0 /* main.m */; };
+		C34CB55A1BC9A889009270A0 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34CB5511BC9A889009270A0 /* RootViewController.m */; };
+		C34CB55B1BC9A889009270A0 /* ThemeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34CB5531BC9A889009270A0 /* ThemeTableViewController.m */; };
 		C34CB5601BC9AB7B009270A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C34CB55F1BC9AB7B009270A0 /* Foundation.framework */; };
 		C34CB5621BC9AB85009270A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C34CB5611BC9AB85009270A0 /* UIKit.framework */; };
 		C34CB5641BC9AB8C009270A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C34CB5631BC9AB8C009270A0 /* CoreGraphics.framework */; };
@@ -116,9 +156,45 @@
 		C34CB5681BC9AB9E009270A0 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C34CB5671BC9AB9E009270A0 /* Accelerate.framework */; };
 		C367EEE21BCAEA9E00A21FE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D2FE6219FF1D03002CD4D6 /* Images.xcassets */; };
 		C3B9C2551BCB186800BD560B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3B9C2541BCB186800BD560B /* Main.storyboard */; };
+		C34CB57C1BC9B1C1009270A0 /* AxisDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E1CC112908B0000D2035F /* AxisDemo.m */; };
+		C34CB57D1BC9B1C1009270A0 /* CandlestickPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C360E1DF13B18CAE007994B6 /* CandlestickPlot.m */; };
+		C34CB57E1BC9B1C1009270A0 /* ColoredBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A31A5514DF782A00734AB7 /* ColoredBarChart.m */; };
+		C34CB57F1BC9B1C1009270A0 /* CompositePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9B12342D7C006BF615 /* CompositePlot.m */; };
+		C34CB5801BC9B1C1009270A0 /* ControlChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C35597951437E07800B41DA7 /* ControlChart.m */; };
+		C34CB5811BC9B1C1009270A0 /* CurvedScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F42A2714D3A75F0044B323 /* CurvedScatterPlot.m */; };
+		C34CB5821BC9B1C1009270A0 /* DatePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E1C13129077C200D2035F /* DatePlot.m */; };
+		C34CB5831BC9B1C1009270A0 /* DonutChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F34F1412AB2598008FBDC3 /* DonutChart.m */; };
+		C34CB5841BC9B1C1009270A0 /* FunctionPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F97F1817A9DE2000A52FF2 /* FunctionPlot.m */; };
+		C34CB5851BC9B1C1009270A0 /* GradientScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9D12342D7C006BF615 /* GradientScatterPlot.m */; };
+		C34CB5861BC9B1C1009270A0 /* ImageDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D70BA5175EB29E00F27173 /* ImageDemo.m */; };
+		C34CB5871BC9B1C1009270A0 /* LabelingPolicyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39C4E4013BFE1A900CD9194 /* LabelingPolicyDemo.m */; };
+		C34CB5881BC9B1C1009270A0 /* LineCapDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C367249213E103910070F47A /* LineCapDemo.m */; };
+		C34CB5891BC9B1C1009270A0 /* OHLCPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C360E1C513B18AAF007994B6 /* OHLCPlot.m */; };
+		C34CB58A1BC9B1C1009270A0 /* PlotSpaceDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39C4E4313BFE1B400CD9194 /* PlotSpaceDemo.m */; };
+		C34CB58B1BC9B1C1009270A0 /* RangePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A14BEB13AEB7E700D103EA /* RangePlot.m */; };
+		C34CB58C1BC9B1C1009270A0 /* RealTimePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C354C0D613C7CDBE00DA8822 /* RealTimePlot.m */; };
+		C34CB58D1BC9B1C1009270A0 /* SteppedScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E1C85129083B000D2035F /* SteppedScatterPlot.m */; };
+		C34CB58E1BC9B1C1009270A0 /* SimplePieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FF9F12342D7C006BF615 /* SimplePieChart.m */; };
+		C34CB58F1BC9B1C1009270A0 /* SimpleScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFA112342D7C006BF615 /* SimpleScatterPlot.m */; };
+		C34CB5901BC9B1C1009270A0 /* VerticalBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F22FFA312342D7C006BF615 /* VerticalBarChart.m */; };
+		C354C0D713C7CDBE00DA8822 /* RealTimePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C354C0D613C7CDBE00DA8822 /* RealTimePlot.m */; };
+		C35597961437E07800B41DA7 /* ControlChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C35597951437E07800B41DA7 /* ControlChart.m */; };
+		C357EA9D1F708E870060CF48 /* CorePlot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C30D8B181BCAF99D0003BB70 /* CorePlot.framework */; };
+		C360E1C613B18AAF007994B6 /* OHLCPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C360E1C513B18AAF007994B6 /* OHLCPlot.m */; };
+		C360E1E013B18CAF007994B6 /* CandlestickPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C360E1DF13B18CAE007994B6 /* CandlestickPlot.m */; };
+		C367249313E103910070F47A /* LineCapDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C367249213E103910070F47A /* LineCapDemo.m */; };
+		C367EEE21BCAEA9E00A21FE7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D2FE6219FF1D03002CD4D6 /* Images.xcassets */; };
+		C39C4E4113BFE1A900CD9194 /* LabelingPolicyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39C4E4013BFE1A900CD9194 /* LabelingPolicyDemo.m */; };
+		C39C4E4413BFE1B400CD9194 /* PlotSpaceDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C39C4E4313BFE1B400CD9194 /* PlotSpaceDemo.m */; };
+		C3A14BEC13AEB7E700D103EA /* RangePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A14BEB13AEB7E700D103EA /* RangePlot.m */; };
+		C3A31A5614DF782A00734AB7 /* ColoredBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A31A5514DF782A00734AB7 /* ColoredBarChart.m */; };
+		C3AC1410150EDE5C00631001 /* CurvedScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F42A2714D3A75F0044B323 /* CurvedScatterPlot.m */; };
 		C3B9C26F1BCB237000BD560B /* DetailViewControllerTV.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B9C26A1BCB237000BD560B /* DetailViewControllerTV.m */; };
 		C3B9C2701BCB237000BD560B /* RootViewControllerTV.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B9C26C1BCB237000BD560B /* RootViewControllerTV.m */; };
 		C3B9C2711BCB237000BD560B /* ThemeTableViewControllerTV.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B9C26E1BCB237000BD560B /* ThemeTableViewControllerTV.m */; };
+		C3D0A1B720E0187600BA2921 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D0A1B920E0187600BA2921 /* Main.storyboard */; };
+		C3D0A1C420E0188800BA2921 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3D0A1C620E0188800BA2921 /* Launch Screen.xib */; };
+		C3D0A1C820E018DE00BA2921 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3D0A1CA20E018DE00BA2921 /* Main.storyboard */; };
 		C3D2FE6319FF1D03002CD4D6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3D2FE6219FF1D03002CD4D6 /* Images.xcassets */; };
 		C3EF42FD19FC75810060791A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3EF42FC19FC75810060791A /* Images.xcassets */; };
 		C3F6216C1C9F365100301061 /* CurvedInterpolationDemo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9595DFB1C9973B9004129DA /* CurvedInterpolationDemo.swift */; };
@@ -245,12 +321,23 @@
 		4F22FF4712342978006BF615 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/mac/main.m; sourceTree = "<group>"; };
 		4F22FF4A1234298E006BF615 /* Plot_Gallery_MacAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Plot_Gallery_MacAppDelegate.h; path = src/mac/Plot_Gallery_MacAppDelegate.h; sourceTree = "<group>"; };
 		4F22FF4B1234298E006BF615 /* Plot_Gallery_MacAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Plot_Gallery_MacAppDelegate.m; path = src/mac/Plot_Gallery_MacAppDelegate.m; sourceTree = "<group>"; };
-		4F22FF5812342A21006BF615 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
-		4F22FF5A12342A21006BF615 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MainMenu.xib; sourceTree = "<group>"; };
 		4F22FF7B12342B5A006BF615 /* Plot_Gallery_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plot_Gallery_Prefix.pch; sourceTree = "<group>"; };
 		4F22FF7C12342B6E006BF615 /* Plot_Gallery_Mac-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Plot_Gallery_Mac-Info.plist"; sourceTree = "<group>"; };
+		4F22FF9A12342D7C006BF615 /* CompositePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CompositePlot.h; path = src/plots/CompositePlot.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4F22FF9B12342D7C006BF615 /* CompositePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CompositePlot.m; path = src/plots/CompositePlot.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4F22FF9C12342D7C006BF615 /* GradientScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GradientScatterPlot.h; path = src/plots/GradientScatterPlot.h; sourceTree = "<group>"; };
+		4F22FF9D12342D7C006BF615 /* GradientScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GradientScatterPlot.m; path = src/plots/GradientScatterPlot.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		4F22FF9E12342D7C006BF615 /* SimplePieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimplePieChart.h; path = src/plots/SimplePieChart.h; sourceTree = "<group>"; };
+		4F22FF9F12342D7C006BF615 /* SimplePieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimplePieChart.m; path = src/plots/SimplePieChart.m; sourceTree = "<group>"; };
+		4F22FFA012342D7C006BF615 /* SimpleScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimpleScatterPlot.h; path = src/plots/SimpleScatterPlot.h; sourceTree = "<group>"; };
+		4F22FFA112342D7C006BF615 /* SimpleScatterPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SimpleScatterPlot.m; path = src/plots/SimpleScatterPlot.m; sourceTree = "<group>"; };
+		4F22FFA212342D7C006BF615 /* VerticalBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VerticalBarChart.h; path = src/plots/VerticalBarChart.h; sourceTree = "<group>"; };
+		4F22FFA312342D7C006BF615 /* VerticalBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VerticalBarChart.m; path = src/plots/VerticalBarChart.m; sourceTree = "<group>"; };
+		4F22FFAB12342DB1006BF615 /* PlotGallery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlotGallery.h; path = src/shared/PlotGallery.h; sourceTree = "<group>"; };
+		4F22FFAC12342DB1006BF615 /* PlotGallery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotGallery.m; path = src/shared/PlotGallery.m; sourceTree = "<group>"; };
+		4F22FFAD12342DB1006BF615 /* PlotItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = PlotItem.h; path = src/shared/PlotItem.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		4F22FFAE12342DB1006BF615 /* PlotItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotItem.m; path = src/shared/PlotItem.m; sourceTree = "<group>"; };
 		4F22FFE7123431D2006BF615 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
-		4F35EBBC12360D89007C3389 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Icon.icns; path = src/mac/Icon.icns; sourceTree = "<group>"; };
 		4F35EBF3123611E3007C3389 /* PlotGalleryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlotGalleryController.h; path = src/mac/PlotGalleryController.h; sourceTree = "<group>"; };
 		4F35EBF4123611E3007C3389 /* PlotGalleryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotGalleryController.m; path = src/mac/PlotGalleryController.m; sourceTree = "<group>"; };
 		4F35EBF5123611E3007C3389 /* PlotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlotView.h; path = src/mac/PlotView.h; sourceTree = "<group>"; };
@@ -286,12 +373,14 @@
 		C04CC4D91CC4E82400B3513B /* SimpleScatterPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SimpleScatterPlot.swift; path = src/plots/SimpleScatterPlot.swift; sourceTree = "<group>"; };
 		C04CC4DA1CC4E82400B3513B /* SteppedScatterPlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SteppedScatterPlot.swift; path = src/plots/SteppedScatterPlot.swift; sourceTree = "<group>"; };
 		C04CC4DB1CC4E82400B3513B /* VerticalBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VerticalBarChart.swift; path = src/plots/VerticalBarChart.swift; sourceTree = "<group>"; };
+		C309C23323B3E12500DEDE9D /* PlotViewItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PlotViewItem.xib; path = "Plot Gallery-Mac/PlotViewItem.xib"; sourceTree = "<group>"; };
+		C309C23523B3E21500DEDE9D /* PlotViewItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PlotViewItem.m; path = src/mac/PlotViewItem.m; sourceTree = "<group>"; };
+		C309C23723B3E29F00DEDE9D /* PlotViewItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PlotViewItem.h; path = src/mac/PlotViewItem.h; sourceTree = "<group>"; };
 		C30D8AF61BCAF99D0003BB70 /* Plot Gallery tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plot Gallery tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C30D8AF91BCAF99D0003BB70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/tvOS/main.m; sourceTree = "<group>"; };
 		C30D8AFB1BCAF99D0003BB70 /* AppDelegateTV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegateTV.h; path = src/tvOS/AppDelegateTV.h; sourceTree = "<group>"; };
 		C30D8AFC1BCAF99D0003BB70 /* AppDelegateTV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegateTV.m; path = src/tvOS/AppDelegateTV.m; sourceTree = "<group>"; };
 		C30D8B071BCAF99D0003BB70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Plot Gallery-tvOS/Assets.xcassets"; sourceTree = "<group>"; };
-		C30D8B091BCAF99D0003BB70 /* Plot_Gallery_tvOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Plot_Gallery_tvOS-Info.plist"; sourceTree = "<group>"; };
 		C30D8B3A1BCAFFAE0003BB70 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		C30D8B3C1BCAFFB50003BB70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C30D8B3E1BCAFFBB0003BB70 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -302,12 +391,48 @@
 		C34CB54B1BC9A889009270A0 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "src/ios/Launch Screen.xib"; sourceTree = "<group>"; };
 		C34CB54D1BC9A889009270A0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = src/ios/Main.storyboard; sourceTree = "<group>"; };
 		C34CB55D1BC9A936009270A0 /* Plot_Gallery_iOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Plot_Gallery_iOS-Info.plist"; sourceTree = "<group>"; };
+		C32D229D23B1086600043720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = src/mac/Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		C3457A4B17AD7C5D000880F3 /* PiNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PiNumberFormatter.h; path = src/shared/PiNumberFormatter.h; sourceTree = "<group>"; };
+		C3457A4C17AD7C5D000880F3 /* PiNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PiNumberFormatter.m; path = src/shared/PiNumberFormatter.m; sourceTree = "<group>"; };
+		C3490DCC20E025660089F309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Plot_Gallery_Mac-Info.plist"; sourceTree = "<group>"; };
+		C3490DD920E025760089F309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Base; path = Base.lproj/Icon.icns; sourceTree = "<group>"; };
+		C3490DDB20E025B60089F309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Plot_Gallery_iOS-Info.plist"; sourceTree = "<group>"; };
+		C3490DDF20E026410089F309 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/Plot_Gallery_tvOS-Info.plist"; sourceTree = "<group>"; };
+		C34CB52E1BC9A76A009270A0 /* Plot Gallery-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Plot Gallery-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C34CB5451BC9A83C009270A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Plot Gallery-iOS/Images.xcassets"; sourceTree = "<group>"; };
+		C34CB5471BC9A889009270A0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = src/ios/AppDelegate.h; sourceTree = "<group>"; };
+		C34CB5481BC9A889009270A0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = src/ios/AppDelegate.m; sourceTree = "<group>"; };
+		C34CB5491BC9A889009270A0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = src/ios/DetailViewController.h; sourceTree = "<group>"; };
+		C34CB54A1BC9A889009270A0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = src/ios/DetailViewController.m; sourceTree = "<group>"; };
+		C34CB54C1BC9A889009270A0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/ios/main.m; sourceTree = "<group>"; };
+		C34CB5501BC9A889009270A0 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = src/ios/RootViewController.h; sourceTree = "<group>"; };
+		C34CB5511BC9A889009270A0 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = src/ios/RootViewController.m; sourceTree = "<group>"; };
+		C34CB5521BC9A889009270A0 /* ThemeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeTableViewController.h; path = src/ios/ThemeTableViewController.h; sourceTree = "<group>"; };
+		C34CB5531BC9A889009270A0 /* ThemeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeTableViewController.m; path = src/ios/ThemeTableViewController.m; sourceTree = "<group>"; };
 		C34CB55F1BC9AB7B009270A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		C34CB5611BC9AB85009270A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		C34CB5631BC9AB8C009270A0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		C34CB5651BC9AB93009270A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		C34CB5671BC9AB9E009270A0 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
 		C3B9C2541BCB186800BD560B /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = src/tvOS/Main.storyboard; sourceTree = "<group>"; };
+		C354C0D513C7CDBE00DA8822 /* RealTimePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RealTimePlot.h; path = src/plots/RealTimePlot.h; sourceTree = "<group>"; };
+		C354C0D613C7CDBE00DA8822 /* RealTimePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RealTimePlot.m; path = src/plots/RealTimePlot.m; sourceTree = "<group>"; };
+		C35597941437E07800B41DA7 /* ControlChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ControlChart.h; path = src/plots/ControlChart.h; sourceTree = "<group>"; };
+		C35597951437E07800B41DA7 /* ControlChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ControlChart.m; path = src/plots/ControlChart.m; sourceTree = "<group>"; };
+		C360E1C413B18AAF007994B6 /* OHLCPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OHLCPlot.h; path = src/plots/OHLCPlot.h; sourceTree = "<group>"; };
+		C360E1C513B18AAF007994B6 /* OHLCPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OHLCPlot.m; path = src/plots/OHLCPlot.m; sourceTree = "<group>"; };
+		C360E1DE13B18CAE007994B6 /* CandlestickPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandlestickPlot.h; path = src/plots/CandlestickPlot.h; sourceTree = "<group>"; };
+		C360E1DF13B18CAE007994B6 /* CandlestickPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = CandlestickPlot.m; path = src/plots/CandlestickPlot.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C367249113E103910070F47A /* LineCapDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineCapDemo.h; path = src/plots/LineCapDemo.h; sourceTree = "<group>"; };
+		C367249213E103910070F47A /* LineCapDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineCapDemo.m; path = src/plots/LineCapDemo.m; sourceTree = "<group>"; };
+		C39C4E3F13BFE1A900CD9194 /* LabelingPolicyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LabelingPolicyDemo.h; path = src/plots/LabelingPolicyDemo.h; sourceTree = "<group>"; };
+		C39C4E4013BFE1A900CD9194 /* LabelingPolicyDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LabelingPolicyDemo.m; path = src/plots/LabelingPolicyDemo.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		C39C4E4213BFE1B400CD9194 /* PlotSpaceDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlotSpaceDemo.h; path = src/plots/PlotSpaceDemo.h; sourceTree = "<group>"; };
+		C39C4E4313BFE1B400CD9194 /* PlotSpaceDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlotSpaceDemo.m; path = src/plots/PlotSpaceDemo.m; sourceTree = "<group>"; };
+		C3A14BEA13AEB7E700D103EA /* RangePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RangePlot.h; path = src/plots/RangePlot.h; sourceTree = "<group>"; };
+		C3A14BEB13AEB7E700D103EA /* RangePlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RangePlot.m; path = src/plots/RangePlot.m; sourceTree = "<group>"; };
+		C3A31A5414DF782A00734AB7 /* ColoredBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColoredBarChart.h; path = src/plots/ColoredBarChart.h; sourceTree = "<group>"; };
+		C3A31A5514DF782A00734AB7 /* ColoredBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ColoredBarChart.m; path = src/plots/ColoredBarChart.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		C3B9C2691BCB237000BD560B /* DetailViewControllerTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewControllerTV.h; path = src/tvOS/DetailViewControllerTV.h; sourceTree = "<group>"; };
 		C3B9C26A1BCB237000BD560B /* DetailViewControllerTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewControllerTV.m; path = src/tvOS/DetailViewControllerTV.m; sourceTree = "<group>"; };
 		C3B9C26B1BCB237000BD560B /* RootViewControllerTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewControllerTV.h; path = src/tvOS/RootViewControllerTV.h; sourceTree = "<group>"; };
@@ -315,6 +440,9 @@
 		C3B9C26D1BCB237000BD560B /* ThemeTableViewControllerTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeTableViewControllerTV.h; path = src/tvOS/ThemeTableViewControllerTV.h; sourceTree = "<group>"; };
 		C3B9C26E1BCB237000BD560B /* ThemeTableViewControllerTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeTableViewControllerTV.m; path = src/tvOS/ThemeTableViewControllerTV.m; sourceTree = "<group>"; };
 		C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = CorePlotWarnings.xcconfig; path = ../../framework/xcconfig/CorePlotWarnings.xcconfig; sourceTree = "<group>"; };
+		C3D0A1B820E0187600BA2921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C3D0A1C520E0188800BA2921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Base.lproj/Launch Screen.xib"; sourceTree = "<group>"; };
+		C3D0A1C920E018DE00BA2921 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C3D2FE6219FF1D03002CD4D6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = img/Images.xcassets; sourceTree = "<group>"; };
 		C3EF42FC19FC75810060791A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Plot Gallery-Mac/Images.xcassets"; sourceTree = "<group>"; };
 		E9595DFB1C9973B9004129DA /* CurvedInterpolationDemo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CurvedInterpolationDemo.swift; path = src/plots/CurvedInterpolationDemo.swift; sourceTree = "<group>"; };
@@ -335,12 +463,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C30D8B3B1BCAFFAE0003BB70 /* Accelerate.framework in Frameworks */,
 				C30D8B3D1BCAFFB50003BB70 /* CoreGraphics.framework in Frameworks */,
-				C30D8B201BCAFC140003BB70 /* CorePlot.framework in Frameworks */,
 				C30D8B411BCAFFC10003BB70 /* Foundation.framework in Frameworks */,
 				C30D8B3F1BCAFFBB0003BB70 /* QuartzCore.framework in Frameworks */,
 				C30D8B431BCAFFCB0003BB70 /* UIKit.framework in Frameworks */,
+				C357EA9D1F708E870060CF48 /* CorePlot.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,7 +476,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C30B12431BCADD300084C567 /* CorePlot.framework in Frameworks */,
-				C34CB5681BC9AB9E009270A0 /* Accelerate.framework in Frameworks */,
 				C34CB5641BC9AB8C009270A0 /* CoreGraphics.framework in Frameworks */,
 				C34CB5601BC9AB7B009270A0 /* Foundation.framework in Frameworks */,
 				C34CB5661BC9AB93009270A0 /* QuartzCore.framework in Frameworks */,
@@ -368,6 +494,8 @@
 				4F35EBF4123611E3007C3389 /* PlotGalleryController.m */,
 				4F35EBF5123611E3007C3389 /* PlotView.h */,
 				4F35EBF6123611E3007C3389 /* PlotView.m */,
+				C309C23723B3E29F00DEDE9D /* PlotViewItem.h */,
+				C309C23523B3E21500DEDE9D /* PlotViewItem.m */,
 				4F22FF4712342978006BF615 /* main.m */,
 				4F22FF4A1234298E006BF615 /* Plot_Gallery_MacAppDelegate.h */,
 				4F22FF4B1234298E006BF615 /* Plot_Gallery_MacAppDelegate.m */,
@@ -417,10 +545,10 @@
 			isa = PBXGroup;
 			children = (
 				C3EF42FC19FC75810060791A /* Images.xcassets */,
-				4F35EBBC12360D89007C3389 /* Icon.icns */,
-				4F22FF7C12342B6E006BF615 /* Plot_Gallery_Mac-Info.plist */,
-				4F22FF5912342A21006BF615 /* MainMenu.xib */,
-				4F22FF5712342A21006BF615 /* InfoPlist.strings */,
+				C3490DDA20E025760089F309 /* Icon.icns */,
+				C32D229C23B1086600043720 /* MainMenu.xib */,
+				C309C23323B3E12500DEDE9D /* PlotViewItem.xib */,
+				C3490DCD20E025660089F309 /* Plot_Gallery_Mac-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -516,8 +644,8 @@
 			isa = PBXGroup;
 			children = (
 				C30D8B071BCAF99D0003BB70 /* Assets.xcassets */,
-				C30D8B091BCAF99D0003BB70 /* Plot_Gallery_tvOS-Info.plist */,
-				C3B9C2541BCB186800BD560B /* Main.storyboard */,
+				C3490DE020E026410089F309 /* Plot_Gallery_tvOS-Info.plist */,
+				C3D0A1CA20E018DE00BA2921 /* Main.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -538,9 +666,9 @@
 			isa = PBXGroup;
 			children = (
 				C34CB5451BC9A83C009270A0 /* Images.xcassets */,
-				C34CB55D1BC9A936009270A0 /* Plot_Gallery_iOS-Info.plist */,
-				C34CB54D1BC9A889009270A0 /* Main.storyboard */,
-				C34CB54B1BC9A889009270A0 /* Launch Screen.xib */,
+				C3490DDC20E025B60089F309 /* Plot_Gallery_iOS-Info.plist */,
+				C3D0A1B920E0187600BA2921 /* Main.storyboard */,
+				C3D0A1C620E0188800BA2921 /* Launch Screen.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -637,6 +765,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1100;
 				TargetAttributes = {
 					8D1107260486CEB800E47090 = {
 						LastSwiftMigration = 0800;
@@ -655,14 +784,14 @@
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Plot_Gallery" */;
 			compatibilityVersion = "Xcode 6.3";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
 				Base,
+				en,
+				fr,
+				ja,
+				de,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Plot Gallery-Mac */;
 			projectDirPath = "";
@@ -746,10 +875,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3D2FE6319FF1D03002CD4D6 /* Images.xcassets in Resources */,
-				4F22FF5B12342A21006BF615 /* InfoPlist.strings in Resources */,
+				C32D229E23B1086600043720 /* MainMenu.xib in Resources */,
 				C3EF42FD19FC75810060791A /* Images.xcassets in Resources */,
-				4F22FF5C12342A21006BF615 /* MainMenu.xib in Resources */,
-				4F35EBBD12360D89007C3389 /* Icon.icns in Resources */,
+				C3490DD820E025760089F309 /* Icon.icns in Resources */,
+				C309C23423B3E12500DEDE9D /* PlotViewItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +888,7 @@
 			files = (
 				C30D8B211BCAFD3E0003BB70 /* Images.xcassets in Resources */,
 				C30D8B081BCAF99D0003BB70 /* Assets.xcassets in Resources */,
-				C3B9C2551BCB186800BD560B /* Main.storyboard in Resources */,
+				C3D0A1C820E018DE00BA2921 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,8 +898,8 @@
 			files = (
 				C34CB5461BC9A83C009270A0 /* Images.xcassets in Resources */,
 				C367EEE21BCAEA9E00A21FE7 /* Images.xcassets in Resources */,
-				C34CB5581BC9A889009270A0 /* Main.storyboard in Resources */,
-				C34CB5561BC9A889009270A0 /* Launch Screen.xib in Resources */,
+				C3D0A1B720E0187600BA2921 /* Main.storyboard in Resources */,
+				C3D0A1C420E0188800BA2921 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +917,7 @@
 				C04CC5441CC7908B00B3513B /* VerticalBarChart.swift in Sources */,
 				C04CC53A1CC7908B00B3513B /* ImageDemo.swift in Sources */,
 				C04CC5351CC7908B00B3513B /* CurvedScatterPlot.swift in Sources */,
+				C309C23623B3E21500DEDE9D /* PlotViewItem.m in Sources */,
 				4F22FF4912342978006BF615 /* main.m in Sources */,
 				C04CC53C1CC7908B00B3513B /* LineCapDemo.swift in Sources */,
 				4F22FF4C1234298E006BF615 /* Plot_Gallery_MacAppDelegate.m in Sources */,
@@ -912,22 +1042,72 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4F22FF5712342A21006BF615 /* InfoPlist.strings */ = {
+		C32D229C23B1086600043720 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4F22FF5812342A21006BF615 /* English */,
-			);
-			name = InfoPlist.strings;
-			path = src/mac/English.lproj;
-			sourceTree = "<group>";
-		};
-		4F22FF5912342A21006BF615 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4F22FF5A12342A21006BF615 /* English */,
+				C32D229D23B1086600043720 /* Base */,
 			);
 			name = MainMenu.xib;
-			path = src/mac/English.lproj;
+			sourceTree = "<group>";
+		};
+		C3490DCD20E025660089F309 /* Plot_Gallery_Mac-Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3490DCC20E025660089F309 /* Base */,
+			);
+			name = "Plot_Gallery_Mac-Info.plist";
+			sourceTree = "<group>";
+		};
+		C3490DDA20E025760089F309 /* Icon.icns */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3490DD920E025760089F309 /* Base */,
+			);
+			name = Icon.icns;
+			path = src/mac;
+			sourceTree = "<group>";
+		};
+		C3490DDC20E025B60089F309 /* Plot_Gallery_iOS-Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3490DDB20E025B60089F309 /* Base */,
+			);
+			name = "Plot_Gallery_iOS-Info.plist";
+			sourceTree = "<group>";
+		};
+		C3490DE020E026410089F309 /* Plot_Gallery_tvOS-Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3490DDF20E026410089F309 /* Base */,
+			);
+			name = "Plot_Gallery_tvOS-Info.plist";
+			sourceTree = "<group>";
+		};
+		C3D0A1B920E0187600BA2921 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3D0A1B820E0187600BA2921 /* Base */,
+			);
+			name = Main.storyboard;
+			path = src/ios;
+			sourceTree = "<group>";
+		};
+		C3D0A1C620E0188800BA2921 /* Launch Screen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3D0A1C520E0188800BA2921 /* Base */,
+			);
+			name = "Launch Screen.xib";
+			path = src/ios;
+			sourceTree = "<group>";
+		};
+		C3D0A1CA20E018DE00BA2921 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C3D0A1C920E018DE00BA2921 /* Base */,
+			);
+			name = Main.storyboard;
+			path = src/tvOS;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -937,19 +1117,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "Plot_Gallery_Mac-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Base.lproj/Plot_Gallery_Mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -960,6 +1140,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				SDKROOT = macosx;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Debug;
@@ -968,18 +1149,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = s;
-				INFOPLIST_FILE = "Plot_Gallery_Mac-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Base.lproj/Plot_Gallery_Mac-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -989,13 +1170,16 @@
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Plot Gallery-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				SDKROOT = macosx;
 				VALID_ARCHS = "i386 x86_64";
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1013,26 +1197,20 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Plot_Gallery_Prefix.pch;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
 				);
-				SDKROOT = macosx;
 				SYMROOT = "$(PROJECT_DIR)/../../build";
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1046,14 +1224,9 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Plot_Gallery_Prefix.pch;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -1075,30 +1248,15 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "Plot_Gallery_tvOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Base.lproj/Plot_Gallery_tvOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-tvOS";
@@ -1122,26 +1280,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				INFOPLIST_FILE = "Plot_Gallery_tvOS-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Base.lproj/Plot_Gallery_tvOS-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-tvOS";
@@ -1159,24 +1302,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1190,6 +1322,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Plot_Gallery_iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				INFOPLIST_FILE = "$(SRCROOT)/Base.lproj/Plot_Gallery_iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-iOS";
@@ -1204,25 +1338,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C3C0DF2719D86B5E00631CAD /* CorePlotWarnings.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1231,6 +1354,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				INFOPLIST_FILE = "Plot_Gallery_iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				INFOPLIST_FILE = "$(SRCROOT)/Base.lproj/Plot_Gallery_iOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.CorePlot.Plot-Gallery-iOS";

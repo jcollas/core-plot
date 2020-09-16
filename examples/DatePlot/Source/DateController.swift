@@ -1,8 +1,9 @@
 import Foundation
 import Cocoa
+import CorePlot
 
 class DateController : NSObject, CPTPlotDataSource {
-    private let oneDay : Double = 24 * 60 * 60;
+    private let oneDay : Double = 24 * 60 * 60
 
     @IBOutlet var hostView : CPTGraphHostingView? = nil
 
@@ -28,39 +29,39 @@ class DateController : NSObject, CPTPlotDataSource {
         newGraph.apply(theme)
 
         if let host = self.hostView {
-            host.hostedGraph = newGraph;
+            host.hostedGraph = newGraph
         }
 
         // Setup scatter plot space
         let plotSpace = newGraph.defaultPlotSpace as! CPTXYPlotSpace
 
-        plotSpace.xRange = CPTPlotRange(location:0.0, length:NSNumber.init(value: oneDay * 5.0))
-        plotSpace.yRange = CPTPlotRange(location:1.0, length:3.0)
+        plotSpace.xRange = CPTPlotRange(location: 0.0, length: (oneDay * 5.0) as NSNumber)
+        plotSpace.yRange = CPTPlotRange(location: 1.0, length: 3.0)
 
         // Axes
         let axisSet = newGraph.axisSet as! CPTXYAxisSet
         if let x = axisSet.xAxis {
-            x.majorIntervalLength   = NSNumber.init(value: oneDay)
+            x.majorIntervalLength   = oneDay as NSNumber
             x.orthogonalPosition    = 2.0
-            x.minorTicksPerInterval = 0;
+            x.minorTicksPerInterval = 0
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .short
             let timeFormatter = CPTTimeFormatter(dateFormatter:dateFormatter)
-            timeFormatter.referenceDate = refDate;
-            x.labelFormatter            = timeFormatter;
+            timeFormatter.referenceDate = refDate
+            x.labelFormatter            = timeFormatter
         }
 
         if let y = axisSet.yAxis {
             y.majorIntervalLength   = 0.5
             y.minorTicksPerInterval = 5
-            y.orthogonalPosition    = NSNumber.init(value: oneDay)
+            y.orthogonalPosition    = oneDay as NSNumber
 
             y.labelingPolicy = .none
         }
 
         // Create a plot that uses the data source method
         let dataSourceLinePlot = CPTScatterPlot(frame: .zero)
-        dataSourceLinePlot.identifier = NSString.init(string: "Date Plot")
+        dataSourceLinePlot.identifier = "Date Plot" as NSString
 
         if let lineStyle = dataSourceLinePlot.dataLineStyle?.mutableCopy() as? CPTMutableLineStyle {
             lineStyle.lineWidth              = 3.0
@@ -87,7 +88,8 @@ class DateController : NSObject, CPTPlotDataSource {
 
     // MARK: - Plot Data Source Methods
 
-    func numberOfRecords(for plot: CPTPlot) -> UInt    {
+    func numberOfRecords(for plot: CPTPlot) -> UInt
+    {
         return UInt(self.plotData.count)
     }
 
@@ -99,6 +101,9 @@ class DateController : NSObject, CPTPlotDataSource {
             
         case .Y:
             return self.plotData[Int(record)] as NSNumber
+
+        @unknown default:
+            return nil
         }
     }
 }

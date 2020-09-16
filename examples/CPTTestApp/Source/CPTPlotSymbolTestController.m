@@ -50,7 +50,7 @@
     // Create a series of plots that uses the data source method
     for ( NSUInteger i = CPTPlotSymbolTypeNone; i <= CPTPlotSymbolTypeCustom; i++ ) {
         CPTScatterPlot *dataSourceLinePlot = [[CPTScatterPlot alloc] initWithFrame:newGraph.bounds];
-        dataSourceLinePlot.identifier = [NSString stringWithFormat:@"%lu", (unsigned long)i];
+        dataSourceLinePlot.identifier = @(i);
         dataSourceLinePlot.shadow     = lineShadow;
 
         CPTMutableLineStyle *lineStyle = [dataSourceLinePlot.dataLineStyle mutableCopy];
@@ -67,7 +67,7 @@
 #pragma mark -
 #pragma mark Plot Data Source Methods
 
--(NSUInteger)numberOfRecordsForPlot:(nonnull CPTPlot *)plot
+-(NSUInteger)numberOfRecordsForPlot:(nonnull CPTPlot *__unused)plot
 {
     return 10;
 }
@@ -82,7 +82,7 @@
             break;
 
         case CPTScatterPlotFieldY:
-            num = @( ( (NSString *)plot.identifier ).integerValue );
+            num = (NSNumber *)plot.identifier;
             break;
 
         default:
@@ -103,7 +103,7 @@
     symbolShadow.shadowColor      = [CPTColor blackColor];
 
     CPTPlotSymbol *symbol = [[CPTPlotSymbol alloc] init];
-    symbol.symbolType = (CPTPlotSymbolType)( (NSString *)plot.identifier ).intValue;
+    symbol.symbolType = (CPTPlotSymbolType)((NSString *)plot.identifier).intValue;
     symbol.fill       = [CPTFill fillWithGradient:gradientFill];
     symbol.shadow     = symbolShadow;
 
@@ -116,9 +116,9 @@
         CGMutablePathRef path = CGPathCreateMutable();
         CGPathMoveToPoint(path, NULL, 0., 0.);
 
-        CGPathAddEllipseInRect( path, NULL, CGRectMake(0., 0., 10., 10.) );
-        CGPathAddEllipseInRect( path, NULL, CGRectMake(1.5, 4., 3., 3.) );
-        CGPathAddEllipseInRect( path, NULL, CGRectMake(5.5, 4., 3., 3.) );
+        CGPathAddEllipseInRect(path, NULL, CGRectMake(0., 0., 10., 10.));
+        CGPathAddEllipseInRect(path, NULL, CGRectMake(1.5, 4., 3., 3.));
+        CGPathAddEllipseInRect(path, NULL, CGRectMake(5.5, 4., 3., 3.));
         CGPathMoveToPoint(path, NULL, 5., 2.);
         CGPathAddArc(path, NULL, 5., 3.3, 2.8, 0., M_PI, TRUE);
         CGPathCloseSubpath(path);

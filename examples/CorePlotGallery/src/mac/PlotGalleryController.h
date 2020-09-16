@@ -12,6 +12,8 @@
 @class PlotItem;
 
 @interface PlotGalleryController : NSObject<NSSplitViewDelegate,
+                                            NSCollectionViewDelegate,
+                                            NSCollectionViewDataSource,
                                             PlotViewDelegate>
 
 @property (nonatomic, strong, nullable) PlotItem *plotItem;

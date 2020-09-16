@@ -50,7 +50,7 @@
     XCTAssertEqual(CPTDecimalIntegerValue([d decimalValue]), (NSInteger)42, @"Result incorrect");
 
     d = [NSDecimalNumber decimalNumberWithString:@"42.1"];
-    XCTAssertEqual( (NSInteger)CPTDecimalIntegerValue([d decimalValue]), (NSInteger)42, @"Result incorrect" );
+    XCTAssertEqual((NSInteger)CPTDecimalIntegerValue([d decimalValue]), (NSInteger)42, @"Result incorrect");
 }
 
 -(void)testCPTDecimalFloatValue
@@ -82,7 +82,7 @@
 
     XCTAssertEqualObjects([NSDecimalNumber decimalNumberWithString:@"100"], [NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromInteger(i)], @"NSInteger to NSDecimal conversion failed");
     XCTAssertEqualObjects([NSDecimalNumber decimalNumberWithString:@"100"], [NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromUnsignedInteger(unsignedI)], @"NSUInteger to NSDecimal conversion failed");
-    XCTAssertEqualWithAccuracy([@(f)floatValue], [[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromFloat(f)] floatValue], 1.0e-7f, @"float to NSDecimal conversion failed");
+    XCTAssertEqualWithAccuracy([@(f) floatValue], [[NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromFloat(f)] floatValue], 1.0e-7f, @"float to NSDecimal conversion failed");
     XCTAssertEqualObjects(@(d), [NSDecimalNumber decimalNumberWithDecimal:CPTDecimalFromDouble(d)], @"double to NSDecimal conversion failed.");
 }
 
@@ -120,6 +120,130 @@
     testValue  = CPTDecimalFromInteger(-1);
     errMessage = [NSString stringWithFormat:@"test value was %@, expected %@", NSDecimalString(&testValue, nil), NSDecimalString(&negativeOne, nil)];
     XCTAssertTrue(NSDecimalCompare(&testValue, &negativeOne) == NSOrderedSame, @"%@", errMessage);
+}
+
+#pragma mark -
+#pragma mark Decimal utilities
+
+-(void)testDecimalMax
+{
+    NSDecimal zero = CPTDecimalFromInteger(0);
+    NSDecimal one  = CPTDecimalFromInteger(1);
+    NSDecimal dNAN = CPTDecimalNaN();
+
+    NSDecimal testValue;
+    NSString *errMessage;
+
+    testValue  = CPTDecimalMin(zero, one);
+    errMessage = [NSString stringWithFormat:@"test min(0, 1), expected %@", NSDecimalString(&zero, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &zero) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMin(one, zero);
+    errMessage = [NSString stringWithFormat:@"test min(1, 0), expected %@", NSDecimalString(&zero, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &zero) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMin(one, dNAN);
+    errMessage = [NSString stringWithFormat:@"test min(1, NAN), expected %@", NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMin(dNAN, one);
+    errMessage = [NSString stringWithFormat:@"test min(NAN, 1), expected %@", NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMin(dNAN, dNAN);
+    errMessage = [NSString stringWithFormat:@"test min(NAN, NAN), expected %@", NSDecimalString(&dNAN, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &dNAN) == NSOrderedSame, @"%@", errMessage);
+}
+
+-(void)testDecimalMin
+{
+    NSDecimal zero = CPTDecimalFromInteger(0);
+    NSDecimal one  = CPTDecimalFromInteger(1);
+    NSDecimal dNAN = CPTDecimalNaN();
+
+    NSDecimal testValue;
+    NSString *errMessage;
+
+    testValue  = CPTDecimalMax(zero, one);
+    errMessage = [NSString stringWithFormat:@"test min(0, 1), expected %@", NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMax(one, zero);
+    errMessage = [NSString stringWithFormat:@"test min(1, 0), expected %@", NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMax(one, dNAN);
+    errMessage = [NSString stringWithFormat:@"test min(1, NAN), expected %@", NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMax(dNAN, one);
+    errMessage = [NSString stringWithFormat:@"test min(NAN, 1), expected %@", NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalMin(dNAN, dNAN);
+    errMessage = [NSString stringWithFormat:@"test min(NAN, NAN), expected %@", NSDecimalString(&dNAN, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &dNAN) == NSOrderedSame, @"%@", errMessage);
+}
+
+-(void)testDecimalAbs
+{
+    NSDecimal zero        = CPTDecimalFromInteger(0);
+    NSDecimal one         = CPTDecimalFromInteger(1);
+    NSDecimal negativeOne = CPTDecimalFromInteger(-1);
+
+    NSDecimal testValue;
+    NSString *errMessage;
+
+    testValue  = CPTDecimalAbs(one);
+    errMessage = [NSString stringWithFormat:@"test value was %@, expected %@", NSDecimalString(&testValue, nil), NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalAbs(zero);
+    errMessage = [NSString stringWithFormat:@"test value was %@, expected %@", NSDecimalString(&testValue, nil), NSDecimalString(&zero, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &zero) == NSOrderedSame, @"%@", errMessage);
+
+    testValue  = CPTDecimalAbs(negativeOne);
+    errMessage = [NSString stringWithFormat:@"test value was %@, expected %@", NSDecimalString(&testValue, nil), NSDecimalString(&one, nil)];
+    XCTAssertTrue(NSDecimalCompare(&testValue, &one) == NSOrderedSame, @"%@", errMessage);
+}
+
+#pragma mark -
+#pragma mark NSDecimalNumber tests
+
+// Fix issues with incorrect values when converting NSDecimalNumber to non-double values (due to bugs in NSDecimalNumber, see radar #32520109)
+-(void)testNSDecimalNumberBugFix
+{
+    NSArray *strings =
+        @[
+            @"0", // validation tests
+            @"1",
+            @"1.8446744073709551615", // 64/65 bit tests (radar 32520109)
+            @"1.8446744073709551616",
+            @"9.821426272392280061", // radar 25465729 tests
+            @"9.821426272392280060",
+    ];
+
+    for ( NSString *string in strings ) {
+        NSDecimalNumber *v    = [NSDecimalNumber decimalNumberWithString:string];
+        NSDecimal d           = v.decimalValue;
+        double expectedDouble = v.doubleValue;
+
+        XCTAssertEqual(CPTDecimalCharValue(d), (char)expectedDouble);
+        XCTAssertEqual(CPTDecimalUnsignedCharValue(d), (unsigned char)expectedDouble);
+        XCTAssertEqual(CPTDecimalShortValue(d), (short)expectedDouble);
+        XCTAssertEqual(CPTDecimalUnsignedShortValue(d), (unsigned short)expectedDouble);
+        XCTAssertEqual(CPTDecimalIntValue(d), (int)expectedDouble);
+        XCTAssertEqual(CPTDecimalUnsignedIntValue(d), (unsigned int)expectedDouble);
+        XCTAssertEqual(CPTDecimalLongValue(d), (long)expectedDouble);
+        XCTAssertEqual(CPTDecimalUnsignedLongValue(d), (unsigned long)expectedDouble);
+        XCTAssertEqual(CPTDecimalLongLongValue(d), (long long)expectedDouble);
+        XCTAssertEqual(CPTDecimalUnsignedLongLongValue(d), (unsigned long long)expectedDouble);
+
+        XCTAssertEqual(CPTDecimalFloatValue(d), (float)expectedDouble);
+
+        XCTAssertEqual(CPTDecimalIntegerValue(d), (NSInteger)expectedDouble);
+        XCTAssertEqual(CPTDecimalUnsignedIntegerValue(d), (NSUInteger)expectedDouble);
+    }
 }
 
 #pragma mark -
@@ -595,11 +719,11 @@
 {
     XCTAssertEqual(CPTInverseLogModulus(0.0), 0.0, @"CPTInverseLogModulus(0.0)");
 
-    XCTAssertEqualWithAccuracy(CPTInverseLogModulus( log10(11.0) ), 10.0, 1.0e-7, @"CPTInverseLogModulus(log10(11.0))");
-    XCTAssertEqualWithAccuracy(CPTInverseLogModulus( -log10(11.0) ), -10.0, 1.0e-7, @"CPTInverseLogModulus(-log10(11.0))");
+    XCTAssertEqualWithAccuracy(CPTInverseLogModulus(log10(11.0)), 10.0, 1.0e-7, @"CPTInverseLogModulus(log10(11.0))");
+    XCTAssertEqualWithAccuracy(CPTInverseLogModulus(-log10(11.0)), -10.0, 1.0e-7, @"CPTInverseLogModulus(-log10(11.0))");
 
-    XCTAssertEqualWithAccuracy(CPTInverseLogModulus( log10(101.0) ), 100.0, 1.0e-7, @"CPTInverseLogModulus(log10(101.0))");
-    XCTAssertEqualWithAccuracy(CPTInverseLogModulus( -log10(101.0) ), -100.0, 1.0e-7, @"CPTInverseLogModulus(-log10(101.0))");
+    XCTAssertEqualWithAccuracy(CPTInverseLogModulus(log10(101.0)), 100.0, 1.0e-7, @"CPTInverseLogModulus(log10(101.0))");
+    XCTAssertEqualWithAccuracy(CPTInverseLogModulus(-log10(101.0)), -100.0, 1.0e-7, @"CPTInverseLogModulus(-log10(101.0))");
 }
 
 /// @endcond
